@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ne-one-server
+  name: ne-one-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: ne-one-server
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --volumes hostPath
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: ne-one-server
+    spec:
+      containers:
+        - env:
+            - name: AUTH_ISSUERS_LOCAL_PUBLICKEY_LOCATION
+              value: http://keycloak:8089/realms/neone/protocol/openid-connect/certs
+            - name: AUTH_VALID_ISSUERS_LOCAL
+              value: http://localhost:8089/realms/neone
+            - name: AUTO_ACCEPT_ACTION_REQUESTS
+              value: "true"
+            - name: BLOBSTORE_CREATE_BUCKET
+              value: "false"
+            - name: HTTP_REPOSITORY_URL
+              value: http://graph-db:7200/repositories/neone
+            - name: LO_ID_CONFIG_HOST
+              value: localhost
+            - name: LO_ID_CONFIG_PORT
+              value: "8080"
+            - name: LO_ID_CONFIG_SCHEME
+              value: http
+            - name: QUARKUS_HTTP_PORT
+              value: "8080"
+            - name: QUARKUS_OIDC_CLIENT_AUTH_SERVER_URL
+              value: http://keycloak:8089/realms/neone
+            - name: QUARKUS_OIDC_CLIENT_CLIENT_ID
+              value: neone-client
+            - name: QUARKUS_OIDC_CLIENT_CREDENTIALS_SECRET
+              value: lx7ThS5aYggdsMm42BP3wMrVqKm9WpNY
+            - name: QUARKUS_REDIS_HOSTS
+              value: redis://localhost:6379
+            - name: REPOSITORY_TYPE
+              value: http
+          image: git.openlogisticsfoundation.org:5050/wg-digitalaircargo/ne-one:dev
+          name: ne-one-server
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
+status: {}

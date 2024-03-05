@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --volumes hostPath
+    kompose.service.type: nodeport
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: keycloak
+  name: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: keycloak
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --volumes hostPath
+        kompose.service.type: nodeport
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: keycloak
+    spec:
+      containers:
+        - args:
+            - start-dev
+            - --import-realm
+            - --hostname=localhost
+          env:
+            - name: KC_HEALTH_ENABLED
+              value: "true"
+            - name: KC_HTTP_PORT
+              value: "8089"
+            - name: KEYCLOAK_ADMIN
+              value: admin
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: admin
+          image: quay.io/keycloak/keycloak:22.0
+          livenessProbe:
+            exec:
+              command:
+                - "exec 3<>/dev/tcp/127.0.0.1/8089;echo -e \"GET /health/ready HTTP/1.1\r\nhost: http://localhost\r\nConnection: close\r\n\r\n\" >&3;grep \"HTTP/1.1 200 OK\" <&3"
+            failureThreshold: 15
+            initialDelaySeconds: 5
+            periodSeconds: 3
+            timeoutSeconds: 2
+          name: keycloak
+          ports:
+            - containerPort: 8089
+          resources: {}
+          volumeMounts:
+            - mountPath: /opt/keycloak/data/import/neone-realm.json
+              name: keycloak-hostpath0
+      restartPolicy: Always
+      volumes:
+        - hostPath:
+            path: C:\Users\jozsa\source\repos\OneRecordNov23\NeOne\keycloak\neone-realm.json
+          name: keycloak-hostpath0
+status: {}
