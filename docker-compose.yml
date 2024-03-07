@@ -110,3 +110,10 @@ services:
       build:
         context: .
         dockerfile: Tracking.Api/Dockerfile
+
+  reelables.api.fake:
+    image: ${DOCKER_REGISTRY-}reelablesapifake
+    build:
+      context: .
+      dockerfile: Reelables.Api.Fake/Dockerfile
+

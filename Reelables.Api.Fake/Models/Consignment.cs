@@ -9,232 +9,227 @@
  */
 
 using System;
-using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Org.OpenAPITools.Converters;
 
-namespace Org.OpenAPITools.Models
-{ 
+namespace Reelables.Api.Fake.Models;
+
+/// <summary>
+/// 
+/// </summary>
+[DataContract]
+public partial class Consignment : IEquatable<Consignment>
+{
     /// <summary>
-    /// 
+    /// Gets or Sets Pieces
     /// </summary>
-    [DataContract]
-    public partial class Consignment : IEquatable<Consignment>
+    [DataMember(Name="pieces", EmitDefaultValue=false)]
+    public ConsignmentPieces Pieces { get; set; }
+
+    /// <summary>
+    /// The tracking reference that identifies the Consignment in the user system
+    /// </summary>
+    /// <value>The tracking reference that identifies the Consignment in the user system</value>
+    [Required]
+    [MaxLength(500)]
+    [DataMember(Name="trackingRef", EmitDefaultValue=false)]
+    public string TrackingRef { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Gateways
+    /// </summary>
+    [DataMember(Name="gateways", EmitDefaultValue=false)]
+    public ConsignmentGateways Gateways { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Workspace
+    /// </summary>
+    [Required]
+    [DataMember(Name="workspace", EmitDefaultValue=false)]
+    public Workspace Workspace { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Destination
+    /// </summary>
+    [DataMember(Name="destination", EmitDefaultValue=false)]
+    public ConsignmentDestination Destination { get; set; }
+
+    /// <summary>
+    /// Unique identifier of the Consignment. Example: &#39;00Es43YBJfNRXNSvLmni&#39;
+    /// </summary>
+    /// <value>Unique identifier of the Consignment. Example: &#39;00Es43YBJfNRXNSvLmni&#39;</value>
+    [Required]
+    [RegularExpression("^[-_A-Za-z0-9]*$")]
+    [MaxLength(20)]
+    [DataMember(Name="id", EmitDefaultValue=false)]
+    public string Id { get; set; }
+
+    /// <summary>
+    /// Indicates whether the Consignment is actively being tracked
+    /// </summary>
+    /// <value>Indicates whether the Consignment is actively being tracked</value>
+    [DataMember(Name="isActive", EmitDefaultValue=true)]
+    public bool IsActive { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Deactivated
+    /// </summary>
+    [DataMember(Name="deactivated", EmitDefaultValue=false)]
+    public ConsignmentDeactivated Deactivated { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Activated
+    /// </summary>
+    [DataMember(Name="activated", EmitDefaultValue=false)]
+    public ConsignmentActivated Activated { get; set; }
+
+    /// <summary>
+    /// Returns the string presentation of the object
+    /// </summary>
+    /// <returns>String presentation of the object</returns>
+    public override string ToString()
     {
-        /// <summary>
-        /// Gets or Sets Pieces
-        /// </summary>
-        [DataMember(Name="pieces", EmitDefaultValue=false)]
-        public ConsignmentPieces Pieces { get; set; }
-
-        /// <summary>
-        /// The tracking reference that identifies the Consignment in the user system
-        /// </summary>
-        /// <value>The tracking reference that identifies the Consignment in the user system</value>
-        [Required]
-        [MaxLength(500)]
-        [DataMember(Name="trackingRef", EmitDefaultValue=false)]
-        public string TrackingRef { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Gateways
-        /// </summary>
-        [DataMember(Name="gateways", EmitDefaultValue=false)]
-        public ConsignmentGateways Gateways { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Workspace
-        /// </summary>
-        [Required]
-        [DataMember(Name="workspace", EmitDefaultValue=false)]
-        public Workspace Workspace { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Destination
-        /// </summary>
-        [DataMember(Name="destination", EmitDefaultValue=false)]
-        public ConsignmentDestination Destination { get; set; }
-
-        /// <summary>
-        /// Unique identifier of the Consignment. Example: &#39;00Es43YBJfNRXNSvLmni&#39;
-        /// </summary>
-        /// <value>Unique identifier of the Consignment. Example: &#39;00Es43YBJfNRXNSvLmni&#39;</value>
-        [Required]
-        [RegularExpression("^[-_A-Za-z0-9]*$")]
-        [MaxLength(20)]
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public string Id { get; set; }
-
-        /// <summary>
-        /// Indicates whether the Consignment is actively being tracked
-        /// </summary>
-        /// <value>Indicates whether the Consignment is actively being tracked</value>
-        [DataMember(Name="isActive", EmitDefaultValue=true)]
-        public bool IsActive { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Deactivated
-        /// </summary>
-        [DataMember(Name="deactivated", EmitDefaultValue=false)]
-        public ConsignmentDeactivated Deactivated { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Activated
-        /// </summary>
-        [DataMember(Name="activated", EmitDefaultValue=false)]
-        public ConsignmentActivated Activated { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class Consignment {\n");
-            sb.Append("  Pieces: ").Append(Pieces).Append("\n");
-            sb.Append("  TrackingRef: ").Append(TrackingRef).Append("\n");
-            sb.Append("  Gateways: ").Append(Gateways).Append("\n");
-            sb.Append("  Workspace: ").Append(Workspace).Append("\n");
-            sb.Append("  Destination: ").Append(Destination).Append("\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  IsActive: ").Append(IsActive).Append("\n");
-            sb.Append("  Deactivated: ").Append(Deactivated).Append("\n");
-            sb.Append("  Activated: ").Append(Activated).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="obj">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj is null) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((Consignment)obj);
-        }
-
-        /// <summary>
-        /// Returns true if Consignment instances are equal
-        /// </summary>
-        /// <param name="other">Instance of Consignment to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Consignment other)
-        {
-            if (other is null) return false;
-            if (ReferenceEquals(this, other)) return true;
-
-            return 
-                (
-                    Pieces == other.Pieces ||
-                    Pieces != null &&
-                    Pieces.Equals(other.Pieces)
-                ) && 
-                (
-                    TrackingRef == other.TrackingRef ||
-                    TrackingRef != null &&
-                    TrackingRef.Equals(other.TrackingRef)
-                ) && 
-                (
-                    Gateways == other.Gateways ||
-                    Gateways != null &&
-                    Gateways.Equals(other.Gateways)
-                ) && 
-                (
-                    Workspace == other.Workspace ||
-                    Workspace != null &&
-                    Workspace.Equals(other.Workspace)
-                ) && 
-                (
-                    Destination == other.Destination ||
-                    Destination != null &&
-                    Destination.Equals(other.Destination)
-                ) && 
-                (
-                    Id == other.Id ||
-                    Id != null &&
-                    Id.Equals(other.Id)
-                ) && 
-                (
-                    IsActive == other.IsActive ||
-                    
-                    IsActive.Equals(other.IsActive)
-                ) && 
-                (
-                    Deactivated == other.Deactivated ||
-                    Deactivated != null &&
-                    Deactivated.Equals(other.Deactivated)
-                ) && 
-                (
-                    Activated == other.Activated ||
-                    Activated != null &&
-                    Activated.Equals(other.Activated)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                var hashCode = 41;
-                // Suitable nullity checks etc, of course :)
-                    if (Pieces != null)
-                    hashCode = hashCode * 59 + Pieces.GetHashCode();
-                    if (TrackingRef != null)
-                    hashCode = hashCode * 59 + TrackingRef.GetHashCode();
-                    if (Gateways != null)
-                    hashCode = hashCode * 59 + Gateways.GetHashCode();
-                    if (Workspace != null)
-                    hashCode = hashCode * 59 + Workspace.GetHashCode();
-                    if (Destination != null)
-                    hashCode = hashCode * 59 + Destination.GetHashCode();
-                    if (Id != null)
-                    hashCode = hashCode * 59 + Id.GetHashCode();
-                    
-                    hashCode = hashCode * 59 + IsActive.GetHashCode();
-                    if (Deactivated != null)
-                    hashCode = hashCode * 59 + Deactivated.GetHashCode();
-                    if (Activated != null)
-                    hashCode = hashCode * 59 + Activated.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        #region Operators
-        #pragma warning disable 1591
-
-        public static bool operator ==(Consignment left, Consignment right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(Consignment left, Consignment right)
-        {
-            return !Equals(left, right);
-        }
-
-        #pragma warning restore 1591
-        #endregion Operators
+        var sb = new StringBuilder();
+        sb.Append("class Consignment {\n");
+        sb.Append("  Pieces: ").Append(Pieces).Append("\n");
+        sb.Append("  TrackingRef: ").Append(TrackingRef).Append("\n");
+        sb.Append("  Gateways: ").Append(Gateways).Append("\n");
+        sb.Append("  Workspace: ").Append(Workspace).Append("\n");
+        sb.Append("  Destination: ").Append(Destination).Append("\n");
+        sb.Append("  Id: ").Append(Id).Append("\n");
+        sb.Append("  IsActive: ").Append(IsActive).Append("\n");
+        sb.Append("  Deactivated: ").Append(Deactivated).Append("\n");
+        sb.Append("  Activated: ").Append(Activated).Append("\n");
+        sb.Append("}\n");
+        return sb.ToString();
     }
+
+    /// <summary>
+    /// Returns the JSON string presentation of the object
+    /// </summary>
+    /// <returns>JSON string presentation of the object</returns>
+    public string ToJson()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
+
+    /// <summary>
+    /// Returns true if objects are equal
+    /// </summary>
+    /// <param name="obj">Object to be compared</param>
+    /// <returns>Boolean</returns>
+    public override bool Equals(object obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.GetType() == GetType() && Equals((Consignment)obj);
+    }
+
+    /// <summary>
+    /// Returns true if Consignment instances are equal
+    /// </summary>
+    /// <param name="other">Instance of Consignment to be compared</param>
+    /// <returns>Boolean</returns>
+    public bool Equals(Consignment other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+
+        return 
+            (
+                Pieces == other.Pieces ||
+                Pieces != null &&
+                Pieces.Equals(other.Pieces)
+            ) && 
+            (
+                TrackingRef == other.TrackingRef ||
+                TrackingRef != null &&
+                TrackingRef.Equals(other.TrackingRef)
+            ) && 
+            (
+                Gateways == other.Gateways ||
+                Gateways != null &&
+                Gateways.Equals(other.Gateways)
+            ) && 
+            (
+                Workspace == other.Workspace ||
+                Workspace != null &&
+                Workspace.Equals(other.Workspace)
+            ) && 
+            (
+                Destination == other.Destination ||
+                Destination != null &&
+                Destination.Equals(other.Destination)
+            ) && 
+            (
+                Id == other.Id ||
+                Id != null &&
+                Id.Equals(other.Id)
+            ) && 
+            (
+                IsActive == other.IsActive ||
+                    
+                IsActive.Equals(other.IsActive)
+            ) && 
+            (
+                Deactivated == other.Deactivated ||
+                Deactivated != null &&
+                Deactivated.Equals(other.Deactivated)
+            ) && 
+            (
+                Activated == other.Activated ||
+                Activated != null &&
+                Activated.Equals(other.Activated)
+            );
+    }
+
+    /// <summary>
+    /// Gets the hash code
+    /// </summary>
+    /// <returns>Hash code</returns>
+    public override int GetHashCode()
+    {
+        unchecked // Overflow is fine, just wrap
+        {
+            var hashCode = 41;
+            // Suitable nullity checks etc, of course :)
+            if (Pieces != null)
+                hashCode = hashCode * 59 + Pieces.GetHashCode();
+            if (TrackingRef != null)
+                hashCode = hashCode * 59 + TrackingRef.GetHashCode();
+            if (Gateways != null)
+                hashCode = hashCode * 59 + Gateways.GetHashCode();
+            if (Workspace != null)
+                hashCode = hashCode * 59 + Workspace.GetHashCode();
+            if (Destination != null)
+                hashCode = hashCode * 59 + Destination.GetHashCode();
+            if (Id != null)
+                hashCode = hashCode * 59 + Id.GetHashCode();
+                    
+            hashCode = hashCode * 59 + IsActive.GetHashCode();
+            if (Deactivated != null)
+                hashCode = hashCode * 59 + Deactivated.GetHashCode();
+            if (Activated != null)
+                hashCode = hashCode * 59 + Activated.GetHashCode();
+            return hashCode;
+        }
+    }
+
+    #region Operators
+#pragma warning disable 1591
+
+    public static bool operator ==(Consignment left, Consignment right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(Consignment left, Consignment right)
+    {
+        return !Equals(left, right);
+    }
+
+#pragma warning restore 1591
+    #endregion Operators
 }

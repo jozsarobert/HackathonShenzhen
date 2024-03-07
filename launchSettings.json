@@ -5,7 +5,8 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "neonesync.service": "StartDebugging",
-        "tracking.api": "StartDebugging"
+        "tracking.api": "StartDebugging",
+        "reelables.api.fake": "StartDebugging"
       }
     }
   }

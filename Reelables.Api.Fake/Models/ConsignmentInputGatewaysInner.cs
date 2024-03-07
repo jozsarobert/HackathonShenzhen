@@ -9,162 +9,157 @@
  */
 
 using System;
-using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Org.OpenAPITools.Converters;
 
-namespace Org.OpenAPITools.Models
-{ 
+namespace Reelables.Api.Fake.Models;
+
+/// <summary>
+/// 
+/// </summary>
+[DataContract]
+public partial class ConsignmentInputGatewaysInner : IEquatable<ConsignmentInputGatewaysInner>
+{
     /// <summary>
-    /// 
+    /// Indicates whether the gateway should be registered. True - will register a new gateway (productName is required) False - indicates that the gateway has already been registered
     /// </summary>
-    [DataContract]
-    public partial class ConsignmentInputGatewaysInner : IEquatable<ConsignmentInputGatewaysInner>
+    /// <value>Indicates whether the gateway should be registered. True - will register a new gateway (productName is required) False - indicates that the gateway has already been registered</value>
+    [DataMember(Name="registerGateway", EmitDefaultValue=true)]
+    public bool RegisterGateway { get; set; }
+
+    /// <summary>
+    /// Device identifier. Example: &#39;e10fce301222e588e1d7482b&#39;
+    /// </summary>
+    /// <value>Device identifier. Example: &#39;e10fce301222e588e1d7482b&#39;</value>
+    [Required]
+    [RegularExpression("^[-_A-Za-z0-9]*$")]
+    [MaxLength(100)]
+    [DataMember(Name="deviceId", EmitDefaultValue=false)]
+    public string DeviceId { get; set; }
+
+    /// <summary>
+    /// Name of Gateway product. Example: &#39;HGD4&#39;
+    /// </summary>
+    /// <value>Name of Gateway product. Example: &#39;HGD4&#39;</value>
+    [RegularExpression("^[-_A-Za-z0-9]*$")]
+    [MaxLength(100)]
+    [DataMember(Name="productName", EmitDefaultValue=false)]
+    public string ProductName { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Manufacturer
+    /// </summary>
+    [Required]
+    [DataMember(Name="manufacturer", EmitDefaultValue=false)]
+    public ConsignmentInputGatewaysInnerManufacturer Manufacturer { get; set; }
+
+    /// <summary>
+    /// Returns the string presentation of the object
+    /// </summary>
+    /// <returns>String presentation of the object</returns>
+    public override string ToString()
     {
-        /// <summary>
-        /// Indicates whether the gateway should be registered. True - will register a new gateway (productName is required) False - indicates that the gateway has already been registered
-        /// </summary>
-        /// <value>Indicates whether the gateway should be registered. True - will register a new gateway (productName is required) False - indicates that the gateway has already been registered</value>
-        [DataMember(Name="registerGateway", EmitDefaultValue=true)]
-        public bool RegisterGateway { get; set; }
-
-        /// <summary>
-        /// Device identifier. Example: &#39;e10fce301222e588e1d7482b&#39;
-        /// </summary>
-        /// <value>Device identifier. Example: &#39;e10fce301222e588e1d7482b&#39;</value>
-        [Required]
-        [RegularExpression("^[-_A-Za-z0-9]*$")]
-        [MaxLength(100)]
-        [DataMember(Name="deviceId", EmitDefaultValue=false)]
-        public string DeviceId { get; set; }
-
-        /// <summary>
-        /// Name of Gateway product. Example: &#39;HGD4&#39;
-        /// </summary>
-        /// <value>Name of Gateway product. Example: &#39;HGD4&#39;</value>
-        [RegularExpression("^[-_A-Za-z0-9]*$")]
-        [MaxLength(100)]
-        [DataMember(Name="productName", EmitDefaultValue=false)]
-        public string ProductName { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Manufacturer
-        /// </summary>
-        [Required]
-        [DataMember(Name="manufacturer", EmitDefaultValue=false)]
-        public ConsignmentInputGatewaysInnerManufacturer Manufacturer { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class ConsignmentInputGatewaysInner {\n");
-            sb.Append("  RegisterGateway: ").Append(RegisterGateway).Append("\n");
-            sb.Append("  DeviceId: ").Append(DeviceId).Append("\n");
-            sb.Append("  ProductName: ").Append(ProductName).Append("\n");
-            sb.Append("  Manufacturer: ").Append(Manufacturer).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="obj">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj is null) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((ConsignmentInputGatewaysInner)obj);
-        }
-
-        /// <summary>
-        /// Returns true if ConsignmentInputGatewaysInner instances are equal
-        /// </summary>
-        /// <param name="other">Instance of ConsignmentInputGatewaysInner to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ConsignmentInputGatewaysInner other)
-        {
-            if (other is null) return false;
-            if (ReferenceEquals(this, other)) return true;
-
-            return 
-                (
-                    RegisterGateway == other.RegisterGateway ||
-                    
-                    RegisterGateway.Equals(other.RegisterGateway)
-                ) && 
-                (
-                    DeviceId == other.DeviceId ||
-                    DeviceId != null &&
-                    DeviceId.Equals(other.DeviceId)
-                ) && 
-                (
-                    ProductName == other.ProductName ||
-                    ProductName != null &&
-                    ProductName.Equals(other.ProductName)
-                ) && 
-                (
-                    Manufacturer == other.Manufacturer ||
-                    Manufacturer != null &&
-                    Manufacturer.Equals(other.Manufacturer)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                var hashCode = 41;
-                // Suitable nullity checks etc, of course :)
-                    
-                    hashCode = hashCode * 59 + RegisterGateway.GetHashCode();
-                    if (DeviceId != null)
-                    hashCode = hashCode * 59 + DeviceId.GetHashCode();
-                    if (ProductName != null)
-                    hashCode = hashCode * 59 + ProductName.GetHashCode();
-                    if (Manufacturer != null)
-                    hashCode = hashCode * 59 + Manufacturer.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        #region Operators
-        #pragma warning disable 1591
-
-        public static bool operator ==(ConsignmentInputGatewaysInner left, ConsignmentInputGatewaysInner right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(ConsignmentInputGatewaysInner left, ConsignmentInputGatewaysInner right)
-        {
-            return !Equals(left, right);
-        }
-
-        #pragma warning restore 1591
-        #endregion Operators
+        var sb = new StringBuilder();
+        sb.Append("class ConsignmentInputGatewaysInner {\n");
+        sb.Append("  RegisterGateway: ").Append(RegisterGateway).Append("\n");
+        sb.Append("  DeviceId: ").Append(DeviceId).Append("\n");
+        sb.Append("  ProductName: ").Append(ProductName).Append("\n");
+        sb.Append("  Manufacturer: ").Append(Manufacturer).Append("\n");
+        sb.Append("}\n");
+        return sb.ToString();
     }
+
+    /// <summary>
+    /// Returns the JSON string presentation of the object
+    /// </summary>
+    /// <returns>JSON string presentation of the object</returns>
+    public string ToJson()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
+
+    /// <summary>
+    /// Returns true if objects are equal
+    /// </summary>
+    /// <param name="obj">Object to be compared</param>
+    /// <returns>Boolean</returns>
+    public override bool Equals(object obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.GetType() == GetType() && Equals((ConsignmentInputGatewaysInner)obj);
+    }
+
+    /// <summary>
+    /// Returns true if ConsignmentInputGatewaysInner instances are equal
+    /// </summary>
+    /// <param name="other">Instance of ConsignmentInputGatewaysInner to be compared</param>
+    /// <returns>Boolean</returns>
+    public bool Equals(ConsignmentInputGatewaysInner other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+
+        return 
+            (
+                RegisterGateway == other.RegisterGateway ||
+                    
+                RegisterGateway.Equals(other.RegisterGateway)
+            ) && 
+            (
+                DeviceId == other.DeviceId ||
+                DeviceId != null &&
+                DeviceId.Equals(other.DeviceId)
+            ) && 
+            (
+                ProductName == other.ProductName ||
+                ProductName != null &&
+                ProductName.Equals(other.ProductName)
+            ) && 
+            (
+                Manufacturer == other.Manufacturer ||
+                Manufacturer != null &&
+                Manufacturer.Equals(other.Manufacturer)
+            );
+    }
+
+    /// <summary>
+    /// Gets the hash code
+    /// </summary>
+    /// <returns>Hash code</returns>
+    public override int GetHashCode()
+    {
+        unchecked // Overflow is fine, just wrap
+        {
+            var hashCode = 41;
+            // Suitable nullity checks etc, of course :)
+                    
+            hashCode = hashCode * 59 + RegisterGateway.GetHashCode();
+            if (DeviceId != null)
+                hashCode = hashCode * 59 + DeviceId.GetHashCode();
+            if (ProductName != null)
+                hashCode = hashCode * 59 + ProductName.GetHashCode();
+            if (Manufacturer != null)
+                hashCode = hashCode * 59 + Manufacturer.GetHashCode();
+            return hashCode;
+        }
+    }
+
+    #region Operators
+#pragma warning disable 1591
+
+    public static bool operator ==(ConsignmentInputGatewaysInner left, ConsignmentInputGatewaysInner right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(ConsignmentInputGatewaysInner left, ConsignmentInputGatewaysInner right)
+    {
+        return !Equals(left, right);
+    }
+
+#pragma warning restore 1591
+    #endregion Operators
 }

@@ -10,955 +10,947 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
-using System.Net.Mime;
-using Org.OpenAPITools.Client;
-using Org.OpenAPITools.Client.Auth;
-using Org.OpenAPITools.Model;
+using Reelables.Api.SDK.Client;
+using Reelables.Api.SDK.Model;
 
-namespace Org.OpenAPITools.Api
+namespace Reelables.Api.SDK.Api;
+
+/// <summary>
+/// Represents a collection of functions to interact with the API endpoints
+/// </summary>
+public interface ISpaceGatewaysApiSync : IApiAccessor
+{
+    #region Synchronous Operations
+    /// <summary>
+    /// Unlink a Gateway from a Space
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>Space</returns>
+    Space SpacesSpaceIdGatewaysGatewayIdDelete(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0);
+
+    /// <summary>
+    /// Unlink a Gateway from a Space
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>ApiResponse of Space</returns>
+    ApiResponse<Space> SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfo(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0);
+    /// <summary>
+    /// Update a Gateway
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="gatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>SpaceGateway</returns>
+    SpaceGateway SpacesSpaceIdGatewaysGatewayIdPut(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0);
+
+    /// <summary>
+    /// Update a Gateway
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="gatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>ApiResponse of SpaceGateway</returns>
+    ApiResponse<SpaceGateway> SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfo(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0);
+    /// <summary>
+    /// Link a Gateway to a Space
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="spaceGatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>Space</returns>
+    Space SpacesSpaceIdGatewaysPost(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0);
+
+    /// <summary>
+    /// Link a Gateway to a Space
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="spaceGatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>ApiResponse of Space</returns>
+    ApiResponse<Space> SpacesSpaceIdGatewaysPostWithHttpInfo(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0);
+    #endregion Synchronous Operations
+}
+
+/// <summary>
+/// Represents a collection of functions to interact with the API endpoints
+/// </summary>
+public interface ISpaceGatewaysApiAsync : IApiAccessor
+{
+    #region Asynchronous Operations
+    /// <summary>
+    /// Unlink a Gateway from a Space
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Space</returns>
+    System.Threading.Tasks.Task<Space> SpacesSpaceIdGatewaysGatewayIdDeleteAsync(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+    /// <summary>
+    /// Unlink a Gateway from a Space
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of ApiResponse (Space)</returns>
+    System.Threading.Tasks.Task<ApiResponse<Space>> SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfoAsync(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    /// <summary>
+    /// Update a Gateway
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="gatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of SpaceGateway</returns>
+    System.Threading.Tasks.Task<SpaceGateway> SpacesSpaceIdGatewaysGatewayIdPutAsync(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+    /// <summary>
+    /// Update a Gateway
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="gatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of ApiResponse (SpaceGateway)</returns>
+    System.Threading.Tasks.Task<ApiResponse<SpaceGateway>> SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfoAsync(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    /// <summary>
+    /// Link a Gateway to a Space
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="spaceGatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Space</returns>
+    System.Threading.Tasks.Task<Space> SpacesSpaceIdGatewaysPostAsync(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+    /// <summary>
+    /// Link a Gateway to a Space
+    /// </summary>
+    /// <remarks>
+    /// 
+    /// </remarks>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="spaceGatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of ApiResponse (Space)</returns>
+    System.Threading.Tasks.Task<ApiResponse<Space>> SpacesSpaceIdGatewaysPostWithHttpInfoAsync(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+    #endregion Asynchronous Operations
+}
+
+/// <summary>
+/// Represents a collection of functions to interact with the API endpoints
+/// </summary>
+public interface ISpaceGatewaysApi : ISpaceGatewaysApiSync, ISpaceGatewaysApiAsync
 {
 
+}
+
+/// <summary>
+/// Represents a collection of functions to interact with the API endpoints
+/// </summary>
+public class SpaceGatewaysApi : ISpaceGatewaysApi
+{
+    private Reelables.Api.SDK.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
+
     /// <summary>
-    /// Represents a collection of functions to interact with the API endpoints
+    /// Initializes a new instance of the <see cref="SpaceGatewaysApi"/> class.
     /// </summary>
-    public interface ISpaceGatewaysApiSync : IApiAccessor
+    /// <returns></returns>
+    public SpaceGatewaysApi() : this((string)null)
     {
-        #region Synchronous Operations
-        /// <summary>
-        /// Unlink a Gateway from a Space
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>Space</returns>
-        Space SpacesSpaceIdGatewaysGatewayIdDelete(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0);
-
-        /// <summary>
-        /// Unlink a Gateway from a Space
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Space</returns>
-        ApiResponse<Space> SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfo(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0);
-        /// <summary>
-        /// Update a Gateway
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="gatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>SpaceGateway</returns>
-        SpaceGateway SpacesSpaceIdGatewaysGatewayIdPut(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0);
-
-        /// <summary>
-        /// Update a Gateway
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="gatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of SpaceGateway</returns>
-        ApiResponse<SpaceGateway> SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfo(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0);
-        /// <summary>
-        /// Link a Gateway to a Space
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="spaceGatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>Space</returns>
-        Space SpacesSpaceIdGatewaysPost(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0);
-
-        /// <summary>
-        /// Link a Gateway to a Space
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="spaceGatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Space</returns>
-        ApiResponse<Space> SpacesSpaceIdGatewaysPostWithHttpInfo(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0);
-        #endregion Synchronous Operations
     }
 
     /// <summary>
-    /// Represents a collection of functions to interact with the API endpoints
+    /// Initializes a new instance of the <see cref="SpaceGatewaysApi"/> class.
     /// </summary>
-    public interface ISpaceGatewaysApiAsync : IApiAccessor
+    /// <returns></returns>
+    public SpaceGatewaysApi(string basePath)
     {
-        #region Asynchronous Operations
-        /// <summary>
-        /// Unlink a Gateway from a Space
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Space</returns>
-        System.Threading.Tasks.Task<Space> SpacesSpaceIdGatewaysGatewayIdDeleteAsync(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <summary>
-        /// Unlink a Gateway from a Space
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Space)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Space>> SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfoAsync(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        /// <summary>
-        /// Update a Gateway
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="gatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of SpaceGateway</returns>
-        System.Threading.Tasks.Task<SpaceGateway> SpacesSpaceIdGatewaysGatewayIdPutAsync(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <summary>
-        /// Update a Gateway
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="gatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (SpaceGateway)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SpaceGateway>> SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfoAsync(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        /// <summary>
-        /// Link a Gateway to a Space
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="spaceGatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Space</returns>
-        System.Threading.Tasks.Task<Space> SpacesSpaceIdGatewaysPostAsync(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <summary>
-        /// Link a Gateway to a Space
-        /// </summary>
-        /// <remarks>
-        /// 
-        /// </remarks>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="spaceGatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Space)</returns>
-        System.Threading.Tasks.Task<ApiResponse<Space>> SpacesSpaceIdGatewaysPostWithHttpInfoAsync(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        #endregion Asynchronous Operations
+        this.Configuration = Reelables.Api.SDK.Client.Configuration.MergeConfigurations(
+            Reelables.Api.SDK.Client.GlobalConfiguration.Instance,
+            new Reelables.Api.SDK.Client.Configuration { BasePath = basePath }
+        );
+        this.Client = new Reelables.Api.SDK.Client.ApiClient(this.Configuration.BasePath);
+        this.AsynchronousClient = new Reelables.Api.SDK.Client.ApiClient(this.Configuration.BasePath);
+        this.ExceptionFactory = Reelables.Api.SDK.Client.Configuration.DefaultExceptionFactory;
     }
 
     /// <summary>
-    /// Represents a collection of functions to interact with the API endpoints
+    /// Initializes a new instance of the <see cref="SpaceGatewaysApi"/> class
+    /// using Configuration object
     /// </summary>
-    public interface ISpaceGatewaysApi : ISpaceGatewaysApiSync, ISpaceGatewaysApiAsync
+    /// <param name="configuration">An instance of Configuration</param>
+    /// <returns></returns>
+    public SpaceGatewaysApi(Reelables.Api.SDK.Client.Configuration configuration)
     {
+        if (configuration == null) throw new ArgumentNullException("configuration");
 
+        this.Configuration = Reelables.Api.SDK.Client.Configuration.MergeConfigurations(
+            Reelables.Api.SDK.Client.GlobalConfiguration.Instance,
+            configuration
+        );
+        this.Client = new Reelables.Api.SDK.Client.ApiClient(this.Configuration.BasePath);
+        this.AsynchronousClient = new Reelables.Api.SDK.Client.ApiClient(this.Configuration.BasePath);
+        ExceptionFactory = Reelables.Api.SDK.Client.Configuration.DefaultExceptionFactory;
     }
 
     /// <summary>
-    /// Represents a collection of functions to interact with the API endpoints
+    /// Initializes a new instance of the <see cref="SpaceGatewaysApi"/> class
+    /// using a Configuration object and client instance.
     /// </summary>
-    public partial class SpaceGatewaysApi : ISpaceGatewaysApi
+    /// <param name="client">The client interface for synchronous API access.</param>
+    /// <param name="asyncClient">The client interface for asynchronous API access.</param>
+    /// <param name="configuration">The configuration object.</param>
+    public SpaceGatewaysApi(Reelables.Api.SDK.Client.ISynchronousClient client, Reelables.Api.SDK.Client.IAsynchronousClient asyncClient, Reelables.Api.SDK.Client.IReadableConfiguration configuration)
     {
-        private Org.OpenAPITools.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SpaceGatewaysApi"/> class.
-        /// </summary>
-        /// <returns></returns>
-        public SpaceGatewaysApi() : this((string)null)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SpaceGatewaysApi"/> class.
-        /// </summary>
-        /// <returns></returns>
-        public SpaceGatewaysApi(string basePath)
-        {
-            this.Configuration = Org.OpenAPITools.Client.Configuration.MergeConfigurations(
-                Org.OpenAPITools.Client.GlobalConfiguration.Instance,
-                new Org.OpenAPITools.Client.Configuration { BasePath = basePath }
-            );
-            this.Client = new Org.OpenAPITools.Client.ApiClient(this.Configuration.BasePath);
-            this.AsynchronousClient = new Org.OpenAPITools.Client.ApiClient(this.Configuration.BasePath);
-            this.ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SpaceGatewaysApi"/> class
-        /// using Configuration object
-        /// </summary>
-        /// <param name="configuration">An instance of Configuration</param>
-        /// <returns></returns>
-        public SpaceGatewaysApi(Org.OpenAPITools.Client.Configuration configuration)
-        {
-            if (configuration == null) throw new ArgumentNullException("configuration");
-
-            this.Configuration = Org.OpenAPITools.Client.Configuration.MergeConfigurations(
-                Org.OpenAPITools.Client.GlobalConfiguration.Instance,
-                configuration
-            );
-            this.Client = new Org.OpenAPITools.Client.ApiClient(this.Configuration.BasePath);
-            this.AsynchronousClient = new Org.OpenAPITools.Client.ApiClient(this.Configuration.BasePath);
-            ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SpaceGatewaysApi"/> class
-        /// using a Configuration object and client instance.
-        /// </summary>
-        /// <param name="client">The client interface for synchronous API access.</param>
-        /// <param name="asyncClient">The client interface for asynchronous API access.</param>
-        /// <param name="configuration">The configuration object.</param>
-        public SpaceGatewaysApi(Org.OpenAPITools.Client.ISynchronousClient client, Org.OpenAPITools.Client.IAsynchronousClient asyncClient, Org.OpenAPITools.Client.IReadableConfiguration configuration)
-        {
-            if (client == null) throw new ArgumentNullException("client");
-            if (asyncClient == null) throw new ArgumentNullException("asyncClient");
-            if (configuration == null) throw new ArgumentNullException("configuration");
-
-            this.Client = client;
-            this.AsynchronousClient = asyncClient;
-            this.Configuration = configuration;
-            this.ExceptionFactory = Org.OpenAPITools.Client.Configuration.DefaultExceptionFactory;
-        }
-
-        /// <summary>
-        /// The client for accessing this underlying API asynchronously.
-        /// </summary>
-        public Org.OpenAPITools.Client.IAsynchronousClient AsynchronousClient { get; set; }
-
-        /// <summary>
-        /// The client for accessing this underlying API synchronously.
-        /// </summary>
-        public Org.OpenAPITools.Client.ISynchronousClient Client { get; set; }
-
-        /// <summary>
-        /// Gets the base path of the API client.
-        /// </summary>
-        /// <value>The base path</value>
-        public string GetBasePath()
-        {
-            return this.Configuration.BasePath;
-        }
-
-        /// <summary>
-        /// Gets or sets the configuration object
-        /// </summary>
-        /// <value>An instance of the Configuration</value>
-        public Org.OpenAPITools.Client.IReadableConfiguration Configuration { get; set; }
-
-        /// <summary>
-        /// Provides a factory method hook for the creation of exceptions.
-        /// </summary>
-        public Org.OpenAPITools.Client.ExceptionFactory ExceptionFactory
-        {
-            get
-            {
-                if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
-                {
-                    throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
-                }
-                return _exceptionFactory;
-            }
-            set { _exceptionFactory = value; }
-        }
-
-        /// <summary>
-        /// Unlink a Gateway from a Space 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>Space</returns>
-        public Space SpacesSpaceIdGatewaysGatewayIdDelete(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0)
-        {
-            Org.OpenAPITools.Client.ApiResponse<Space> localVarResponse = SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfo(spaceId, gatewayId, requestId);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Unlink a Gateway from a Space 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Space</returns>
-        public Org.OpenAPITools.Client.ApiResponse<Space> SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfo(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0)
-        {
-            // verify the required parameter 'spaceId' is set
-            if (spaceId == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdDelete");
-            }
-
-            // verify the required parameter 'gatewayId' is set
-            if (gatewayId == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'gatewayId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdDelete");
-            }
-
-            Org.OpenAPITools.Client.RequestOptions localVarRequestOptions = new Org.OpenAPITools.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = Org.OpenAPITools.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = Org.OpenAPITools.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("spaceId", Org.OpenAPITools.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("gatewayId", Org.OpenAPITools.Client.ClientUtils.ParameterToString(gatewayId)); // path parameter
-            if (requestId != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("request-id", Org.OpenAPITools.Client.ClientUtils.ParameterToString(requestId)); // header parameter
-            }
-
-            localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysGatewayIdDelete";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (AuthEndpoint) required
-            // oauth required
-            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
-            {
-                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
-                {
-                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
-                }
-                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
-                         this.Configuration.OAuthFlow != null)
-                {
-                    localVarRequestOptions.OAuth = true;
-                }
-            }
-
-            // make the HTTP request
-            var localVarResponse = this.Client.Delete<Space>("/spaces/{spaceId}/gateways/{gatewayId}", localVarRequestOptions, this.Configuration);
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysGatewayIdDelete", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Unlink a Gateway from a Space 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Space</returns>
-        public async System.Threading.Tasks.Task<Space> SpacesSpaceIdGatewaysGatewayIdDeleteAsync(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            Org.OpenAPITools.Client.ApiResponse<Space> localVarResponse = await SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfoAsync(spaceId, gatewayId, requestId, operationIndex, cancellationToken).ConfigureAwait(false);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Unlink a Gateway from a Space 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Space)</returns>
-        public async System.Threading.Tasks.Task<Org.OpenAPITools.Client.ApiResponse<Space>> SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfoAsync(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            // verify the required parameter 'spaceId' is set
-            if (spaceId == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdDelete");
-            }
-
-            // verify the required parameter 'gatewayId' is set
-            if (gatewayId == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'gatewayId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdDelete");
-            }
-
-
-            Org.OpenAPITools.Client.RequestOptions localVarRequestOptions = new Org.OpenAPITools.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = Org.OpenAPITools.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = Org.OpenAPITools.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("spaceId", Org.OpenAPITools.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("gatewayId", Org.OpenAPITools.Client.ClientUtils.ParameterToString(gatewayId)); // path parameter
-            if (requestId != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("request-id", Org.OpenAPITools.Client.ClientUtils.ParameterToString(requestId)); // header parameter
-            }
-
-            localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysGatewayIdDelete";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (AuthEndpoint) required
-            // oauth required
-            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
-            {
-                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
-                {
-                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
-                }
-                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
-                         this.Configuration.OAuthFlow != null)
-                {
-                    localVarRequestOptions.OAuth = true;
-                }
-            }
-
-            // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.DeleteAsync<Space>("/spaces/{spaceId}/gateways/{gatewayId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysGatewayIdDelete", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Update a Gateway 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="gatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>SpaceGateway</returns>
-        public SpaceGateway SpacesSpaceIdGatewaysGatewayIdPut(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0)
-        {
-            Org.OpenAPITools.Client.ApiResponse<SpaceGateway> localVarResponse = SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfo(spaceId, gatewayId, gatewayInput, requestId);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Update a Gateway 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="gatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of SpaceGateway</returns>
-        public Org.OpenAPITools.Client.ApiResponse<SpaceGateway> SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfo(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0)
-        {
-            // verify the required parameter 'spaceId' is set
-            if (spaceId == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
-            }
-
-            // verify the required parameter 'gatewayId' is set
-            if (gatewayId == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'gatewayId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
-            }
-
-            // verify the required parameter 'gatewayInput' is set
-            if (gatewayInput == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'gatewayInput' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
-            }
-
-            Org.OpenAPITools.Client.RequestOptions localVarRequestOptions = new Org.OpenAPITools.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = Org.OpenAPITools.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = Org.OpenAPITools.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("spaceId", Org.OpenAPITools.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("gatewayId", Org.OpenAPITools.Client.ClientUtils.ParameterToString(gatewayId)); // path parameter
-            if (requestId != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("request-id", Org.OpenAPITools.Client.ClientUtils.ParameterToString(requestId)); // header parameter
-            }
-            localVarRequestOptions.Data = gatewayInput;
-
-            localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysGatewayIdPut";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (AuthEndpoint) required
-            // oauth required
-            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
-            {
-                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
-                {
-                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
-                }
-                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
-                         this.Configuration.OAuthFlow != null)
-                {
-                    localVarRequestOptions.OAuth = true;
-                }
-            }
-
-            // make the HTTP request
-            var localVarResponse = this.Client.Put<SpaceGateway>("/spaces/{spaceId}/gateways/{gatewayId}", localVarRequestOptions, this.Configuration);
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysGatewayIdPut", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Update a Gateway 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="gatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of SpaceGateway</returns>
-        public async System.Threading.Tasks.Task<SpaceGateway> SpacesSpaceIdGatewaysGatewayIdPutAsync(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            Org.OpenAPITools.Client.ApiResponse<SpaceGateway> localVarResponse = await SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfoAsync(spaceId, gatewayId, gatewayInput, requestId, operationIndex, cancellationToken).ConfigureAwait(false);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Update a Gateway 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="gatewayId">The identifier of the Gateway</param>
-        /// <param name="gatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (SpaceGateway)</returns>
-        public async System.Threading.Tasks.Task<Org.OpenAPITools.Client.ApiResponse<SpaceGateway>> SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfoAsync(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            // verify the required parameter 'spaceId' is set
-            if (spaceId == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
-            }
-
-            // verify the required parameter 'gatewayId' is set
-            if (gatewayId == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'gatewayId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
-            }
-
-            // verify the required parameter 'gatewayInput' is set
-            if (gatewayInput == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'gatewayInput' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
-            }
-
-
-            Org.OpenAPITools.Client.RequestOptions localVarRequestOptions = new Org.OpenAPITools.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = Org.OpenAPITools.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = Org.OpenAPITools.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("spaceId", Org.OpenAPITools.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("gatewayId", Org.OpenAPITools.Client.ClientUtils.ParameterToString(gatewayId)); // path parameter
-            if (requestId != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("request-id", Org.OpenAPITools.Client.ClientUtils.ParameterToString(requestId)); // header parameter
-            }
-            localVarRequestOptions.Data = gatewayInput;
-
-            localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysGatewayIdPut";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (AuthEndpoint) required
-            // oauth required
-            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
-            {
-                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
-                {
-                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
-                }
-                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
-                         this.Configuration.OAuthFlow != null)
-                {
-                    localVarRequestOptions.OAuth = true;
-                }
-            }
-
-            // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PutAsync<SpaceGateway>("/spaces/{spaceId}/gateways/{gatewayId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysGatewayIdPut", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Link a Gateway to a Space 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="spaceGatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>Space</returns>
-        public Space SpacesSpaceIdGatewaysPost(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0)
-        {
-            Org.OpenAPITools.Client.ApiResponse<Space> localVarResponse = SpacesSpaceIdGatewaysPostWithHttpInfo(spaceId, spaceGatewayInput, requestId);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Link a Gateway to a Space 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="spaceGatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of Space</returns>
-        public Org.OpenAPITools.Client.ApiResponse<Space> SpacesSpaceIdGatewaysPostWithHttpInfo(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0)
-        {
-            // verify the required parameter 'spaceId' is set
-            if (spaceId == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysPost");
-            }
-
-            // verify the required parameter 'spaceGatewayInput' is set
-            if (spaceGatewayInput == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'spaceGatewayInput' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysPost");
-            }
-
-            Org.OpenAPITools.Client.RequestOptions localVarRequestOptions = new Org.OpenAPITools.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = Org.OpenAPITools.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = Org.OpenAPITools.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("spaceId", Org.OpenAPITools.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
-            if (requestId != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("request-id", Org.OpenAPITools.Client.ClientUtils.ParameterToString(requestId)); // header parameter
-            }
-            localVarRequestOptions.Data = spaceGatewayInput;
-
-            localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysPost";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (AuthEndpoint) required
-            // oauth required
-            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
-            {
-                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
-                {
-                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
-                }
-                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
-                         this.Configuration.OAuthFlow != null)
-                {
-                    localVarRequestOptions.OAuth = true;
-                }
-            }
-
-            // make the HTTP request
-            var localVarResponse = this.Client.Post<Space>("/spaces/{spaceId}/gateways", localVarRequestOptions, this.Configuration);
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysPost", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Link a Gateway to a Space 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="spaceGatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Space</returns>
-        public async System.Threading.Tasks.Task<Space> SpacesSpaceIdGatewaysPostAsync(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            Org.OpenAPITools.Client.ApiResponse<Space> localVarResponse = await SpacesSpaceIdGatewaysPostWithHttpInfoAsync(spaceId, spaceGatewayInput, requestId, operationIndex, cancellationToken).ConfigureAwait(false);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Link a Gateway to a Space 
-        /// </summary>
-        /// <exception cref="Org.OpenAPITools.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="spaceId">The identifier of the Space</param>
-        /// <param name="spaceGatewayInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Space)</returns>
-        public async System.Threading.Tasks.Task<Org.OpenAPITools.Client.ApiResponse<Space>> SpacesSpaceIdGatewaysPostWithHttpInfoAsync(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            // verify the required parameter 'spaceId' is set
-            if (spaceId == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysPost");
-            }
-
-            // verify the required parameter 'spaceGatewayInput' is set
-            if (spaceGatewayInput == null)
-            {
-                throw new Org.OpenAPITools.Client.ApiException(400, "Missing required parameter 'spaceGatewayInput' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysPost");
-            }
-
-
-            Org.OpenAPITools.Client.RequestOptions localVarRequestOptions = new Org.OpenAPITools.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = Org.OpenAPITools.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = Org.OpenAPITools.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("spaceId", Org.OpenAPITools.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
-            if (requestId != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("request-id", Org.OpenAPITools.Client.ClientUtils.ParameterToString(requestId)); // header parameter
-            }
-            localVarRequestOptions.Data = spaceGatewayInput;
-
-            localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysPost";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (AuthEndpoint) required
-            // oauth required
-            if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
-            {
-                if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
-                {
-                    localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
-                }
-                else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
-                         !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
-                         this.Configuration.OAuthFlow != null)
-                {
-                    localVarRequestOptions.OAuth = true;
-                }
-            }
-
-            // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<Space>("/spaces/{spaceId}/gateways", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysPost", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
+        if (client == null) throw new ArgumentNullException("client");
+        if (asyncClient == null) throw new ArgumentNullException("asyncClient");
+        if (configuration == null) throw new ArgumentNullException("configuration");
+
+        this.Client = client;
+        this.AsynchronousClient = asyncClient;
+        this.Configuration = configuration;
+        this.ExceptionFactory = Reelables.Api.SDK.Client.Configuration.DefaultExceptionFactory;
     }
+
+    /// <summary>
+    /// The client for accessing this underlying API asynchronously.
+    /// </summary>
+    public Reelables.Api.SDK.Client.IAsynchronousClient AsynchronousClient { get; set; }
+
+    /// <summary>
+    /// The client for accessing this underlying API synchronously.
+    /// </summary>
+    public Reelables.Api.SDK.Client.ISynchronousClient Client { get; set; }
+
+    /// <summary>
+    /// Gets the base path of the API client.
+    /// </summary>
+    /// <value>The base path</value>
+    public string GetBasePath()
+    {
+        return this.Configuration.BasePath;
+    }
+
+    /// <summary>
+    /// Gets or sets the configuration object
+    /// </summary>
+    /// <value>An instance of the Configuration</value>
+    public Reelables.Api.SDK.Client.IReadableConfiguration Configuration { get; set; }
+
+    /// <summary>
+    /// Provides a factory method hook for the creation of exceptions.
+    /// </summary>
+    public Reelables.Api.SDK.Client.ExceptionFactory ExceptionFactory
+    {
+        get
+        {
+            if (_exceptionFactory != null && _exceptionFactory.GetInvocationList().Length > 1)
+            {
+                throw new InvalidOperationException("Multicast delegate for ExceptionFactory is unsupported.");
+            }
+            return _exceptionFactory;
+        }
+        set { _exceptionFactory = value; }
+    }
+
+    /// <summary>
+    /// Unlink a Gateway from a Space 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>Space</returns>
+    public Space SpacesSpaceIdGatewaysGatewayIdDelete(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0)
+    {
+        Reelables.Api.SDK.Client.ApiResponse<Space> localVarResponse = SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfo(spaceId, gatewayId, requestId);
+        return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Unlink a Gateway from a Space 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>ApiResponse of Space</returns>
+    public Reelables.Api.SDK.Client.ApiResponse<Space> SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfo(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0)
+    {
+        // verify the required parameter 'spaceId' is set
+        if (spaceId == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdDelete");
+        }
+
+        // verify the required parameter 'gatewayId' is set
+        if (gatewayId == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'gatewayId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdDelete");
+        }
+
+        Reelables.Api.SDK.Client.RequestOptions localVarRequestOptions = new Reelables.Api.SDK.Client.RequestOptions();
+
+        string[] _contentTypes = new string[] {
+        };
+
+        // to determine the Accept header
+        string[] _accepts = new string[] {
+            "application/json"
+        };
+
+        var localVarContentType = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+        if (localVarContentType != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+        }
+
+        var localVarAccept = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+        if (localVarAccept != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+        }
+
+        localVarRequestOptions.PathParameters.Add("spaceId", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
+        localVarRequestOptions.PathParameters.Add("gatewayId", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(gatewayId)); // path parameter
+        if (requestId != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("request-id", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(requestId)); // header parameter
+        }
+
+        localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysGatewayIdDelete";
+        localVarRequestOptions.OperationIndex = operationIndex;
+
+        // authentication (AuthEndpoint) required
+        // oauth required
+        if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+        {
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+            else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                     this.Configuration.OAuthFlow != null)
+            {
+                localVarRequestOptions.OAuth = true;
+            }
+        }
+
+        // make the HTTP request
+        var localVarResponse = this.Client.Delete<Space>("/spaces/{spaceId}/gateways/{gatewayId}", localVarRequestOptions, this.Configuration);
+        if (this.ExceptionFactory != null)
+        {
+            Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysGatewayIdDelete", localVarResponse);
+            if (_exception != null)
+            {
+                throw _exception;
+            }
+        }
+
+        return localVarResponse;
+    }
+
+    /// <summary>
+    /// Unlink a Gateway from a Space 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Space</returns>
+    public async System.Threading.Tasks.Task<Space> SpacesSpaceIdGatewaysGatewayIdDeleteAsync(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    {
+        Reelables.Api.SDK.Client.ApiResponse<Space> localVarResponse = await SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfoAsync(spaceId, gatewayId, requestId, operationIndex, cancellationToken).ConfigureAwait(false);
+        return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Unlink a Gateway from a Space 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of ApiResponse (Space)</returns>
+    public async System.Threading.Tasks.Task<Reelables.Api.SDK.Client.ApiResponse<Space>> SpacesSpaceIdGatewaysGatewayIdDeleteWithHttpInfoAsync(string spaceId, string gatewayId, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    {
+        // verify the required parameter 'spaceId' is set
+        if (spaceId == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdDelete");
+        }
+
+        // verify the required parameter 'gatewayId' is set
+        if (gatewayId == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'gatewayId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdDelete");
+        }
+
+
+        Reelables.Api.SDK.Client.RequestOptions localVarRequestOptions = new Reelables.Api.SDK.Client.RequestOptions();
+
+        string[] _contentTypes = new string[] {
+        };
+
+        // to determine the Accept header
+        string[] _accepts = new string[] {
+            "application/json"
+        };
+
+        var localVarContentType = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+        if (localVarContentType != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+        }
+
+        var localVarAccept = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+        if (localVarAccept != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+        }
+
+        localVarRequestOptions.PathParameters.Add("spaceId", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
+        localVarRequestOptions.PathParameters.Add("gatewayId", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(gatewayId)); // path parameter
+        if (requestId != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("request-id", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(requestId)); // header parameter
+        }
+
+        localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysGatewayIdDelete";
+        localVarRequestOptions.OperationIndex = operationIndex;
+
+        // authentication (AuthEndpoint) required
+        // oauth required
+        if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+        {
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+            else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                     this.Configuration.OAuthFlow != null)
+            {
+                localVarRequestOptions.OAuth = true;
+            }
+        }
+
+        // make the HTTP request
+        var localVarResponse = await this.AsynchronousClient.DeleteAsync<Space>("/spaces/{spaceId}/gateways/{gatewayId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+        if (this.ExceptionFactory != null)
+        {
+            Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysGatewayIdDelete", localVarResponse);
+            if (_exception != null)
+            {
+                throw _exception;
+            }
+        }
+
+        return localVarResponse;
+    }
+
+    /// <summary>
+    /// Update a Gateway 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="gatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>SpaceGateway</returns>
+    public SpaceGateway SpacesSpaceIdGatewaysGatewayIdPut(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0)
+    {
+        Reelables.Api.SDK.Client.ApiResponse<SpaceGateway> localVarResponse = SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfo(spaceId, gatewayId, gatewayInput, requestId);
+        return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Update a Gateway 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="gatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>ApiResponse of SpaceGateway</returns>
+    public Reelables.Api.SDK.Client.ApiResponse<SpaceGateway> SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfo(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0)
+    {
+        // verify the required parameter 'spaceId' is set
+        if (spaceId == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
+        }
+
+        // verify the required parameter 'gatewayId' is set
+        if (gatewayId == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'gatewayId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
+        }
+
+        // verify the required parameter 'gatewayInput' is set
+        if (gatewayInput == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'gatewayInput' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
+        }
+
+        Reelables.Api.SDK.Client.RequestOptions localVarRequestOptions = new Reelables.Api.SDK.Client.RequestOptions();
+
+        string[] _contentTypes = new string[] {
+            "application/json"
+        };
+
+        // to determine the Accept header
+        string[] _accepts = new string[] {
+            "application/json"
+        };
+
+        var localVarContentType = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+        if (localVarContentType != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+        }
+
+        var localVarAccept = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+        if (localVarAccept != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+        }
+
+        localVarRequestOptions.PathParameters.Add("spaceId", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
+        localVarRequestOptions.PathParameters.Add("gatewayId", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(gatewayId)); // path parameter
+        if (requestId != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("request-id", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(requestId)); // header parameter
+        }
+        localVarRequestOptions.Data = gatewayInput;
+
+        localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysGatewayIdPut";
+        localVarRequestOptions.OperationIndex = operationIndex;
+
+        // authentication (AuthEndpoint) required
+        // oauth required
+        if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+        {
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+            else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                     this.Configuration.OAuthFlow != null)
+            {
+                localVarRequestOptions.OAuth = true;
+            }
+        }
+
+        // make the HTTP request
+        var localVarResponse = this.Client.Put<SpaceGateway>("/spaces/{spaceId}/gateways/{gatewayId}", localVarRequestOptions, this.Configuration);
+        if (this.ExceptionFactory != null)
+        {
+            Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysGatewayIdPut", localVarResponse);
+            if (_exception != null)
+            {
+                throw _exception;
+            }
+        }
+
+        return localVarResponse;
+    }
+
+    /// <summary>
+    /// Update a Gateway 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="gatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of SpaceGateway</returns>
+    public async System.Threading.Tasks.Task<SpaceGateway> SpacesSpaceIdGatewaysGatewayIdPutAsync(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    {
+        Reelables.Api.SDK.Client.ApiResponse<SpaceGateway> localVarResponse = await SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfoAsync(spaceId, gatewayId, gatewayInput, requestId, operationIndex, cancellationToken).ConfigureAwait(false);
+        return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Update a Gateway 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="gatewayId">The identifier of the Gateway</param>
+    /// <param name="gatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of ApiResponse (SpaceGateway)</returns>
+    public async System.Threading.Tasks.Task<Reelables.Api.SDK.Client.ApiResponse<SpaceGateway>> SpacesSpaceIdGatewaysGatewayIdPutWithHttpInfoAsync(string spaceId, string gatewayId, GatewayInput gatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    {
+        // verify the required parameter 'spaceId' is set
+        if (spaceId == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
+        }
+
+        // verify the required parameter 'gatewayId' is set
+        if (gatewayId == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'gatewayId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
+        }
+
+        // verify the required parameter 'gatewayInput' is set
+        if (gatewayInput == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'gatewayInput' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysGatewayIdPut");
+        }
+
+
+        Reelables.Api.SDK.Client.RequestOptions localVarRequestOptions = new Reelables.Api.SDK.Client.RequestOptions();
+
+        string[] _contentTypes = new string[] {
+            "application/json"
+        };
+
+        // to determine the Accept header
+        string[] _accepts = new string[] {
+            "application/json"
+        };
+
+        var localVarContentType = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+        if (localVarContentType != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+        }
+
+        var localVarAccept = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+        if (localVarAccept != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+        }
+
+        localVarRequestOptions.PathParameters.Add("spaceId", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
+        localVarRequestOptions.PathParameters.Add("gatewayId", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(gatewayId)); // path parameter
+        if (requestId != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("request-id", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(requestId)); // header parameter
+        }
+        localVarRequestOptions.Data = gatewayInput;
+
+        localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysGatewayIdPut";
+        localVarRequestOptions.OperationIndex = operationIndex;
+
+        // authentication (AuthEndpoint) required
+        // oauth required
+        if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+        {
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+            else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                     this.Configuration.OAuthFlow != null)
+            {
+                localVarRequestOptions.OAuth = true;
+            }
+        }
+
+        // make the HTTP request
+        var localVarResponse = await this.AsynchronousClient.PutAsync<SpaceGateway>("/spaces/{spaceId}/gateways/{gatewayId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+        if (this.ExceptionFactory != null)
+        {
+            Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysGatewayIdPut", localVarResponse);
+            if (_exception != null)
+            {
+                throw _exception;
+            }
+        }
+
+        return localVarResponse;
+    }
+
+    /// <summary>
+    /// Link a Gateway to a Space 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="spaceGatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>Space</returns>
+    public Space SpacesSpaceIdGatewaysPost(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0)
+    {
+        Reelables.Api.SDK.Client.ApiResponse<Space> localVarResponse = SpacesSpaceIdGatewaysPostWithHttpInfo(spaceId, spaceGatewayInput, requestId);
+        return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Link a Gateway to a Space 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="spaceGatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <returns>ApiResponse of Space</returns>
+    public Reelables.Api.SDK.Client.ApiResponse<Space> SpacesSpaceIdGatewaysPostWithHttpInfo(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0)
+    {
+        // verify the required parameter 'spaceId' is set
+        if (spaceId == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysPost");
+        }
+
+        // verify the required parameter 'spaceGatewayInput' is set
+        if (spaceGatewayInput == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'spaceGatewayInput' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysPost");
+        }
+
+        Reelables.Api.SDK.Client.RequestOptions localVarRequestOptions = new Reelables.Api.SDK.Client.RequestOptions();
+
+        string[] _contentTypes = new string[] {
+            "application/json"
+        };
+
+        // to determine the Accept header
+        string[] _accepts = new string[] {
+            "application/json"
+        };
+
+        var localVarContentType = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+        if (localVarContentType != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+        }
+
+        var localVarAccept = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+        if (localVarAccept != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+        }
+
+        localVarRequestOptions.PathParameters.Add("spaceId", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
+        if (requestId != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("request-id", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(requestId)); // header parameter
+        }
+        localVarRequestOptions.Data = spaceGatewayInput;
+
+        localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysPost";
+        localVarRequestOptions.OperationIndex = operationIndex;
+
+        // authentication (AuthEndpoint) required
+        // oauth required
+        if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+        {
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+            else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                     this.Configuration.OAuthFlow != null)
+            {
+                localVarRequestOptions.OAuth = true;
+            }
+        }
+
+        // make the HTTP request
+        var localVarResponse = this.Client.Post<Space>("/spaces/{spaceId}/gateways", localVarRequestOptions, this.Configuration);
+        if (this.ExceptionFactory != null)
+        {
+            Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysPost", localVarResponse);
+            if (_exception != null)
+            {
+                throw _exception;
+            }
+        }
+
+        return localVarResponse;
+    }
+
+    /// <summary>
+    /// Link a Gateway to a Space 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="spaceGatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of Space</returns>
+    public async System.Threading.Tasks.Task<Space> SpacesSpaceIdGatewaysPostAsync(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    {
+        Reelables.Api.SDK.Client.ApiResponse<Space> localVarResponse = await SpacesSpaceIdGatewaysPostWithHttpInfoAsync(spaceId, spaceGatewayInput, requestId, operationIndex, cancellationToken).ConfigureAwait(false);
+        return localVarResponse.Data;
+    }
+
+    /// <summary>
+    /// Link a Gateway to a Space 
+    /// </summary>
+    /// <exception cref="Reelables.Api.SDK.Client.ApiException">Thrown when fails to make API call</exception>
+    /// <param name="spaceId">The identifier of the Space</param>
+    /// <param name="spaceGatewayInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00 (optional)</param>
+    /// <param name="operationIndex">Index associated with the operation.</param>
+    /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+    /// <returns>Task of ApiResponse (Space)</returns>
+    public async System.Threading.Tasks.Task<Reelables.Api.SDK.Client.ApiResponse<Space>> SpacesSpaceIdGatewaysPostWithHttpInfoAsync(string spaceId, SpaceGatewayInput spaceGatewayInput, string? requestId = default(string?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+    {
+        // verify the required parameter 'spaceId' is set
+        if (spaceId == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'spaceId' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysPost");
+        }
+
+        // verify the required parameter 'spaceGatewayInput' is set
+        if (spaceGatewayInput == null)
+        {
+            throw new Reelables.Api.SDK.Client.ApiException(400, "Missing required parameter 'spaceGatewayInput' when calling SpaceGatewaysApi->SpacesSpaceIdGatewaysPost");
+        }
+
+
+        Reelables.Api.SDK.Client.RequestOptions localVarRequestOptions = new Reelables.Api.SDK.Client.RequestOptions();
+
+        string[] _contentTypes = new string[] {
+            "application/json"
+        };
+
+        // to determine the Accept header
+        string[] _accepts = new string[] {
+            "application/json"
+        };
+
+        var localVarContentType = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+        if (localVarContentType != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+        }
+
+        var localVarAccept = Reelables.Api.SDK.Client.ClientUtils.SelectHeaderAccept(_accepts);
+        if (localVarAccept != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+        }
+
+        localVarRequestOptions.PathParameters.Add("spaceId", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(spaceId)); // path parameter
+        if (requestId != null)
+        {
+            localVarRequestOptions.HeaderParameters.Add("request-id", Reelables.Api.SDK.Client.ClientUtils.ParameterToString(requestId)); // header parameter
+        }
+        localVarRequestOptions.Data = spaceGatewayInput;
+
+        localVarRequestOptions.Operation = "SpaceGatewaysApi.SpacesSpaceIdGatewaysPost";
+        localVarRequestOptions.OperationIndex = operationIndex;
+
+        // authentication (AuthEndpoint) required
+        // oauth required
+        if (!localVarRequestOptions.HeaderParameters.ContainsKey("Authorization"))
+        {
+            if (!string.IsNullOrEmpty(this.Configuration.AccessToken))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Authorization", "Bearer " + this.Configuration.AccessToken);
+            }
+            else if (!string.IsNullOrEmpty(this.Configuration.OAuthTokenUrl) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientId) &&
+                     !string.IsNullOrEmpty(this.Configuration.OAuthClientSecret) &&
+                     this.Configuration.OAuthFlow != null)
+            {
+                localVarRequestOptions.OAuth = true;
+            }
+        }
+
+        // make the HTTP request
+        var localVarResponse = await this.AsynchronousClient.PostAsync<Space>("/spaces/{spaceId}/gateways", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+        if (this.ExceptionFactory != null)
+        {
+            Exception _exception = this.ExceptionFactory("SpacesSpaceIdGatewaysPost", localVarResponse);
+            if (_exception != null)
+            {
+                throw _exception;
+            }
+        }
+
+        return localVarResponse;
+    }
+
 }

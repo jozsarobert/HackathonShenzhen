@@ -9,152 +9,135 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using Swashbuckle.AspNetCore.Annotations;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using Newtonsoft.Json;
-using Org.OpenAPITools.Attributes;
-using Org.OpenAPITools.Models;
+using Reelables.Api.Fake.Attributes;
+using Reelables.Api.Fake.Models;
+using Reelables.Api.Fake.Services;
 
-namespace Org.OpenAPITools.Controllers
-{ 
+namespace Reelables.Api.Fake.Controllers;
+
+/// <summary>
+/// 
+/// </summary>
+[ApiController]
+public class AssetsApiController : ControllerBase
+{
+    private readonly IAssetService _assetService;
+
+    public AssetsApiController(IAssetService assetService)
+    {
+        _assetService = assetService;
+    }
     /// <summary>
-    /// 
+    /// Delete an Asset
     /// </summary>
-    [ApiController]
-    public class AssetsApiController : ControllerBase
-    { 
-        /// <summary>
-        /// Delete an Asset
-        /// </summary>
-        /// <param name="assetId">The identifier of the Asset</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
-        /// <response code="204">204 response</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="404">Asset not found</response>
-        /// <response code="429">Too Many Requests</response>
-        [HttpDelete]
-        [Route("/v1/assets/{assetId}")]
-        [ValidateModelState]
-        [SwaggerOperation("AssetsAssetIdDelete")]
-        [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
-        [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
-        [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Asset not found")]
-        [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
-        public virtual IActionResult AssetsAssetIdDelete([FromRoute (Name = "assetId")][Required]string assetId, [FromHeader (Name = "request-id")]string requestId)
-        {
+    /// <param name="assetId">The identifier of the Asset</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
+    /// <response code="204">204 response</response>
+    /// <response code="401">Unauthorized</response>
+    /// <response code="403">Forbidden</response>
+    /// <response code="404">Asset not found</response>
+    /// <response code="429">Too Many Requests</response>
+    [HttpDelete]
+    [Route("/v1/assets/{assetId}")]
+    [ValidateModelState]
+    [SwaggerOperation("AssetsAssetIdDelete")]
+    [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
+    [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
+    [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Asset not found")]
+    [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
+    public virtual IActionResult AssetsAssetIdDelete([FromRoute (Name = "assetId")][Required]string assetId, [FromHeader (Name = "request-id")]string requestId)
+    {
 
-            //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(204);
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(403, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(404, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(429, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(204);
+        //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(401, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(403, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(404, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(429, default(ErrorResponse));
 
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
+    }
 
-        /// <summary>
-        /// Get an Asset
-        /// </summary>
-        /// <param name="assetId">The identifier of the Asset</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
-        /// <response code="200">200 response</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="404">Asset not found</response>
-        /// <response code="429">Too Many Requests</response>
-        [HttpGet]
-        [Route("/v1/assets/{assetId}")]
-        [ValidateModelState]
-        [SwaggerOperation("AssetsAssetIdGet")]
-        [SwaggerResponse(statusCode: 200, type: typeof(Asset), description: "200 response")]
-        [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
-        [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
-        [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Asset not found")]
-        [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
-        public virtual IActionResult AssetsAssetIdGet([FromRoute (Name = "assetId")][Required]string assetId, [FromHeader (Name = "request-id")]string requestId)
-        {
+    /// <summary>
+    /// Get an Asset
+    /// </summary>
+    /// <param name="assetId">The identifier of the Asset</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
+    /// <response code="200">200 response</response>
+    /// <response code="401">Unauthorized</response>
+    /// <response code="403">Forbidden</response>
+    /// <response code="404">Asset not found</response>
+    /// <response code="429">Too Many Requests</response>
+    [HttpGet]
+    [Route("/v1/assets/{assetId}")]
+    [ValidateModelState]
+    [SwaggerOperation("AssetsAssetIdGet")]
+    [SwaggerResponse(statusCode: 200, type: typeof(Asset), description: "200 response")]
+    [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
+    [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
+    [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Asset not found")]
+    [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
+    public virtual IActionResult AssetsAssetIdGet([FromRoute (Name = "assetId")][Required]string assetId, [FromHeader (Name = "request-id")]string requestId)
+    {
+        var asset = _assetService.GetAsset(assetId);
 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(Asset));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(403, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(404, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(429, default(ErrorResponse));
-            string exampleJson = null;
-            exampleJson = "{\r\n  \"inSpaces\" : [ {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  } ],\r\n  \"temperatures\" : {\r\n    \"nextToken\" : \"nextToken\",\r\n    \"items\" : [ {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    } ]\r\n  },\r\n  \"name\" : \"name\",\r\n  \"locations\" : {\r\n    \"nextToken\" : \"nextToken\",\r\n    \"items\" : [ {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    } ]\r\n  },\r\n  \"id\" : \"id\",\r\n  \"label\" : {\r\n    \"bleId\" : 494379917,\r\n    \"nfcId\" : \"nfcId\",\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  },\r\n  \"createdOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n  \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        return Ok(asset);
+
+    }
+
+    /// <summary>
+    /// Update an Asset
+    /// </summary>
+    /// <param name="assetId">The identifier of the Asset</param>
+    /// <param name="assetInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
+    /// <response code="200">200 response</response>
+    /// <response code="401">Unauthorized</response>
+    /// <response code="403">Forbidden</response>
+    /// <response code="404">Asset not found</response>
+    /// <response code="429">Too Many Requests</response>
+    [HttpPut]
+    [Route("/v1/assets/{assetId}")]
+    [Consumes("application/json")]
+    [ValidateModelState]
+    [SwaggerOperation("AssetsAssetIdPut")]
+    [SwaggerResponse(statusCode: 200, type: typeof(Asset), description: "200 response")]
+    [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
+    [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
+    [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Asset not found")]
+    [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
+    public virtual IActionResult AssetsAssetIdPut([FromRoute (Name = "assetId")][Required]string assetId, [FromBody]AssetInput assetInput, [FromHeader (Name = "request-id")]string requestId)
+    {
+
+        //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(200, default(Asset));
+        //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(401, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(403, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(404, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(429, default(ErrorResponse));
+        string exampleJson = null;
+        exampleJson = "{\r\n  \"inSpaces\" : [ {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  } ],\r\n  \"temperatures\" : {\r\n    \"nextToken\" : \"nextToken\",\r\n    \"items\" : [ {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    } ]\r\n  },\r\n  \"name\" : \"name\",\r\n  \"locations\" : {\r\n    \"nextToken\" : \"nextToken\",\r\n    \"items\" : [ {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    } ]\r\n  },\r\n  \"id\" : \"id\",\r\n  \"label\" : {\r\n    \"bleId\" : 494379917,\r\n    \"nfcId\" : \"nfcId\",\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  },\r\n  \"createdOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n  \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
             
-            var example = exampleJson != null
+        var example = exampleJson != null
             ? JsonConvert.DeserializeObject<Asset>(exampleJson)
             : default(Asset);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
-
-        /// <summary>
-        /// Update an Asset
-        /// </summary>
-        /// <param name="assetId">The identifier of the Asset</param>
-        /// <param name="assetInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
-        /// <response code="200">200 response</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="404">Asset not found</response>
-        /// <response code="429">Too Many Requests</response>
-        [HttpPut]
-        [Route("/v1/assets/{assetId}")]
-        [Consumes("application/json")]
-        [ValidateModelState]
-        [SwaggerOperation("AssetsAssetIdPut")]
-        [SwaggerResponse(statusCode: 200, type: typeof(Asset), description: "200 response")]
-        [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
-        [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
-        [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Asset not found")]
-        [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
-        public virtual IActionResult AssetsAssetIdPut([FromRoute (Name = "assetId")][Required]string assetId, [FromBody]AssetInput assetInput, [FromHeader (Name = "request-id")]string requestId)
-        {
-
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(Asset));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(403, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(404, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(429, default(ErrorResponse));
-            string exampleJson = null;
-            exampleJson = "{\r\n  \"inSpaces\" : [ {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  }, {\r\n    \"spaceName\" : \"spaceName\",\r\n    \"spaceId\" : \"spaceId\",\r\n    \"hasExited\" : true,\r\n    \"enteredOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"exitedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  } ],\r\n  \"temperatures\" : {\r\n    \"nextToken\" : \"nextToken\",\r\n    \"items\" : [ {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    }, {\r\n      \"degreesCelcius\" : -51.95031,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\",\r\n      \"numberReadings\" : 602745\r\n    } ]\r\n  },\r\n  \"name\" : \"name\",\r\n  \"locations\" : {\r\n    \"nextToken\" : \"nextToken\",\r\n    \"items\" : [ {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    }, {\r\n      \"coordinate\" : {\r\n        \"latitude\" : -63.615368,\r\n        \"longitude\" : 34.63682\r\n      },\r\n      \"error\" : 563737,\r\n      \"timestamp\" : \"2000-01-23T04:56:07.000+00:00\"\r\n    } ]\r\n  },\r\n  \"id\" : \"id\",\r\n  \"label\" : {\r\n    \"bleId\" : 494379917,\r\n    \"nfcId\" : \"nfcId\",\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\"\r\n  },\r\n  \"createdOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n  \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            
-            var example = exampleJson != null
-            ? JsonConvert.DeserializeObject<Asset>(exampleJson)
-            : default(Asset);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
+        //TODO: Change the data returned
+        return new ObjectResult(example);
     }
 }

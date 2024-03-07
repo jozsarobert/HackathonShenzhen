@@ -9,184 +9,179 @@
  */
 
 using System;
-using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Org.OpenAPITools.Converters;
 
-namespace Org.OpenAPITools.Models
-{ 
+namespace Reelables.Api.Fake.Models;
+
+/// <summary>
+/// 
+/// </summary>
+[DataContract]
+public partial class Facility : IEquatable<Facility>
+{
     /// <summary>
-    /// 
+    /// Date that the Facility was created, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;
     /// </summary>
-    [DataContract]
-    public partial class Facility : IEquatable<Facility>
+    /// <value>Date that the Facility was created, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;</value>
+    [RegularExpression("^[0-9TZ:-]*$")]
+    [MaxLength(20)]
+    [DataMember(Name="createdAt", EmitDefaultValue=false)]
+    public DateTime CreatedAt { get; set; }
+
+    /// <summary>
+    /// The name of the Facility
+    /// </summary>
+    /// <value>The name of the Facility</value>
+    [Required]
+    [RegularExpression("^[a-zA-Z0-9!@#$&()\\-`.+,/\" ]*$")]
+    [MaxLength(500)]
+    [DataMember(Name="name", EmitDefaultValue=false)]
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Unique identifier of the Facility. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;
+    /// </summary>
+    /// <value>Unique identifier of the Facility. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;</value>
+    [Required]
+    [RegularExpression("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")]
+    [MaxLength(36)]
+    [DataMember(Name="id", EmitDefaultValue=false)]
+    public Guid Id { get; set; }
+
+    /// <summary>
+    /// Unique identifier of the Workspace. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;
+    /// </summary>
+    /// <value>Unique identifier of the Workspace. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;</value>
+    [Required]
+    [RegularExpression("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")]
+    [MaxLength(36)]
+    [DataMember(Name="workspaceId", EmitDefaultValue=false)]
+    public Guid WorkspaceId { get; set; }
+
+    /// <summary>
+    /// A facility identifier relevant to the user
+    /// </summary>
+    /// <value>A facility identifier relevant to the user</value>
+    [MaxLength(500)]
+    [DataMember(Name="userFacilityId", EmitDefaultValue=false)]
+    public string UserFacilityId { get; set; }
+
+    /// <summary>
+    /// Returns the string presentation of the object
+    /// </summary>
+    /// <returns>String presentation of the object</returns>
+    public override string ToString()
     {
-        /// <summary>
-        /// Date that the Facility was created, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;
-        /// </summary>
-        /// <value>Date that the Facility was created, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;</value>
-        [RegularExpression("^[0-9TZ:-]*$")]
-        [MaxLength(20)]
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
-        public DateTime CreatedAt { get; set; }
-
-        /// <summary>
-        /// The name of the Facility
-        /// </summary>
-        /// <value>The name of the Facility</value>
-        [Required]
-        [RegularExpression("^[a-zA-Z0-9!@#$&()\\-`.+,/\" ]*$")]
-        [MaxLength(500)]
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Unique identifier of the Facility. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;
-        /// </summary>
-        /// <value>Unique identifier of the Facility. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;</value>
-        [Required]
-        [RegularExpression("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")]
-        [MaxLength(36)]
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public Guid Id { get; set; }
-
-        /// <summary>
-        /// Unique identifier of the Workspace. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;
-        /// </summary>
-        /// <value>Unique identifier of the Workspace. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;</value>
-        [Required]
-        [RegularExpression("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")]
-        [MaxLength(36)]
-        [DataMember(Name="workspaceId", EmitDefaultValue=false)]
-        public Guid WorkspaceId { get; set; }
-
-        /// <summary>
-        /// A facility identifier relevant to the user
-        /// </summary>
-        /// <value>A facility identifier relevant to the user</value>
-        [MaxLength(500)]
-        [DataMember(Name="userFacilityId", EmitDefaultValue=false)]
-        public string UserFacilityId { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class Facility {\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  WorkspaceId: ").Append(WorkspaceId).Append("\n");
-            sb.Append("  UserFacilityId: ").Append(UserFacilityId).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="obj">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj is null) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((Facility)obj);
-        }
-
-        /// <summary>
-        /// Returns true if Facility instances are equal
-        /// </summary>
-        /// <param name="other">Instance of Facility to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Facility other)
-        {
-            if (other is null) return false;
-            if (ReferenceEquals(this, other)) return true;
-
-            return 
-                (
-                    CreatedAt == other.CreatedAt ||
-                    CreatedAt != null &&
-                    CreatedAt.Equals(other.CreatedAt)
-                ) && 
-                (
-                    Name == other.Name ||
-                    Name != null &&
-                    Name.Equals(other.Name)
-                ) && 
-                (
-                    Id == other.Id ||
-                    Id != null &&
-                    Id.Equals(other.Id)
-                ) && 
-                (
-                    WorkspaceId == other.WorkspaceId ||
-                    WorkspaceId != null &&
-                    WorkspaceId.Equals(other.WorkspaceId)
-                ) && 
-                (
-                    UserFacilityId == other.UserFacilityId ||
-                    UserFacilityId != null &&
-                    UserFacilityId.Equals(other.UserFacilityId)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                var hashCode = 41;
-                // Suitable nullity checks etc, of course :)
-                    if (CreatedAt != null)
-                    hashCode = hashCode * 59 + CreatedAt.GetHashCode();
-                    if (Name != null)
-                    hashCode = hashCode * 59 + Name.GetHashCode();
-                    if (Id != null)
-                    hashCode = hashCode * 59 + Id.GetHashCode();
-                    if (WorkspaceId != null)
-                    hashCode = hashCode * 59 + WorkspaceId.GetHashCode();
-                    if (UserFacilityId != null)
-                    hashCode = hashCode * 59 + UserFacilityId.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        #region Operators
-        #pragma warning disable 1591
-
-        public static bool operator ==(Facility left, Facility right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(Facility left, Facility right)
-        {
-            return !Equals(left, right);
-        }
-
-        #pragma warning restore 1591
-        #endregion Operators
+        var sb = new StringBuilder();
+        sb.Append("class Facility {\n");
+        sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+        sb.Append("  Name: ").Append(Name).Append("\n");
+        sb.Append("  Id: ").Append(Id).Append("\n");
+        sb.Append("  WorkspaceId: ").Append(WorkspaceId).Append("\n");
+        sb.Append("  UserFacilityId: ").Append(UserFacilityId).Append("\n");
+        sb.Append("}\n");
+        return sb.ToString();
     }
+
+    /// <summary>
+    /// Returns the JSON string presentation of the object
+    /// </summary>
+    /// <returns>JSON string presentation of the object</returns>
+    public string ToJson()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
+
+    /// <summary>
+    /// Returns true if objects are equal
+    /// </summary>
+    /// <param name="obj">Object to be compared</param>
+    /// <returns>Boolean</returns>
+    public override bool Equals(object obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.GetType() == GetType() && Equals((Facility)obj);
+    }
+
+    /// <summary>
+    /// Returns true if Facility instances are equal
+    /// </summary>
+    /// <param name="other">Instance of Facility to be compared</param>
+    /// <returns>Boolean</returns>
+    public bool Equals(Facility other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+
+        return 
+            (
+                CreatedAt == other.CreatedAt ||
+                CreatedAt != null &&
+                CreatedAt.Equals(other.CreatedAt)
+            ) && 
+            (
+                Name == other.Name ||
+                Name != null &&
+                Name.Equals(other.Name)
+            ) && 
+            (
+                Id == other.Id ||
+                Id != null &&
+                Id.Equals(other.Id)
+            ) && 
+            (
+                WorkspaceId == other.WorkspaceId ||
+                WorkspaceId != null &&
+                WorkspaceId.Equals(other.WorkspaceId)
+            ) && 
+            (
+                UserFacilityId == other.UserFacilityId ||
+                UserFacilityId != null &&
+                UserFacilityId.Equals(other.UserFacilityId)
+            );
+    }
+
+    /// <summary>
+    /// Gets the hash code
+    /// </summary>
+    /// <returns>Hash code</returns>
+    public override int GetHashCode()
+    {
+        unchecked // Overflow is fine, just wrap
+        {
+            var hashCode = 41;
+            // Suitable nullity checks etc, of course :)
+            if (CreatedAt != null)
+                hashCode = hashCode * 59 + CreatedAt.GetHashCode();
+            if (Name != null)
+                hashCode = hashCode * 59 + Name.GetHashCode();
+            if (Id != null)
+                hashCode = hashCode * 59 + Id.GetHashCode();
+            if (WorkspaceId != null)
+                hashCode = hashCode * 59 + WorkspaceId.GetHashCode();
+            if (UserFacilityId != null)
+                hashCode = hashCode * 59 + UserFacilityId.GetHashCode();
+            return hashCode;
+        }
+    }
+
+    #region Operators
+#pragma warning disable 1591
+
+    public static bool operator ==(Facility left, Facility right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(Facility left, Facility right)
+    {
+        return !Equals(left, right);
+    }
+
+#pragma warning restore 1591
+    #endregion Operators
 }

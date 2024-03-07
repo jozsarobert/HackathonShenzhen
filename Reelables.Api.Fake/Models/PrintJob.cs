@@ -9,334 +9,329 @@
  */
 
 using System;
-using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Org.OpenAPITools.Converters;
 
-namespace Org.OpenAPITools.Models
-{ 
+namespace Reelables.Api.Fake.Models;
+
+/// <summary>
+/// 
+/// </summary>
+[DataContract]
+public partial class PrintJob : IEquatable<PrintJob>
+{
     /// <summary>
-    /// 
+    /// The origin of the Print Job (e.g. Remote or Local Barcode)
     /// </summary>
-    [DataContract]
-    public partial class PrintJob : IEquatable<PrintJob>
+    /// <value>The origin of the Print Job (e.g. Remote or Local Barcode)</value>
+    [Required]
+    [RegularExpression("^[a-zA-Z0-9!@#$&()\\-`.+,/\" ]*$")]
+    [MaxLength(100)]
+    [DataMember(Name="origin", EmitDefaultValue=false)]
+    public string Origin { get; set; }
+
+    /// <summary>
+    /// Indicates whether to replace the existing Label, in the case where the Asset is already linked to a Label
+    /// </summary>
+    /// <value>Indicates whether to replace the existing Label, in the case where the Asset is already linked to a Label</value>
+    [DataMember(Name="replaceExistingLabel", EmitDefaultValue=true)]
+    public bool ReplaceExistingLabel { get; set; }
+
+    /// <summary>
+    /// Indicates whether the Print Job has a cut line (where to cut a label to de-activate) included
+    /// </summary>
+    /// <value>Indicates whether the Print Job has a cut line (where to cut a label to de-activate) included</value>
+    [DataMember(Name="includeCutLine", EmitDefaultValue=true)]
+    public bool IncludeCutLine { get; set; }
+
+    /// <summary>
+    /// The indentifier of the Print Template
+    /// </summary>
+    /// <value>The indentifier of the Print Template</value>
+    [RegularExpression("^template[0-9]*$")]
+    [MaxLength(12)]
+    [DataMember(Name="templateId", EmitDefaultValue=false)]
+    public string TemplateId { get; set; }
+
+    /// <summary>
+    /// Date that the Print Job was created, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;
+    /// </summary>
+    /// <value>Date that the Print Job was created, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;</value>
+    [Required]
+    [RegularExpression("^[0-9TZ:-]*$")]
+    [MaxLength(20)]
+    [DataMember(Name="createdAt", EmitDefaultValue=false)]
+    public DateTime CreatedAt { get; set; }
+
+    /// <summary>
+    /// Indicates whether the Print Job was successful
+    /// </summary>
+    /// <value>Indicates whether the Print Job was successful</value>
+    [DataMember(Name="isSuccessful", EmitDefaultValue=true)]
+    public bool IsSuccessful { get; set; }
+
+    /// <summary>
+    /// Unique identifier of the Asset printed. Example: &#39;00Es43YBJfNRXNSvLmni&#39;
+    /// </summary>
+    /// <value>Unique identifier of the Asset printed. Example: &#39;00Es43YBJfNRXNSvLmni&#39;</value>
+    [Required]
+    [RegularExpression("^[-_A-Za-z0-9]*$")]
+    [MaxLength(20)]
+    [DataMember(Name="assetId", EmitDefaultValue=false)]
+    public string AssetId { get; set; }
+
+    /// <summary>
+    /// Describes the failure if the Print Job was unsuccessful
+    /// </summary>
+    /// <value>Describes the failure if the Print Job was unsuccessful</value>
+    [RegularExpression("^[a-zA-Z0-9!@#$&()\\-`.+,/\" ]*$")]
+    [MaxLength(100)]
+    [DataMember(Name="failureReason", EmitDefaultValue=false)]
+    public string FailureReason { get; set; }
+
+    /// <summary>
+    /// Printer identifier - the serial number of the Printer. Example: &#39;abcdefgh123456789&#39;
+    /// </summary>
+    /// <value>Printer identifier - the serial number of the Printer. Example: &#39;abcdefgh123456789&#39;</value>
+    [Required]
+    [RegularExpression("^[-_A-Za-z0-9]*$")]
+    [MaxLength(50)]
+    [DataMember(Name="printerId", EmitDefaultValue=false)]
+    public string PrinterId { get; set; }
+
+    /// <summary>
+    /// Unique identifier of the Print Job. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;
+    /// </summary>
+    /// <value>Unique identifier of the Print Job. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;</value>
+    [Required]
+    [RegularExpression("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")]
+    [MaxLength(36)]
+    [DataMember(Name="id", EmitDefaultValue=false)]
+    public Guid Id { get; set; }
+
+    /// <summary>
+    /// Unique identifier of the Workspace that the Printer belongs to. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;
+    /// </summary>
+    /// <value>Unique identifier of the Workspace that the Printer belongs to. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;</value>
+    [Required]
+    [RegularExpression("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")]
+    [MaxLength(36)]
+    [DataMember(Name="workspaceId", EmitDefaultValue=false)]
+    public Guid WorkspaceId { get; set; }
+
+    /// <summary>
+    /// Date that the Print Job was last updated, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;
+    /// </summary>
+    /// <value>Date that the Print Job was last updated, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;</value>
+    [RegularExpression("^[0-9TZ:-]*$")]
+    [MaxLength(20)]
+    [DataMember(Name="updatedAt", EmitDefaultValue=false)]
+    public DateTime UpdatedAt { get; set; }
+
+    /// <summary>
+    /// The status of the Print Job
+    /// </summary>
+    /// <value>The status of the Print Job</value>
+    [Required]
+    [RegularExpression("^[a-zA-Z0-9!@#$&()\\-`.+,/\" ]*$")]
+    [MaxLength(100)]
+    [DataMember(Name="status", EmitDefaultValue=false)]
+    public string Status { get; set; }
+
+    /// <summary>
+    /// Indicates whether the Print Job is complete
+    /// </summary>
+    /// <value>Indicates whether the Print Job is complete</value>
+    [DataMember(Name="isComplete", EmitDefaultValue=true)]
+    public bool IsComplete { get; set; }
+
+    /// <summary>
+    /// Returns the string presentation of the object
+    /// </summary>
+    /// <returns>String presentation of the object</returns>
+    public override string ToString()
     {
-        /// <summary>
-        /// The origin of the Print Job (e.g. Remote or Local Barcode)
-        /// </summary>
-        /// <value>The origin of the Print Job (e.g. Remote or Local Barcode)</value>
-        [Required]
-        [RegularExpression("^[a-zA-Z0-9!@#$&()\\-`.+,/\" ]*$")]
-        [MaxLength(100)]
-        [DataMember(Name="origin", EmitDefaultValue=false)]
-        public string Origin { get; set; }
-
-        /// <summary>
-        /// Indicates whether to replace the existing Label, in the case where the Asset is already linked to a Label
-        /// </summary>
-        /// <value>Indicates whether to replace the existing Label, in the case where the Asset is already linked to a Label</value>
-        [DataMember(Name="replaceExistingLabel", EmitDefaultValue=true)]
-        public bool ReplaceExistingLabel { get; set; }
-
-        /// <summary>
-        /// Indicates whether the Print Job has a cut line (where to cut a label to de-activate) included
-        /// </summary>
-        /// <value>Indicates whether the Print Job has a cut line (where to cut a label to de-activate) included</value>
-        [DataMember(Name="includeCutLine", EmitDefaultValue=true)]
-        public bool IncludeCutLine { get; set; }
-
-        /// <summary>
-        /// The indentifier of the Print Template
-        /// </summary>
-        /// <value>The indentifier of the Print Template</value>
-        [RegularExpression("^template[0-9]*$")]
-        [MaxLength(12)]
-        [DataMember(Name="templateId", EmitDefaultValue=false)]
-        public string TemplateId { get; set; }
-
-        /// <summary>
-        /// Date that the Print Job was created, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;
-        /// </summary>
-        /// <value>Date that the Print Job was created, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;</value>
-        [Required]
-        [RegularExpression("^[0-9TZ:-]*$")]
-        [MaxLength(20)]
-        [DataMember(Name="createdAt", EmitDefaultValue=false)]
-        public DateTime CreatedAt { get; set; }
-
-        /// <summary>
-        /// Indicates whether the Print Job was successful
-        /// </summary>
-        /// <value>Indicates whether the Print Job was successful</value>
-        [DataMember(Name="isSuccessful", EmitDefaultValue=true)]
-        public bool IsSuccessful { get; set; }
-
-        /// <summary>
-        /// Unique identifier of the Asset printed. Example: &#39;00Es43YBJfNRXNSvLmni&#39;
-        /// </summary>
-        /// <value>Unique identifier of the Asset printed. Example: &#39;00Es43YBJfNRXNSvLmni&#39;</value>
-        [Required]
-        [RegularExpression("^[-_A-Za-z0-9]*$")]
-        [MaxLength(20)]
-        [DataMember(Name="assetId", EmitDefaultValue=false)]
-        public string AssetId { get; set; }
-
-        /// <summary>
-        /// Describes the failure if the Print Job was unsuccessful
-        /// </summary>
-        /// <value>Describes the failure if the Print Job was unsuccessful</value>
-        [RegularExpression("^[a-zA-Z0-9!@#$&()\\-`.+,/\" ]*$")]
-        [MaxLength(100)]
-        [DataMember(Name="failureReason", EmitDefaultValue=false)]
-        public string FailureReason { get; set; }
-
-        /// <summary>
-        /// Printer identifier - the serial number of the Printer. Example: &#39;abcdefgh123456789&#39;
-        /// </summary>
-        /// <value>Printer identifier - the serial number of the Printer. Example: &#39;abcdefgh123456789&#39;</value>
-        [Required]
-        [RegularExpression("^[-_A-Za-z0-9]*$")]
-        [MaxLength(50)]
-        [DataMember(Name="printerId", EmitDefaultValue=false)]
-        public string PrinterId { get; set; }
-
-        /// <summary>
-        /// Unique identifier of the Print Job. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;
-        /// </summary>
-        /// <value>Unique identifier of the Print Job. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;</value>
-        [Required]
-        [RegularExpression("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")]
-        [MaxLength(36)]
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public Guid Id { get; set; }
-
-        /// <summary>
-        /// Unique identifier of the Workspace that the Printer belongs to. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;
-        /// </summary>
-        /// <value>Unique identifier of the Workspace that the Printer belongs to. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;</value>
-        [Required]
-        [RegularExpression("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")]
-        [MaxLength(36)]
-        [DataMember(Name="workspaceId", EmitDefaultValue=false)]
-        public Guid WorkspaceId { get; set; }
-
-        /// <summary>
-        /// Date that the Print Job was last updated, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;
-        /// </summary>
-        /// <value>Date that the Print Job was last updated, in UTC. Example: &#39;2019-07-21T17:32:28Z&#39;</value>
-        [RegularExpression("^[0-9TZ:-]*$")]
-        [MaxLength(20)]
-        [DataMember(Name="updatedAt", EmitDefaultValue=false)]
-        public DateTime UpdatedAt { get; set; }
-
-        /// <summary>
-        /// The status of the Print Job
-        /// </summary>
-        /// <value>The status of the Print Job</value>
-        [Required]
-        [RegularExpression("^[a-zA-Z0-9!@#$&()\\-`.+,/\" ]*$")]
-        [MaxLength(100)]
-        [DataMember(Name="status", EmitDefaultValue=false)]
-        public string Status { get; set; }
-
-        /// <summary>
-        /// Indicates whether the Print Job is complete
-        /// </summary>
-        /// <value>Indicates whether the Print Job is complete</value>
-        [DataMember(Name="isComplete", EmitDefaultValue=true)]
-        public bool IsComplete { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class PrintJob {\n");
-            sb.Append("  Origin: ").Append(Origin).Append("\n");
-            sb.Append("  ReplaceExistingLabel: ").Append(ReplaceExistingLabel).Append("\n");
-            sb.Append("  IncludeCutLine: ").Append(IncludeCutLine).Append("\n");
-            sb.Append("  TemplateId: ").Append(TemplateId).Append("\n");
-            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
-            sb.Append("  IsSuccessful: ").Append(IsSuccessful).Append("\n");
-            sb.Append("  AssetId: ").Append(AssetId).Append("\n");
-            sb.Append("  FailureReason: ").Append(FailureReason).Append("\n");
-            sb.Append("  PrinterId: ").Append(PrinterId).Append("\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  WorkspaceId: ").Append(WorkspaceId).Append("\n");
-            sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
-            sb.Append("  Status: ").Append(Status).Append("\n");
-            sb.Append("  IsComplete: ").Append(IsComplete).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="obj">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj is null) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((PrintJob)obj);
-        }
-
-        /// <summary>
-        /// Returns true if PrintJob instances are equal
-        /// </summary>
-        /// <param name="other">Instance of PrintJob to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(PrintJob other)
-        {
-            if (other is null) return false;
-            if (ReferenceEquals(this, other)) return true;
-
-            return 
-                (
-                    Origin == other.Origin ||
-                    Origin != null &&
-                    Origin.Equals(other.Origin)
-                ) && 
-                (
-                    ReplaceExistingLabel == other.ReplaceExistingLabel ||
-                    
-                    ReplaceExistingLabel.Equals(other.ReplaceExistingLabel)
-                ) && 
-                (
-                    IncludeCutLine == other.IncludeCutLine ||
-                    
-                    IncludeCutLine.Equals(other.IncludeCutLine)
-                ) && 
-                (
-                    TemplateId == other.TemplateId ||
-                    TemplateId != null &&
-                    TemplateId.Equals(other.TemplateId)
-                ) && 
-                (
-                    CreatedAt == other.CreatedAt ||
-                    CreatedAt != null &&
-                    CreatedAt.Equals(other.CreatedAt)
-                ) && 
-                (
-                    IsSuccessful == other.IsSuccessful ||
-                    
-                    IsSuccessful.Equals(other.IsSuccessful)
-                ) && 
-                (
-                    AssetId == other.AssetId ||
-                    AssetId != null &&
-                    AssetId.Equals(other.AssetId)
-                ) && 
-                (
-                    FailureReason == other.FailureReason ||
-                    FailureReason != null &&
-                    FailureReason.Equals(other.FailureReason)
-                ) && 
-                (
-                    PrinterId == other.PrinterId ||
-                    PrinterId != null &&
-                    PrinterId.Equals(other.PrinterId)
-                ) && 
-                (
-                    Id == other.Id ||
-                    Id != null &&
-                    Id.Equals(other.Id)
-                ) && 
-                (
-                    WorkspaceId == other.WorkspaceId ||
-                    WorkspaceId != null &&
-                    WorkspaceId.Equals(other.WorkspaceId)
-                ) && 
-                (
-                    UpdatedAt == other.UpdatedAt ||
-                    UpdatedAt != null &&
-                    UpdatedAt.Equals(other.UpdatedAt)
-                ) && 
-                (
-                    Status == other.Status ||
-                    Status != null &&
-                    Status.Equals(other.Status)
-                ) && 
-                (
-                    IsComplete == other.IsComplete ||
-                    
-                    IsComplete.Equals(other.IsComplete)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                var hashCode = 41;
-                // Suitable nullity checks etc, of course :)
-                    if (Origin != null)
-                    hashCode = hashCode * 59 + Origin.GetHashCode();
-                    
-                    hashCode = hashCode * 59 + ReplaceExistingLabel.GetHashCode();
-                    
-                    hashCode = hashCode * 59 + IncludeCutLine.GetHashCode();
-                    if (TemplateId != null)
-                    hashCode = hashCode * 59 + TemplateId.GetHashCode();
-                    if (CreatedAt != null)
-                    hashCode = hashCode * 59 + CreatedAt.GetHashCode();
-                    
-                    hashCode = hashCode * 59 + IsSuccessful.GetHashCode();
-                    if (AssetId != null)
-                    hashCode = hashCode * 59 + AssetId.GetHashCode();
-                    if (FailureReason != null)
-                    hashCode = hashCode * 59 + FailureReason.GetHashCode();
-                    if (PrinterId != null)
-                    hashCode = hashCode * 59 + PrinterId.GetHashCode();
-                    if (Id != null)
-                    hashCode = hashCode * 59 + Id.GetHashCode();
-                    if (WorkspaceId != null)
-                    hashCode = hashCode * 59 + WorkspaceId.GetHashCode();
-                    if (UpdatedAt != null)
-                    hashCode = hashCode * 59 + UpdatedAt.GetHashCode();
-                    if (Status != null)
-                    hashCode = hashCode * 59 + Status.GetHashCode();
-                    
-                    hashCode = hashCode * 59 + IsComplete.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        #region Operators
-        #pragma warning disable 1591
-
-        public static bool operator ==(PrintJob left, PrintJob right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(PrintJob left, PrintJob right)
-        {
-            return !Equals(left, right);
-        }
-
-        #pragma warning restore 1591
-        #endregion Operators
+        var sb = new StringBuilder();
+        sb.Append("class PrintJob {\n");
+        sb.Append("  Origin: ").Append(Origin).Append("\n");
+        sb.Append("  ReplaceExistingLabel: ").Append(ReplaceExistingLabel).Append("\n");
+        sb.Append("  IncludeCutLine: ").Append(IncludeCutLine).Append("\n");
+        sb.Append("  TemplateId: ").Append(TemplateId).Append("\n");
+        sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+        sb.Append("  IsSuccessful: ").Append(IsSuccessful).Append("\n");
+        sb.Append("  AssetId: ").Append(AssetId).Append("\n");
+        sb.Append("  FailureReason: ").Append(FailureReason).Append("\n");
+        sb.Append("  PrinterId: ").Append(PrinterId).Append("\n");
+        sb.Append("  Id: ").Append(Id).Append("\n");
+        sb.Append("  WorkspaceId: ").Append(WorkspaceId).Append("\n");
+        sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
+        sb.Append("  Status: ").Append(Status).Append("\n");
+        sb.Append("  IsComplete: ").Append(IsComplete).Append("\n");
+        sb.Append("}\n");
+        return sb.ToString();
     }
+
+    /// <summary>
+    /// Returns the JSON string presentation of the object
+    /// </summary>
+    /// <returns>JSON string presentation of the object</returns>
+    public string ToJson()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
+
+    /// <summary>
+    /// Returns true if objects are equal
+    /// </summary>
+    /// <param name="obj">Object to be compared</param>
+    /// <returns>Boolean</returns>
+    public override bool Equals(object obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.GetType() == GetType() && Equals((PrintJob)obj);
+    }
+
+    /// <summary>
+    /// Returns true if PrintJob instances are equal
+    /// </summary>
+    /// <param name="other">Instance of PrintJob to be compared</param>
+    /// <returns>Boolean</returns>
+    public bool Equals(PrintJob other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+
+        return 
+            (
+                Origin == other.Origin ||
+                Origin != null &&
+                Origin.Equals(other.Origin)
+            ) && 
+            (
+                ReplaceExistingLabel == other.ReplaceExistingLabel ||
+                    
+                ReplaceExistingLabel.Equals(other.ReplaceExistingLabel)
+            ) && 
+            (
+                IncludeCutLine == other.IncludeCutLine ||
+                    
+                IncludeCutLine.Equals(other.IncludeCutLine)
+            ) && 
+            (
+                TemplateId == other.TemplateId ||
+                TemplateId != null &&
+                TemplateId.Equals(other.TemplateId)
+            ) && 
+            (
+                CreatedAt == other.CreatedAt ||
+                CreatedAt != null &&
+                CreatedAt.Equals(other.CreatedAt)
+            ) && 
+            (
+                IsSuccessful == other.IsSuccessful ||
+                    
+                IsSuccessful.Equals(other.IsSuccessful)
+            ) && 
+            (
+                AssetId == other.AssetId ||
+                AssetId != null &&
+                AssetId.Equals(other.AssetId)
+            ) && 
+            (
+                FailureReason == other.FailureReason ||
+                FailureReason != null &&
+                FailureReason.Equals(other.FailureReason)
+            ) && 
+            (
+                PrinterId == other.PrinterId ||
+                PrinterId != null &&
+                PrinterId.Equals(other.PrinterId)
+            ) && 
+            (
+                Id == other.Id ||
+                Id != null &&
+                Id.Equals(other.Id)
+            ) && 
+            (
+                WorkspaceId == other.WorkspaceId ||
+                WorkspaceId != null &&
+                WorkspaceId.Equals(other.WorkspaceId)
+            ) && 
+            (
+                UpdatedAt == other.UpdatedAt ||
+                UpdatedAt != null &&
+                UpdatedAt.Equals(other.UpdatedAt)
+            ) && 
+            (
+                Status == other.Status ||
+                Status != null &&
+                Status.Equals(other.Status)
+            ) && 
+            (
+                IsComplete == other.IsComplete ||
+                    
+                IsComplete.Equals(other.IsComplete)
+            );
+    }
+
+    /// <summary>
+    /// Gets the hash code
+    /// </summary>
+    /// <returns>Hash code</returns>
+    public override int GetHashCode()
+    {
+        unchecked // Overflow is fine, just wrap
+        {
+            var hashCode = 41;
+            // Suitable nullity checks etc, of course :)
+            if (Origin != null)
+                hashCode = hashCode * 59 + Origin.GetHashCode();
+                    
+            hashCode = hashCode * 59 + ReplaceExistingLabel.GetHashCode();
+                    
+            hashCode = hashCode * 59 + IncludeCutLine.GetHashCode();
+            if (TemplateId != null)
+                hashCode = hashCode * 59 + TemplateId.GetHashCode();
+            if (CreatedAt != null)
+                hashCode = hashCode * 59 + CreatedAt.GetHashCode();
+                    
+            hashCode = hashCode * 59 + IsSuccessful.GetHashCode();
+            if (AssetId != null)
+                hashCode = hashCode * 59 + AssetId.GetHashCode();
+            if (FailureReason != null)
+                hashCode = hashCode * 59 + FailureReason.GetHashCode();
+            if (PrinterId != null)
+                hashCode = hashCode * 59 + PrinterId.GetHashCode();
+            if (Id != null)
+                hashCode = hashCode * 59 + Id.GetHashCode();
+            if (WorkspaceId != null)
+                hashCode = hashCode * 59 + WorkspaceId.GetHashCode();
+            if (UpdatedAt != null)
+                hashCode = hashCode * 59 + UpdatedAt.GetHashCode();
+            if (Status != null)
+                hashCode = hashCode * 59 + Status.GetHashCode();
+                    
+            hashCode = hashCode * 59 + IsComplete.GetHashCode();
+            return hashCode;
+        }
+    }
+
+    #region Operators
+#pragma warning disable 1591
+
+    public static bool operator ==(PrintJob left, PrintJob right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(PrintJob left, PrintJob right)
+    {
+        return !Equals(left, right);
+    }
+
+#pragma warning restore 1591
+    #endregion Operators
 }

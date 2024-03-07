@@ -1,32 +1,25 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-# Container we use for final publish
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER app
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
+EXPOSE 8081
 
-# Build container
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
-
-# Copy the code into the container
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["src/Org.OpenAPITools/Org.OpenAPITools.csproj", "Org.OpenAPITools/"]
+COPY ["Reelables.Api.Fake/Reelables.Api.Fake.csproj", "Reelables.Api.Fake/"]
+RUN dotnet restore "./Reelables.Api.Fake/./Reelables.Api.Fake.csproj"
+COPY . .
+WORKDIR "/src/Reelables.Api.Fake"
+RUN dotnet build "./Reelables.Api.Fake.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-# NuGet restore
-RUN dotnet restore "Org.OpenAPITools/Org.OpenAPITools.csproj"
-COPY ["src/Org.OpenAPITools/", "Org.OpenAPITools/"]
-
-# Build the API
-WORKDIR "Org.OpenAPITools"
-RUN dotnet build "Org.OpenAPITools.csproj" -c Release -o /app/build
-
-# Publish it
 FROM build AS publish
-RUN dotnet publish "Org.OpenAPITools.csproj" -c Release -o /app/publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./Reelables.Api.Fake.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# Make the final image for publishing
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Org.OpenAPITools.dll"]
+ENTRYPOINT ["dotnet", "Reelables.Api.Fake.dll"]

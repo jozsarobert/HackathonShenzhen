@@ -9,148 +9,143 @@
  */
 
 using System;
-using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Org.OpenAPITools.Converters;
 
-namespace Org.OpenAPITools.Models
-{ 
+namespace Reelables.Api.Fake.Models;
+
+/// <summary>
+/// 
+/// </summary>
+[DataContract]
+public partial class Temperature : IEquatable<Temperature>
+{
     /// <summary>
-    /// 
+    /// Temperature value rounded to 1 decimal place, for each minute of the hour. Example: -2.1
     /// </summary>
-    [DataContract]
-    public partial class Temperature : IEquatable<Temperature>
+    /// <value>Temperature value rounded to 1 decimal place, for each minute of the hour. Example: -2.1</value>
+    [Required]
+    [Range(-100, 500)]
+    [DataMember(Name="degreesCelcius", EmitDefaultValue=true)]
+    public float DegreesCelcius { get; set; }
+
+    /// <summary>
+    /// Timestamp of the temperature. Example: &#39;2019-07-21T17:32:28Z&#39;
+    /// </summary>
+    /// <value>Timestamp of the temperature. Example: &#39;2019-07-21T17:32:28Z&#39;</value>
+    [Required]
+    [RegularExpression("^[0-9TZ:-]*$")]
+    [MaxLength(20)]
+    [DataMember(Name="timestamp", EmitDefaultValue=false)]
+    public DateTime Timestamp { get; set; }
+
+    /// <summary>
+    /// The number of readings that were used to evaluate the temperature value
+    /// </summary>
+    /// <value>The number of readings that were used to evaluate the temperature value</value>
+    [Range(0, 1000000)]
+    [DataMember(Name="numberReadings", EmitDefaultValue=true)]
+    public int NumberReadings { get; set; }
+
+    /// <summary>
+    /// Returns the string presentation of the object
+    /// </summary>
+    /// <returns>String presentation of the object</returns>
+    public override string ToString()
     {
-        /// <summary>
-        /// Temperature value rounded to 1 decimal place, for each minute of the hour. Example: -2.1
-        /// </summary>
-        /// <value>Temperature value rounded to 1 decimal place, for each minute of the hour. Example: -2.1</value>
-        [Required]
-        [Range(-100, 500)]
-        [DataMember(Name="degreesCelcius", EmitDefaultValue=true)]
-        public float DegreesCelcius { get; set; }
-
-        /// <summary>
-        /// Timestamp of the temperature. Example: &#39;2019-07-21T17:32:28Z&#39;
-        /// </summary>
-        /// <value>Timestamp of the temperature. Example: &#39;2019-07-21T17:32:28Z&#39;</value>
-        [Required]
-        [RegularExpression("^[0-9TZ:-]*$")]
-        [MaxLength(20)]
-        [DataMember(Name="timestamp", EmitDefaultValue=false)]
-        public DateTime Timestamp { get; set; }
-
-        /// <summary>
-        /// The number of readings that were used to evaluate the temperature value
-        /// </summary>
-        /// <value>The number of readings that were used to evaluate the temperature value</value>
-        [Range(0, 1000000)]
-        [DataMember(Name="numberReadings", EmitDefaultValue=true)]
-        public int NumberReadings { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class Temperature {\n");
-            sb.Append("  DegreesCelcius: ").Append(DegreesCelcius).Append("\n");
-            sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
-            sb.Append("  NumberReadings: ").Append(NumberReadings).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="obj">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj is null) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((Temperature)obj);
-        }
-
-        /// <summary>
-        /// Returns true if Temperature instances are equal
-        /// </summary>
-        /// <param name="other">Instance of Temperature to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Temperature other)
-        {
-            if (other is null) return false;
-            if (ReferenceEquals(this, other)) return true;
-
-            return 
-                (
-                    DegreesCelcius == other.DegreesCelcius ||
-                    
-                    DegreesCelcius.Equals(other.DegreesCelcius)
-                ) && 
-                (
-                    Timestamp == other.Timestamp ||
-                    Timestamp != null &&
-                    Timestamp.Equals(other.Timestamp)
-                ) && 
-                (
-                    NumberReadings == other.NumberReadings ||
-                    
-                    NumberReadings.Equals(other.NumberReadings)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                var hashCode = 41;
-                // Suitable nullity checks etc, of course :)
-                    
-                    hashCode = hashCode * 59 + DegreesCelcius.GetHashCode();
-                    if (Timestamp != null)
-                    hashCode = hashCode * 59 + Timestamp.GetHashCode();
-                    
-                    hashCode = hashCode * 59 + NumberReadings.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        #region Operators
-        #pragma warning disable 1591
-
-        public static bool operator ==(Temperature left, Temperature right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(Temperature left, Temperature right)
-        {
-            return !Equals(left, right);
-        }
-
-        #pragma warning restore 1591
-        #endregion Operators
+        var sb = new StringBuilder();
+        sb.Append("class Temperature {\n");
+        sb.Append("  DegreesCelcius: ").Append(DegreesCelcius).Append("\n");
+        sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
+        sb.Append("  NumberReadings: ").Append(NumberReadings).Append("\n");
+        sb.Append("}\n");
+        return sb.ToString();
     }
+
+    /// <summary>
+    /// Returns the JSON string presentation of the object
+    /// </summary>
+    /// <returns>JSON string presentation of the object</returns>
+    public string ToJson()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
+
+    /// <summary>
+    /// Returns true if objects are equal
+    /// </summary>
+    /// <param name="obj">Object to be compared</param>
+    /// <returns>Boolean</returns>
+    public override bool Equals(object obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.GetType() == GetType() && Equals((Temperature)obj);
+    }
+
+    /// <summary>
+    /// Returns true if Temperature instances are equal
+    /// </summary>
+    /// <param name="other">Instance of Temperature to be compared</param>
+    /// <returns>Boolean</returns>
+    public bool Equals(Temperature other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+
+        return 
+            (
+                DegreesCelcius == other.DegreesCelcius ||
+                    
+                DegreesCelcius.Equals(other.DegreesCelcius)
+            ) && 
+            (
+                Timestamp == other.Timestamp ||
+                Timestamp != null &&
+                Timestamp.Equals(other.Timestamp)
+            ) && 
+            (
+                NumberReadings == other.NumberReadings ||
+                    
+                NumberReadings.Equals(other.NumberReadings)
+            );
+    }
+
+    /// <summary>
+    /// Gets the hash code
+    /// </summary>
+    /// <returns>Hash code</returns>
+    public override int GetHashCode()
+    {
+        unchecked // Overflow is fine, just wrap
+        {
+            var hashCode = 41;
+            // Suitable nullity checks etc, of course :)
+                    
+            hashCode = hashCode * 59 + DegreesCelcius.GetHashCode();
+            if (Timestamp != null)
+                hashCode = hashCode * 59 + Timestamp.GetHashCode();
+                    
+            hashCode = hashCode * 59 + NumberReadings.GetHashCode();
+            return hashCode;
+        }
+    }
+
+    #region Operators
+#pragma warning disable 1591
+
+    public static bool operator ==(Temperature left, Temperature right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(Temperature left, Temperature right)
+    {
+        return !Equals(left, right);
+    }
+
+#pragma warning restore 1591
+    #endregion Operators
 }

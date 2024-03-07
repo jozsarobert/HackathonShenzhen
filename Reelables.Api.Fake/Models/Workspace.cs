@@ -9,189 +9,184 @@
  */
 
 using System;
-using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Org.OpenAPITools.Converters;
 
-namespace Org.OpenAPITools.Models
-{ 
+namespace Reelables.Api.Fake.Models;
+
+/// <summary>
+/// 
+/// </summary>
+[DataContract]
+public partial class Workspace : IEquatable<Workspace>
+{
     /// <summary>
-    /// 
+    /// Gets or Sets Printers
     /// </summary>
-    [DataContract]
-    public partial class Workspace : IEquatable<Workspace>
+    [DataMember(Name="printers", EmitDefaultValue=false)]
+    public WorkspacePrinters Printers { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Assets
+    /// </summary>
+    [DataMember(Name="assets", EmitDefaultValue=false)]
+    public WorkspaceAssets Assets { get; set; }
+
+    /// <summary>
+    /// Gets or Sets PrintTemplates
+    /// </summary>
+    [DataMember(Name="printTemplates", EmitDefaultValue=false)]
+    public WorkspacePrintTemplates PrintTemplates { get; set; }
+
+    /// <summary>
+    /// The name of the Workspace
+    /// </summary>
+    /// <value>The name of the Workspace</value>
+    [Required]
+    [RegularExpression("^[a-zA-Z0-9!@#$&()\\-`.+,/\" ]*$")]
+    [MaxLength(500)]
+    [DataMember(Name="name", EmitDefaultValue=false)]
+    public string Name { get; set; }
+
+    /// <summary>
+    /// Gets or Sets Spaces
+    /// </summary>
+    [DataMember(Name="spaces", EmitDefaultValue=false)]
+    public WorkspaceSpaces Spaces { get; set; }
+
+    /// <summary>
+    /// Unique identifier of the workspace. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;
+    /// </summary>
+    /// <value>Unique identifier of the workspace. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;</value>
+    [Required]
+    [RegularExpression("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")]
+    [MaxLength(36)]
+    [DataMember(Name="id", EmitDefaultValue=false)]
+    public Guid Id { get; set; }
+
+    /// <summary>
+    /// Returns the string presentation of the object
+    /// </summary>
+    /// <returns>String presentation of the object</returns>
+    public override string ToString()
     {
-        /// <summary>
-        /// Gets or Sets Printers
-        /// </summary>
-        [DataMember(Name="printers", EmitDefaultValue=false)]
-        public WorkspacePrinters Printers { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Assets
-        /// </summary>
-        [DataMember(Name="assets", EmitDefaultValue=false)]
-        public WorkspaceAssets Assets { get; set; }
-
-        /// <summary>
-        /// Gets or Sets PrintTemplates
-        /// </summary>
-        [DataMember(Name="printTemplates", EmitDefaultValue=false)]
-        public WorkspacePrintTemplates PrintTemplates { get; set; }
-
-        /// <summary>
-        /// The name of the Workspace
-        /// </summary>
-        /// <value>The name of the Workspace</value>
-        [Required]
-        [RegularExpression("^[a-zA-Z0-9!@#$&()\\-`.+,/\" ]*$")]
-        [MaxLength(500)]
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Spaces
-        /// </summary>
-        [DataMember(Name="spaces", EmitDefaultValue=false)]
-        public WorkspaceSpaces Spaces { get; set; }
-
-        /// <summary>
-        /// Unique identifier of the workspace. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;
-        /// </summary>
-        /// <value>Unique identifier of the workspace. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;</value>
-        [Required]
-        [RegularExpression("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")]
-        [MaxLength(36)]
-        [DataMember(Name="id", EmitDefaultValue=false)]
-        public Guid Id { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class Workspace {\n");
-            sb.Append("  Printers: ").Append(Printers).Append("\n");
-            sb.Append("  Assets: ").Append(Assets).Append("\n");
-            sb.Append("  PrintTemplates: ").Append(PrintTemplates).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Spaces: ").Append(Spaces).Append("\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="obj">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj is null) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((Workspace)obj);
-        }
-
-        /// <summary>
-        /// Returns true if Workspace instances are equal
-        /// </summary>
-        /// <param name="other">Instance of Workspace to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(Workspace other)
-        {
-            if (other is null) return false;
-            if (ReferenceEquals(this, other)) return true;
-
-            return 
-                (
-                    Printers == other.Printers ||
-                    Printers != null &&
-                    Printers.Equals(other.Printers)
-                ) && 
-                (
-                    Assets == other.Assets ||
-                    Assets != null &&
-                    Assets.Equals(other.Assets)
-                ) && 
-                (
-                    PrintTemplates == other.PrintTemplates ||
-                    PrintTemplates != null &&
-                    PrintTemplates.Equals(other.PrintTemplates)
-                ) && 
-                (
-                    Name == other.Name ||
-                    Name != null &&
-                    Name.Equals(other.Name)
-                ) && 
-                (
-                    Spaces == other.Spaces ||
-                    Spaces != null &&
-                    Spaces.Equals(other.Spaces)
-                ) && 
-                (
-                    Id == other.Id ||
-                    Id != null &&
-                    Id.Equals(other.Id)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                var hashCode = 41;
-                // Suitable nullity checks etc, of course :)
-                    if (Printers != null)
-                    hashCode = hashCode * 59 + Printers.GetHashCode();
-                    if (Assets != null)
-                    hashCode = hashCode * 59 + Assets.GetHashCode();
-                    if (PrintTemplates != null)
-                    hashCode = hashCode * 59 + PrintTemplates.GetHashCode();
-                    if (Name != null)
-                    hashCode = hashCode * 59 + Name.GetHashCode();
-                    if (Spaces != null)
-                    hashCode = hashCode * 59 + Spaces.GetHashCode();
-                    if (Id != null)
-                    hashCode = hashCode * 59 + Id.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        #region Operators
-        #pragma warning disable 1591
-
-        public static bool operator ==(Workspace left, Workspace right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(Workspace left, Workspace right)
-        {
-            return !Equals(left, right);
-        }
-
-        #pragma warning restore 1591
-        #endregion Operators
+        var sb = new StringBuilder();
+        sb.Append("class Workspace {\n");
+        sb.Append("  Printers: ").Append(Printers).Append("\n");
+        sb.Append("  Assets: ").Append(Assets).Append("\n");
+        sb.Append("  PrintTemplates: ").Append(PrintTemplates).Append("\n");
+        sb.Append("  Name: ").Append(Name).Append("\n");
+        sb.Append("  Spaces: ").Append(Spaces).Append("\n");
+        sb.Append("  Id: ").Append(Id).Append("\n");
+        sb.Append("}\n");
+        return sb.ToString();
     }
+
+    /// <summary>
+    /// Returns the JSON string presentation of the object
+    /// </summary>
+    /// <returns>JSON string presentation of the object</returns>
+    public string ToJson()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
+
+    /// <summary>
+    /// Returns true if objects are equal
+    /// </summary>
+    /// <param name="obj">Object to be compared</param>
+    /// <returns>Boolean</returns>
+    public override bool Equals(object obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.GetType() == GetType() && Equals((Workspace)obj);
+    }
+
+    /// <summary>
+    /// Returns true if Workspace instances are equal
+    /// </summary>
+    /// <param name="other">Instance of Workspace to be compared</param>
+    /// <returns>Boolean</returns>
+    public bool Equals(Workspace other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+
+        return 
+            (
+                Printers == other.Printers ||
+                Printers != null &&
+                Printers.Equals(other.Printers)
+            ) && 
+            (
+                Assets == other.Assets ||
+                Assets != null &&
+                Assets.Equals(other.Assets)
+            ) && 
+            (
+                PrintTemplates == other.PrintTemplates ||
+                PrintTemplates != null &&
+                PrintTemplates.Equals(other.PrintTemplates)
+            ) && 
+            (
+                Name == other.Name ||
+                Name != null &&
+                Name.Equals(other.Name)
+            ) && 
+            (
+                Spaces == other.Spaces ||
+                Spaces != null &&
+                Spaces.Equals(other.Spaces)
+            ) && 
+            (
+                Id == other.Id ||
+                Id != null &&
+                Id.Equals(other.Id)
+            );
+    }
+
+    /// <summary>
+    /// Gets the hash code
+    /// </summary>
+    /// <returns>Hash code</returns>
+    public override int GetHashCode()
+    {
+        unchecked // Overflow is fine, just wrap
+        {
+            var hashCode = 41;
+            // Suitable nullity checks etc, of course :)
+            if (Printers != null)
+                hashCode = hashCode * 59 + Printers.GetHashCode();
+            if (Assets != null)
+                hashCode = hashCode * 59 + Assets.GetHashCode();
+            if (PrintTemplates != null)
+                hashCode = hashCode * 59 + PrintTemplates.GetHashCode();
+            if (Name != null)
+                hashCode = hashCode * 59 + Name.GetHashCode();
+            if (Spaces != null)
+                hashCode = hashCode * 59 + Spaces.GetHashCode();
+            if (Id != null)
+                hashCode = hashCode * 59 + Id.GetHashCode();
+            return hashCode;
+        }
+    }
+
+    #region Operators
+#pragma warning disable 1591
+
+    public static bool operator ==(Workspace left, Workspace right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(Workspace left, Workspace right)
+    {
+        return !Equals(left, right);
+    }
+
+#pragma warning restore 1591
+    #endregion Operators
 }

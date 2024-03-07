@@ -9,198 +9,193 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using Swashbuckle.AspNetCore.Annotations;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using Newtonsoft.Json;
-using Org.OpenAPITools.Attributes;
-using Org.OpenAPITools.Models;
+using Reelables.Api.Fake.Attributes;
+using Reelables.Api.Fake.Models;
 
-namespace Org.OpenAPITools.Controllers
+namespace Reelables.Api.Fake.Controllers;
+
+/// <summary>
+/// 
+/// </summary>
+[ApiController]
+public class WorkspacePrintersApiController : ControllerBase
 { 
     /// <summary>
-    /// 
+    /// List Printers in a Workspace
     /// </summary>
-    [ApiController]
-    public class WorkspacePrintersApiController : ControllerBase
-    { 
-        /// <summary>
-        /// List Printers in a Workspace
-        /// </summary>
-        /// <param name="workspaceId">The identifier of the Workspace</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
-        /// <param name="limit">Number of Printers to return. Default: 100. Maximum: 10000</param>
-        /// <param name="nextToken">Pagination token to get next page of Printers</param>
-        /// <response code="200">200 response</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="429">Too Many Requests</response>
-        [HttpGet]
-        [Route("/v1/workspaces/{workspaceId}/printers")]
-        [ValidateModelState]
-        [SwaggerOperation("WorkspacesWorkspaceIdPrintersGet")]
-        [SwaggerResponse(statusCode: 200, type: typeof(WorkspacePrinters), description: "200 response")]
-        [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
-        [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
-        [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
-        public virtual IActionResult WorkspacesWorkspaceIdPrintersGet([FromRoute (Name = "workspaceId")][Required]string workspaceId, [FromHeader (Name = "request-id")]string requestId, [FromQuery (Name = "limit")]string limit, [FromQuery (Name = "nextToken")]string nextToken)
-        {
+    /// <param name="workspaceId">The identifier of the Workspace</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
+    /// <param name="limit">Number of Printers to return. Default: 100. Maximum: 10000</param>
+    /// <param name="nextToken">Pagination token to get next page of Printers</param>
+    /// <response code="200">200 response</response>
+    /// <response code="401">Unauthorized</response>
+    /// <response code="403">Forbidden</response>
+    /// <response code="429">Too Many Requests</response>
+    [HttpGet]
+    [Route("/v1/workspaces/{workspaceId}/printers")]
+    [ValidateModelState]
+    [SwaggerOperation("WorkspacesWorkspaceIdPrintersGet")]
+    [SwaggerResponse(statusCode: 200, type: typeof(WorkspacePrinters), description: "200 response")]
+    [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
+    [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
+    [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
+    public virtual IActionResult WorkspacesWorkspaceIdPrintersGet([FromRoute (Name = "workspaceId")][Required]string workspaceId, [FromHeader (Name = "request-id")]string requestId, [FromQuery (Name = "limit")]string limit, [FromQuery (Name = "nextToken")]string nextToken)
+    {
 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(WorkspacePrinters));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(403, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(429, default(ErrorResponse));
-            string exampleJson = null;
-            exampleJson = "{\r\n  \"nextToken\" : \"nextToken\",\r\n  \"items\" : [ {\r\n    \"name\" : \"name\",\r\n    \"printerId\" : \"printerId\",\r\n    \"isOnline\" : true,\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"printerId\" : \"printerId\",\r\n    \"isOnline\" : true,\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"printerId\" : \"printerId\",\r\n    \"isOnline\" : true,\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"printerId\" : \"printerId\",\r\n    \"isOnline\" : true,\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"printerId\" : \"printerId\",\r\n    \"isOnline\" : true,\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(200, default(WorkspacePrinters));
+        //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(401, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(403, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(429, default(ErrorResponse));
+        string exampleJson = null;
+        exampleJson = "{\r\n  \"nextToken\" : \"nextToken\",\r\n  \"items\" : [ {\r\n    \"name\" : \"name\",\r\n    \"printerId\" : \"printerId\",\r\n    \"isOnline\" : true,\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"printerId\" : \"printerId\",\r\n    \"isOnline\" : true,\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"printerId\" : \"printerId\",\r\n    \"isOnline\" : true,\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"printerId\" : \"printerId\",\r\n    \"isOnline\" : true,\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n  }, {\r\n    \"name\" : \"name\",\r\n    \"printerId\" : \"printerId\",\r\n    \"isOnline\" : true,\r\n    \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n    \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
             
-            var example = exampleJson != null
+        var example = exampleJson != null
             ? JsonConvert.DeserializeObject<WorkspacePrinters>(exampleJson)
             : default(WorkspacePrinters);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
+        //TODO: Change the data returned
+        return new ObjectResult(example);
+    }
 
-        /// <summary>
-        /// Remove a Printer from a Workspace
-        /// </summary>
-        /// <param name="workspaceId">The identifier of the Workspace</param>
-        /// <param name="printerId">The identifier of the Printer</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
-        /// <response code="204">204 response</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="404">Printer not found in workspace</response>
-        /// <response code="429">Too Many Requests</response>
-        [HttpDelete]
-        [Route("/v1/workspaces/{workspaceId}/printers/{printerId}")]
-        [ValidateModelState]
-        [SwaggerOperation("WorkspacesWorkspaceIdPrintersPrinterIdDelete")]
-        [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
-        [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
-        [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Printer not found in workspace")]
-        [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
-        public virtual IActionResult WorkspacesWorkspaceIdPrintersPrinterIdDelete([FromRoute (Name = "workspaceId")][Required]string workspaceId, [FromRoute (Name = "printerId")][Required]string printerId, [FromHeader (Name = "request-id")]string requestId)
-        {
+    /// <summary>
+    /// Remove a Printer from a Workspace
+    /// </summary>
+    /// <param name="workspaceId">The identifier of the Workspace</param>
+    /// <param name="printerId">The identifier of the Printer</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
+    /// <response code="204">204 response</response>
+    /// <response code="401">Unauthorized</response>
+    /// <response code="403">Forbidden</response>
+    /// <response code="404">Printer not found in workspace</response>
+    /// <response code="429">Too Many Requests</response>
+    [HttpDelete]
+    [Route("/v1/workspaces/{workspaceId}/printers/{printerId}")]
+    [ValidateModelState]
+    [SwaggerOperation("WorkspacesWorkspaceIdPrintersPrinterIdDelete")]
+    [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
+    [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
+    [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Printer not found in workspace")]
+    [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
+    public virtual IActionResult WorkspacesWorkspaceIdPrintersPrinterIdDelete([FromRoute (Name = "workspaceId")][Required]string workspaceId, [FromRoute (Name = "printerId")][Required]string printerId, [FromHeader (Name = "request-id")]string requestId)
+    {
 
-            //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(204);
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(403, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(404, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(429, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 204 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(204);
+        //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(401, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(403, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(404, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(429, default(ErrorResponse));
 
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
+    }
 
-        /// <summary>
-        /// Get a Printer
-        /// </summary>
-        /// <param name="workspaceId">The identifier of the Workspace</param>
-        /// <param name="printerId">The identifier of the Printer</param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
-        /// <response code="200">200 response</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="404">Printer not found in workspace</response>
-        /// <response code="429">Too Many Requests</response>
-        [HttpGet]
-        [Route("/v1/workspaces/{workspaceId}/printers/{printerId}")]
-        [ValidateModelState]
-        [SwaggerOperation("WorkspacesWorkspaceIdPrintersPrinterIdGet")]
-        [SwaggerResponse(statusCode: 200, type: typeof(WorkspacePrinter), description: "200 response")]
-        [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
-        [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
-        [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Printer not found in workspace")]
-        [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
-        public virtual IActionResult WorkspacesWorkspaceIdPrintersPrinterIdGet([FromRoute (Name = "workspaceId")][Required]string workspaceId, [FromRoute (Name = "printerId")][Required]string printerId, [FromHeader (Name = "request-id")]string requestId)
-        {
+    /// <summary>
+    /// Get a Printer
+    /// </summary>
+    /// <param name="workspaceId">The identifier of the Workspace</param>
+    /// <param name="printerId">The identifier of the Printer</param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
+    /// <response code="200">200 response</response>
+    /// <response code="401">Unauthorized</response>
+    /// <response code="403">Forbidden</response>
+    /// <response code="404">Printer not found in workspace</response>
+    /// <response code="429">Too Many Requests</response>
+    [HttpGet]
+    [Route("/v1/workspaces/{workspaceId}/printers/{printerId}")]
+    [ValidateModelState]
+    [SwaggerOperation("WorkspacesWorkspaceIdPrintersPrinterIdGet")]
+    [SwaggerResponse(statusCode: 200, type: typeof(WorkspacePrinter), description: "200 response")]
+    [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
+    [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
+    [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Printer not found in workspace")]
+    [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
+    public virtual IActionResult WorkspacesWorkspaceIdPrintersPrinterIdGet([FromRoute (Name = "workspaceId")][Required]string workspaceId, [FromRoute (Name = "printerId")][Required]string printerId, [FromHeader (Name = "request-id")]string requestId)
+    {
 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(WorkspacePrinter));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(403, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(404, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(429, default(ErrorResponse));
-            string exampleJson = null;
-            exampleJson = "{\r\n  \"name\" : \"name\",\r\n  \"printerId\" : \"printerId\",\r\n  \"isOnline\" : true,\r\n  \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n  \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(200, default(WorkspacePrinter));
+        //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(401, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(403, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(404, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(429, default(ErrorResponse));
+        string exampleJson = null;
+        exampleJson = "{\r\n  \"name\" : \"name\",\r\n  \"printerId\" : \"printerId\",\r\n  \"isOnline\" : true,\r\n  \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n  \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
             
-            var example = exampleJson != null
+        var example = exampleJson != null
             ? JsonConvert.DeserializeObject<WorkspacePrinter>(exampleJson)
             : default(WorkspacePrinter);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
+        //TODO: Change the data returned
+        return new ObjectResult(example);
+    }
 
-        /// <summary>
-        /// Update a Printer
-        /// </summary>
-        /// <param name="workspaceId">The identifier of the Workspace</param>
-        /// <param name="printerId">The identifier of the Printer</param>
-        /// <param name="workspacePrinterInput"></param>
-        /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
-        /// <response code="200">200 response</response>
-        /// <response code="401">Unauthorized</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="404">Printer not found in workspace</response>
-        /// <response code="429">Too Many Requests</response>
-        [HttpPut]
-        [Route("/v1/workspaces/{workspaceId}/printers/{printerId}")]
-        [Consumes("application/json")]
-        [ValidateModelState]
-        [SwaggerOperation("WorkspacesWorkspaceIdPrintersPrinterIdPut")]
-        [SwaggerResponse(statusCode: 200, type: typeof(WorkspacePrinter), description: "200 response")]
-        [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
-        [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
-        [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Printer not found in workspace")]
-        [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
-        public virtual IActionResult WorkspacesWorkspaceIdPrintersPrinterIdPut([FromRoute (Name = "workspaceId")][Required]string workspaceId, [FromRoute (Name = "printerId")][Required]string printerId, [FromBody]WorkspacePrinterInput workspacePrinterInput, [FromHeader (Name = "request-id")]string requestId)
-        {
+    /// <summary>
+    /// Update a Printer
+    /// </summary>
+    /// <param name="workspaceId">The identifier of the Workspace</param>
+    /// <param name="printerId">The identifier of the Printer</param>
+    /// <param name="workspacePrinterInput"></param>
+    /// <param name="requestId">Unique identifier for the API request. Example: f7ecf495-ca1c-4468-a6c2-6ee3f723fa00</param>
+    /// <response code="200">200 response</response>
+    /// <response code="401">Unauthorized</response>
+    /// <response code="403">Forbidden</response>
+    /// <response code="404">Printer not found in workspace</response>
+    /// <response code="429">Too Many Requests</response>
+    [HttpPut]
+    [Route("/v1/workspaces/{workspaceId}/printers/{printerId}")]
+    [Consumes("application/json")]
+    [ValidateModelState]
+    [SwaggerOperation("WorkspacesWorkspaceIdPrintersPrinterIdPut")]
+    [SwaggerResponse(statusCode: 200, type: typeof(WorkspacePrinter), description: "200 response")]
+    [SwaggerResponse(statusCode: 401, type: typeof(ErrorResponse), description: "Unauthorized")]
+    [SwaggerResponse(statusCode: 403, type: typeof(ErrorResponse), description: "Forbidden")]
+    [SwaggerResponse(statusCode: 404, type: typeof(ErrorResponse), description: "Printer not found in workspace")]
+    [SwaggerResponse(statusCode: 429, type: typeof(ErrorResponse), description: "Too Many Requests")]
+    public virtual IActionResult WorkspacesWorkspaceIdPrintersPrinterIdPut([FromRoute (Name = "workspaceId")][Required]string workspaceId, [FromRoute (Name = "printerId")][Required]string printerId, [FromBody]WorkspacePrinterInput workspacePrinterInput, [FromHeader (Name = "request-id")]string requestId)
+    {
 
-            //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(200, default(WorkspacePrinter));
-            //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(401, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(403, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(404, default(ErrorResponse));
-            //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
-            // return StatusCode(429, default(ErrorResponse));
-            string exampleJson = null;
-            exampleJson = "{\r\n  \"name\" : \"name\",\r\n  \"printerId\" : \"printerId\",\r\n  \"isOnline\" : true,\r\n  \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n  \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
-            exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        //TODO: Uncomment the next line to return response 200 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(200, default(WorkspacePrinter));
+        //TODO: Uncomment the next line to return response 401 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(401, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 403 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(403, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 404 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(404, default(ErrorResponse));
+        //TODO: Uncomment the next line to return response 429 or use other options such as return this.NotFound(), return this.BadRequest(..), ...
+        // return StatusCode(429, default(ErrorResponse));
+        string exampleJson = null;
+        exampleJson = "{\r\n  \"name\" : \"name\",\r\n  \"printerId\" : \"printerId\",\r\n  \"isOnline\" : true,\r\n  \"addedOn\" : \"2000-01-23T04:56:07.000+00:00\",\r\n  \"workspaceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\"\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
+        exampleJson = "{\r\n  \"errors\" : [ {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  }, {\r\n    \"code\" : \"code\",\r\n    \"id\" : \"id\",\r\n    \"detail\" : \"detail\",\r\n    \"title\" : \"title\",\r\n    \"status\" : \"status\"\r\n  } ]\r\n}";
             
-            var example = exampleJson != null
+        var example = exampleJson != null
             ? JsonConvert.DeserializeObject<WorkspacePrinter>(exampleJson)
             : default(WorkspacePrinter);
-            //TODO: Change the data returned
-            return new ObjectResult(example);
-        }
+        //TODO: Change the data returned
+        return new ObjectResult(example);
     }
 }

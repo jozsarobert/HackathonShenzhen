@@ -1,34 +1,20 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.IO;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = Org.OpenAPITools.Client.OpenAPIDateConverter;
 
-namespace Org.OpenAPITools.Model
+namespace Reelables.Api.SDK.Model;
+
+[DataContract(Name = "Consignment_deactivated")]
+public class ConsignmentDeactivated
 {
-
-    [DataContract(Name = "Consignment_deactivated")]
-    public partial class ConsignmentDeactivated
-    {
-        [JsonConstructorAttribute]
-        protected ConsignmentDeactivated() { }
+    [JsonConstructor]
+    protected ConsignmentDeactivated() { }
       
-        [DataMember(Name = "where", EmitDefaultValue = false)]
-        public ConsignmentDeactivatedWhere Where { get; set; }
+    [DataMember(Name = "where", EmitDefaultValue = false)]
+    public ConsignmentDeactivatedWhere Where { get; set; }
 
-        [DataMember(Name = "when", IsRequired = true, EmitDefaultValue = true)]
-        public DateTime When { get; set; }
+    [DataMember(Name = "when", IsRequired = true, EmitDefaultValue = true)]
+    public DateTime When { get; set; }
 
        
-    }
-
 }

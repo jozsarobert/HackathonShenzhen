@@ -9,129 +9,124 @@
  */
 
 using System;
-using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
-using Org.OpenAPITools.Converters;
 
-namespace Org.OpenAPITools.Models
-{ 
+namespace Reelables.Api.Fake.Models;
+
+/// <summary>
+/// 
+/// </summary>
+[DataContract]
+public partial class ConsignmentActivated : IEquatable<ConsignmentActivated>
+{
     /// <summary>
-    /// 
+    /// Gets or Sets Where
     /// </summary>
-    [DataContract]
-    public partial class ConsignmentActivated : IEquatable<ConsignmentActivated>
+    [DataMember(Name="where", EmitDefaultValue=false)]
+    public ConsignmentDeactivatedWhere Where { get; set; }
+
+    /// <summary>
+    /// ISO Timestamp when Consignment was activated. Example: &#39;2023-07-21T17:32:28Z&#39;
+    /// </summary>
+    /// <value>ISO Timestamp when Consignment was activated. Example: &#39;2023-07-21T17:32:28Z&#39;</value>
+    [Required]
+    [RegularExpression("^[0-9TZ:-]*$")]
+    [MaxLength(20)]
+    [DataMember(Name="when", EmitDefaultValue=false)]
+    public DateTime When { get; set; }
+
+    /// <summary>
+    /// Returns the string presentation of the object
+    /// </summary>
+    /// <returns>String presentation of the object</returns>
+    public override string ToString()
     {
-        /// <summary>
-        /// Gets or Sets Where
-        /// </summary>
-        [DataMember(Name="where", EmitDefaultValue=false)]
-        public ConsignmentDeactivatedWhere Where { get; set; }
-
-        /// <summary>
-        /// ISO Timestamp when Consignment was activated. Example: &#39;2023-07-21T17:32:28Z&#39;
-        /// </summary>
-        /// <value>ISO Timestamp when Consignment was activated. Example: &#39;2023-07-21T17:32:28Z&#39;</value>
-        [Required]
-        [RegularExpression("^[0-9TZ:-]*$")]
-        [MaxLength(20)]
-        [DataMember(Name="when", EmitDefaultValue=false)]
-        public DateTime When { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            sb.Append("class ConsignmentActivated {\n");
-            sb.Append("  Where: ").Append(Where).Append("\n");
-            sb.Append("  When: ").Append(When).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public string ToJson()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
-
-        /// <summary>
-        /// Returns true if objects are equal
-        /// </summary>
-        /// <param name="obj">Object to be compared</param>
-        /// <returns>Boolean</returns>
-        public override bool Equals(object obj)
-        {
-            if (obj is null) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            return obj.GetType() == GetType() && Equals((ConsignmentActivated)obj);
-        }
-
-        /// <summary>
-        /// Returns true if ConsignmentActivated instances are equal
-        /// </summary>
-        /// <param name="other">Instance of ConsignmentActivated to be compared</param>
-        /// <returns>Boolean</returns>
-        public bool Equals(ConsignmentActivated other)
-        {
-            if (other is null) return false;
-            if (ReferenceEquals(this, other)) return true;
-
-            return 
-                (
-                    Where == other.Where ||
-                    Where != null &&
-                    Where.Equals(other.Where)
-                ) && 
-                (
-                    When == other.When ||
-                    When != null &&
-                    When.Equals(other.When)
-                );
-        }
-
-        /// <summary>
-        /// Gets the hash code
-        /// </summary>
-        /// <returns>Hash code</returns>
-        public override int GetHashCode()
-        {
-            unchecked // Overflow is fine, just wrap
-            {
-                var hashCode = 41;
-                // Suitable nullity checks etc, of course :)
-                    if (Where != null)
-                    hashCode = hashCode * 59 + Where.GetHashCode();
-                    if (When != null)
-                    hashCode = hashCode * 59 + When.GetHashCode();
-                return hashCode;
-            }
-        }
-
-        #region Operators
-        #pragma warning disable 1591
-
-        public static bool operator ==(ConsignmentActivated left, ConsignmentActivated right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(ConsignmentActivated left, ConsignmentActivated right)
-        {
-            return !Equals(left, right);
-        }
-
-        #pragma warning restore 1591
-        #endregion Operators
+        var sb = new StringBuilder();
+        sb.Append("class ConsignmentActivated {\n");
+        sb.Append("  Where: ").Append(Where).Append("\n");
+        sb.Append("  When: ").Append(When).Append("\n");
+        sb.Append("}\n");
+        return sb.ToString();
     }
+
+    /// <summary>
+    /// Returns the JSON string presentation of the object
+    /// </summary>
+    /// <returns>JSON string presentation of the object</returns>
+    public string ToJson()
+    {
+        return JsonConvert.SerializeObject(this, Formatting.Indented);
+    }
+
+    /// <summary>
+    /// Returns true if objects are equal
+    /// </summary>
+    /// <param name="obj">Object to be compared</param>
+    /// <returns>Boolean</returns>
+    public override bool Equals(object obj)
+    {
+        if (obj is null) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        return obj.GetType() == GetType() && Equals((ConsignmentActivated)obj);
+    }
+
+    /// <summary>
+    /// Returns true if ConsignmentActivated instances are equal
+    /// </summary>
+    /// <param name="other">Instance of ConsignmentActivated to be compared</param>
+    /// <returns>Boolean</returns>
+    public bool Equals(ConsignmentActivated other)
+    {
+        if (other is null) return false;
+        if (ReferenceEquals(this, other)) return true;
+
+        return 
+            (
+                Where == other.Where ||
+                Where != null &&
+                Where.Equals(other.Where)
+            ) && 
+            (
+                When == other.When ||
+                When != null &&
+                When.Equals(other.When)
+            );
+    }
+
+    /// <summary>
+    /// Gets the hash code
+    /// </summary>
+    /// <returns>Hash code</returns>
+    public override int GetHashCode()
+    {
+        unchecked // Overflow is fine, just wrap
+        {
+            var hashCode = 41;
+            // Suitable nullity checks etc, of course :)
+            if (Where != null)
+                hashCode = hashCode * 59 + Where.GetHashCode();
+            if (When != null)
+                hashCode = hashCode * 59 + When.GetHashCode();
+            return hashCode;
+        }
+    }
+
+    #region Operators
+#pragma warning disable 1591
+
+    public static bool operator ==(ConsignmentActivated left, ConsignmentActivated right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(ConsignmentActivated left, ConsignmentActivated right)
+    {
+        return !Equals(left, right);
+    }
+
+#pragma warning restore 1591
+    #endregion Operators
 }

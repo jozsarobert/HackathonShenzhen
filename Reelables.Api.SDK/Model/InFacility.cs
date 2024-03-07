@@ -10,206 +10,33 @@
 
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.IO;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-using System.ComponentModel.DataAnnotations;
-using OpenAPIDateConverter = Org.OpenAPITools.Client.OpenAPIDateConverter;
 
-namespace Org.OpenAPITools.Model
+namespace Reelables.Api.SDK.Model;
+
+[DataContract(Name = "InFacility")]
+public class InFacility
 {
-    /// <summary>
-    /// InFacility
-    /// </summary>
-    [DataContract(Name = "InFacility")]
-    public partial class InFacility : IValidatableObject
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InFacility" /> class.
-        /// </summary>
-        [JsonConstructorAttribute]
-        protected InFacility() { }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InFacility" /> class.
-        /// </summary>
-        /// <param name="hasExited">Indicate whether the item has exited the Facility.</param>
-        /// <param name="facilityId">Unique identifier of the Facility. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39; (required).</param>
-        /// <param name="enteredOn">Date that the item entered the Facility. Example: &#39;2023-07-21T17:32:28Z&#39; (required).</param>
-        /// <param name="facilityName">The name of the Facility (required).</param>
-        /// <param name="exitedOn">Date that the item exited the Facility. Example: &#39;2023-07-21T17:32:28Z&#39;.</param>
-        /// <param name="userFacilityId">A facility identifier relevant to the user.</param>
-        public InFacility(bool hasExited = default(bool), string facilityId = default(string), DateTime enteredOn = default(DateTime), string facilityName = default(string), DateTime exitedOn = default(DateTime), string userFacilityId = default(string))
-        {
-            // to ensure "facilityId" is required (not null)
-            if (facilityId == null)
-            {
-                throw new ArgumentNullException("facilityId is a required property for InFacility and cannot be null");
-            }
-            this.FacilityId = facilityId;
-            this.EnteredOn = enteredOn;
-            // to ensure "facilityName" is required (not null)
-            if (facilityName == null)
-            {
-                throw new ArgumentNullException("facilityName is a required property for InFacility and cannot be null");
-            }
-            this.FacilityName = facilityName;
-            this.HasExited = hasExited;
-            this.ExitedOn = exitedOn;
-            this.UserFacilityId = userFacilityId;
-        }
+    [JsonConstructor]
+    protected InFacility() { }
 
-        /// <summary>
-        /// Indicate whether the item has exited the Facility
-        /// </summary>
-        /// <value>Indicate whether the item has exited the Facility</value>
-        [DataMember(Name = "hasExited", EmitDefaultValue = true)]
-        public bool HasExited { get; set; }
+    [DataMember(Name = "hasExited", EmitDefaultValue = true)]
+    public bool HasExited { get; set; }
 
-        /// <summary>
-        /// Unique identifier of the Facility. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;
-        /// </summary>
-        /// <value>Unique identifier of the Facility. Example: &#39;d290f1ee-6c54-4b01-90e6-d701748f0851&#39;</value>
-        [DataMember(Name = "facilityId", IsRequired = true, EmitDefaultValue = true)]
-        public string FacilityId { get; set; }
+    [DataMember(Name = "facilityId", IsRequired = true, EmitDefaultValue = true)]
+    public string FacilityId { get; set; }
 
-        /// <summary>
-        /// Date that the item entered the Facility. Example: &#39;2023-07-21T17:32:28Z&#39;
-        /// </summary>
-        /// <value>Date that the item entered the Facility. Example: &#39;2023-07-21T17:32:28Z&#39;</value>
-        [DataMember(Name = "enteredOn", IsRequired = true, EmitDefaultValue = true)]
-        public DateTime EnteredOn { get; set; }
+    [DataMember(Name = "enteredOn", IsRequired = true, EmitDefaultValue = true)]
+    public DateTime EnteredOn { get; set; }
 
-        /// <summary>
-        /// The name of the Facility
-        /// </summary>
-        /// <value>The name of the Facility</value>
-        [DataMember(Name = "facilityName", IsRequired = true, EmitDefaultValue = true)]
-        public string FacilityName { get; set; }
+    [DataMember(Name = "facilityName", IsRequired = true, EmitDefaultValue = true)]
+    public string FacilityName { get; set; }
 
-        /// <summary>
-        /// Date that the item exited the Facility. Example: &#39;2023-07-21T17:32:28Z&#39;
-        /// </summary>
-        /// <value>Date that the item exited the Facility. Example: &#39;2023-07-21T17:32:28Z&#39;</value>
-        [DataMember(Name = "exitedOn", EmitDefaultValue = false)]
-        public DateTime ExitedOn { get; set; }
+    [DataMember(Name = "exitedOn", EmitDefaultValue = false)]
+    public DateTime ExitedOn { get; set; }
 
-        /// <summary>
-        /// A facility identifier relevant to the user
-        /// </summary>
-        /// <value>A facility identifier relevant to the user</value>
-        [DataMember(Name = "userFacilityId", EmitDefaultValue = false)]
-        public string UserFacilityId { get; set; }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("class InFacility {\n");
-            sb.Append("  HasExited: ").Append(HasExited).Append("\n");
-            sb.Append("  FacilityId: ").Append(FacilityId).Append("\n");
-            sb.Append("  EnteredOn: ").Append(EnteredOn).Append("\n");
-            sb.Append("  FacilityName: ").Append(FacilityName).Append("\n");
-            sb.Append("  ExitedOn: ").Append(ExitedOn).Append("\n");
-            sb.Append("  UserFacilityId: ").Append(UserFacilityId).Append("\n");
-            sb.Append("}\n");
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Returns the JSON string presentation of the object
-        /// </summary>
-        /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-        }
-
-        /// <summary>
-        /// To validate all properties of the instance
-        /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
-        {
-            // FacilityId (string) maxLength
-            if (this.FacilityId != null && this.FacilityId.Length > 36)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for FacilityId, length must be less than 36.", new [] { "FacilityId" });
-            }
-
-            if (this.FacilityId != null) {
-                // FacilityId (string) pattern
-                Regex regexFacilityId = new Regex(@"^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$", RegexOptions.CultureInvariant);
-                if (!regexFacilityId.Match(this.FacilityId).Success)
-                {
-                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for FacilityId, must match a pattern of " + regexFacilityId, new [] { "FacilityId" });
-                }
-            }
-
-            // EnteredOn (DateTime) maxLength
-            if (this.EnteredOn != null && this.EnteredOn.Length > 20)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EnteredOn, length must be less than 20.", new [] { "EnteredOn" });
-            }
-
-            if (this.EnteredOn != null) {
-                // EnteredOn (DateTime) pattern
-                Regex regexEnteredOn = new Regex(@"^[0-9TZ:-]*$", RegexOptions.CultureInvariant);
-                if (!regexEnteredOn.Match(this.EnteredOn).Success)
-                {
-                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for EnteredOn, must match a pattern of " + regexEnteredOn, new [] { "EnteredOn" });
-                }
-            }
-
-            // FacilityName (string) maxLength
-            if (this.FacilityName != null && this.FacilityName.Length > 500)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for FacilityName, length must be less than 500.", new [] { "FacilityName" });
-            }
-
-            if (this.FacilityName != null) {
-                // FacilityName (string) pattern
-                Regex regexFacilityName = new Regex(@"^[a-zA-Z0-9!@#$&()\-`.+,/"" ]*$", RegexOptions.CultureInvariant);
-                if (!regexFacilityName.Match(this.FacilityName).Success)
-                {
-                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for FacilityName, must match a pattern of " + regexFacilityName, new [] { "FacilityName" });
-                }
-            }
-
-            // ExitedOn (DateTime) maxLength
-            if (this.ExitedOn != null && this.ExitedOn.Length > 20)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ExitedOn, length must be less than 20.", new [] { "ExitedOn" });
-            }
-
-            if (this.ExitedOn != null) {
-                // ExitedOn (DateTime) pattern
-                Regex regexExitedOn = new Regex(@"^[0-9TZ:-]*$", RegexOptions.CultureInvariant);
-                if (!regexExitedOn.Match(this.ExitedOn).Success)
-                {
-                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ExitedOn, must match a pattern of " + regexExitedOn, new [] { "ExitedOn" });
-                }
-            }
-
-            // UserFacilityId (string) maxLength
-            if (this.UserFacilityId != null && this.UserFacilityId.Length > 500)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for UserFacilityId, length must be less than 500.", new [] { "UserFacilityId" });
-            }
-
-            yield break;
-        }
-    }
+    [DataMember(Name = "userFacilityId", EmitDefaultValue = false)]
+    public string UserFacilityId { get; set; }
 
 }

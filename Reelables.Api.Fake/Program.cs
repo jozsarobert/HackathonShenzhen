@@ -1,33 +1,32 @@
-using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Reelables.Api.Fake.Services;
 
-namespace Org.OpenAPITools
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IAssetService, AssetService>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    /// <summary>
-    /// Program
-    /// </summary>
-    public class Program
-    {
-        /// <summary>
-        /// Main
-        /// </summary>
-        /// <param name="args"></param>
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        /// <summary>
-        /// Create the host builder.
-        /// </summary>
-        /// <param name="args"></param>
-        /// <returns>IHostBuilder</returns>
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                   webBuilder.UseStartup<Startup>()
-                             .UseUrls("http://0.0.0.0:8080/");
-                });
-    }
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

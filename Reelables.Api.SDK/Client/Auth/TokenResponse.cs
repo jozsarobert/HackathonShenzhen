@@ -11,13 +11,12 @@
 
 using Newtonsoft.Json;
 
-namespace Org.OpenAPITools.Client.Auth
+namespace Reelables.Api.SDK.Client.Auth;
+
+class TokenResponse
 {
-    class TokenResponse
-    {
-        [JsonProperty("token_type")]
-        public string TokenType { get; set; }
-        [JsonProperty("access_token")]
-        public string AccessToken { get; set; }
-    }
+    [JsonProperty("token_type")]
+    public string TokenType { get; set; }
+    [JsonProperty("access_token")]
+    public string AccessToken { get; set; }
 }
