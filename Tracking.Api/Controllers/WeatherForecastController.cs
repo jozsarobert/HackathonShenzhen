@@ -19,6 +19,7 @@ namespace Tracking.Api.Controllers
         {
             _dbContext.Piece.Add(new Data.Model.Piece
             {
+                
                 UldReference = new Data.Model.LoadingUnit
                 {
 
@@ -27,6 +28,7 @@ namespace Tracking.Api.Controllers
                     new Data.Model.IotDevice
                     {
                         Name = "",
+
                         //ConnectedSensors = new List<Data.Model.Sensor>
                     } 
                 },
@@ -42,7 +44,8 @@ namespace Tracking.Api.Controllers
 
                         }
                         
-                    }
+                    },
+                    
                 },
                 TransportOrganization = new Data.Model.Organization
                 {

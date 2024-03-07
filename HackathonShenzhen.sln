@@ -26,6 +26,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OneRecordDocumentation", "O
 		ONE-Record-API-OpenAPI.yaml = ONE-Record-API-OpenAPI.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReelableDocumentation", "ReelableDocumentation", "{DE083AE7-8D9F-4BC6-BC29-3ADEAE3BE88B}"
+	ProjectSection(SolutionItems) = preProject
+		reelables-api-openapi-source.json = reelables-api-openapi-source.json
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reelables.Api.SDK", "Reelables.Api.SDK\Reelables.Api.SDK.csproj", "{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reelables.Api.Fake", "Reelables.Api.Fake\Reelables.Api.Fake.csproj", "{8188EC4F-20AD-4C72-A59D-A83AF6F1F7F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +69,14 @@ Global
 		{A99A24AE-33B6-4EF6-9621-591DE4903158}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A99A24AE-33B6-4EF6-9621-591DE4903158}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A99A24AE-33B6-4EF6-9621-591DE4903158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8188EC4F-20AD-4C72-A59D-A83AF6F1F7F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8188EC4F-20AD-4C72-A59D-A83AF6F1F7F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8188EC4F-20AD-4C72-A59D-A83AF6F1F7F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8188EC4F-20AD-4C72-A59D-A83AF6F1F7F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
