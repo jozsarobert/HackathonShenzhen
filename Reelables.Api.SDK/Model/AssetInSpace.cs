@@ -23,5 +23,5 @@ public class AssetInSpace
     public DateTime EnteredOn { get; set; }
 
     [DataMember(Name = "exitedOn", EmitDefaultValue = false)]
-    public DateTime ExitedOn { get; set; }    
+    public DateTime? ExitedOn { get; set; }    
 }

@@ -1,23 +1,24 @@
 version: '3.4'
 
 services:
-  reelables.api.fake:
+  reelables-api-fake:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTP_PORTS=8180
     ports:
-      - "8080"
+      - "8180"
 
-  neonesync.service:
+  neonesync-service:
     environment:
       - DOTNET_ENVIRONMENT=Development
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
 
-  tracking.api:
+  tracking-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+      - BASE_PATH="http://reelables-api-fake:8180/v1/" 
     ports:
       - "8080"
 

@@ -6,8 +6,6 @@
     <AssemblyName>OneRecord.Api.SDK</AssemblyName>
     <PackageId>OneRecord.Api.SDK</PackageId>
     <OutputType>Library</OutputType>
-    <Authors>OpenAPI</Authors>
-    <Company>OpenAPI</Company>
     <AssemblyTitle>OneRecord API SDK Library</AssemblyTitle>
     <Description>SDK for calling OneRecord API</Description>
     <Copyright>No Copyright</Copyright>

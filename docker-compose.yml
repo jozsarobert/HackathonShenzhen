@@ -12,6 +12,8 @@ services:
       environment:
         SA_PASSWORD: "Shenzhen2024!"
         ACCEPT_EULA: "Y"
+      extra_hosts:
+        - "host.docker.internal:host-gateway"
   rabbitmq:
       image: rabbitmq:3-management-alpine
       container_name: 'rabbitmq'
@@ -21,24 +23,40 @@ services:
       volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-  reelables.api.fake:
+      extra_hosts:
+        - "host.docker.internal:host-gateway"
+  reelables-api-fake:
     image: ${DOCKER_REGISTRY-}reelablesapifake
     build:
       context: .
       dockerfile: Reelables.Api.Fake/Dockerfile
     ports:
-        - "18001:8080"
-  neonesync.service:
+        - "18001:8180"
+    networks:
+      - my_network
+ 
+  neonesync-service:
     image: ${DOCKER_REGISTRY-}neonesyncservice
     build:
       context: .
       dockerfile: NeOneSync.Service/Dockerfile
+    networks:
+      - my_network
 
-
-  tracking.api:
+  tracking-api:
     image: ${DOCKER_REGISTRY-}trackingapi
     build:
       context: .
       dockerfile: Tracking.Api/Dockerfile
     ports:
         - "18000:8080"
+    networks:
+      - my_network
+    environment:
+      - BASE_PATH=http://reelables-api-fake:8180/v1
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+networks:
+  my_network:
+    driver: bridge
