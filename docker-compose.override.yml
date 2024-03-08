@@ -17,8 +17,8 @@ services:
   tracking-api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTP_PORTS=8280
       - BASE_PATH="http://reelables-api-fake:8180/v1/" 
     ports:
-      - "8080"
+      - "8280"
 
