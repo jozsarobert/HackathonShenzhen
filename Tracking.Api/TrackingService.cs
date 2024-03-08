@@ -1,6 +1,4 @@
-﻿using Reelables.Api.SDK.Api;
-
-namespace Tracking.Api
+﻿namespace Tracking.Api
 {
     public class TrackingService : BackgroundService
     {

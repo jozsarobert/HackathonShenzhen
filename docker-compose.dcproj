@@ -4,7 +4,7 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>e7c0ad74-d706-4461-a15f-9e8e961a1461</ProjectGuid>
+    <ProjectGuid>12893658-31d1-4333-9f1c-ce9cb3fd7f9e</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>tracking.api</DockerServiceName>

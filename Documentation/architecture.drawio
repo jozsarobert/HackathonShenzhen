@@ -1,0 +1,74 @@
+<mxfile host="app.diagrams.net" modified="2024-03-04T17:32:31.859Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="gmYVpntKWyvsMdI93J0z" version="24.0.1" type="device">
+  <diagram name="1 oldal" id="CTSUQwHasYdqh4XSaB4S">
+    <mxGraphModel dx="1434" dy="738" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="EyXJCI7vJs3owA7amJov-3" value="Reelabel API" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="20" y="140" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-4" value="Ne:One" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="740" y="140" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-5" value="Tracking API" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="360" y="140" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-6" value="" style="endArrow=classic;html=1;rounded=0;entryX=1.038;entryY=0.163;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="EyXJCI7vJs3owA7amJov-5" target="EyXJCI7vJs3owA7amJov-3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-7" value="Polling for IOT data" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="EyXJCI7vJs3owA7amJov-6" vertex="1" connectable="0">
+          <mxGeometry x="0.2537" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-8" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="EyXJCI7vJs3owA7amJov-3" target="EyXJCI7vJs3owA7amJov-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-9" value="IOT Data&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="EyXJCI7vJs3owA7amJov-8" vertex="1" connectable="0">
+          <mxGeometry x="-0.3846" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-23" value="MSSQL" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
+          <mxGeometry x="370" y="270" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-24" value="MSG BUS" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="500" y="30" width="30" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-25" value="NeOneSync&lt;br&gt;Service" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="590" y="140" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-26" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=-0.167;entryY=0.317;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="EyXJCI7vJs3owA7amJov-5" target="EyXJCI7vJs3owA7amJov-24" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-27" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="EyXJCI7vJs3owA7amJov-23" target="EyXJCI7vJs3owA7amJov-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="410" as="sourcePoint" />
+            <mxPoint x="440" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-28" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1.067;exitY=0.31;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="EyXJCI7vJs3owA7amJov-24" target="EyXJCI7vJs3owA7amJov-25" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="660" y="390" as="sourcePoint" />
+            <mxPoint x="710" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EyXJCI7vJs3owA7amJov-29" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="EyXJCI7vJs3owA7amJov-25" target="EyXJCI7vJs3owA7amJov-4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="690" y="350" as="sourcePoint" />
+            <mxPoint x="740" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

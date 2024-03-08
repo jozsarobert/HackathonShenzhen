@@ -7,34 +7,30 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneRecord.Api.SDK", "OneRec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneRecord.Data.Model", "OneRecord.Data.Model\OneRecord.Data.Model.csproj", "{AFC500BD-38E9-4DAD-9A2C-C419EE1C6A4D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracking.Api", "Tracking.Api\Tracking.Api.csproj", "{F225DA46-E04D-4F9E-8547-868C21A03B95}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracking.Data", "Tracking.Data\Tracking.Data.csproj", "{25158000-3A93-4FB7-9F16-DC1DDA491C51}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeOneSync.Service", "NeOneSync.Service\NeOneSync.Service.csproj", "{883ED3DC-D903-48F5-99E1-D37EC7D5E9C2}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E7C0AD74-D706-4461-A15F-9E8E961A1461}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neone.ServiceClient", "Neone.ServiceClient\Neone.ServiceClient.csproj", "{A99A24AE-33B6-4EF6-9621-591DE4903158}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OneRecordDocumentation", "OneRecordDocumentation", "{8638820A-04DA-4BEC-9B5D-295D308B5038}"
-	ProjectSection(SolutionItems) = preProject
-		1R Data Model - December 2023 - 3.0.0 (1).pdf = 1R Data Model - December 2023 - 3.0.0 (1).pdf
-		architecture.drawio = architecture.drawio
-		IATA-1R-CCL-Ontology (1).ttl = IATA-1R-CCL-Ontology (1).ttl
-		IATA-1R-DM-Ontology (1).ttl = IATA-1R-DM-Ontology (1).ttl
-		ONE Record API Collections.postman_collection.json = ONE Record API Collections.postman_collection.json
-		ONE-Record-API-OpenAPI.yaml = ONE-Record-API-OpenAPI.yaml
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReelableDocumentation", "ReelableDocumentation", "{DE083AE7-8D9F-4BC6-BC29-3ADEAE3BE88B}"
-	ProjectSection(SolutionItems) = preProject
-		reelables-api-openapi-source.json = reelables-api-openapi-source.json
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reelables.Api.SDK", "Reelables.Api.SDK\Reelables.Api.SDK.csproj", "{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reelables.Api.Fake", "Reelables.Api.Fake\Reelables.Api.Fake.csproj", "{8188EC4F-20AD-4C72-A59D-A83AF6F1F7F3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{95F8F2C6-53E5-457C-963D-F3DADCD25F79}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\1R Data Model - December 2023 - 3.0.0 (1).pdf = Documentation\1R Data Model - December 2023 - 3.0.0 (1).pdf
+		Documentation\architecture.drawio = Documentation\architecture.drawio
+		Documentation\IATA-1R-CCL-Ontology (1).ttl = Documentation\IATA-1R-CCL-Ontology (1).ttl
+		Documentation\IATA-1R-DM-Ontology (1).ttl = Documentation\IATA-1R-DM-Ontology (1).ttl
+		Documentation\ONE Record API Collections.postman_collection.json = Documentation\ONE Record API Collections.postman_collection.json
+		Documentation\ONE-Record-API-OpenAPI.yaml = Documentation\ONE-Record-API-OpenAPI.yaml
+		Documentation\reelables-api-openapi-source.json = Documentation\reelables-api-openapi-source.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reelables.Api.Fake", "Reelables.Api.Fake\Reelables.Api.Fake.csproj", "{D3CE7C09-2327-4E89-801C-0A4FFD45E702}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracking.Api", "Tracking.Api\Tracking.Api.csproj", "{810343EF-AF00-4FC2-86B9-0C3F555C8F98}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{12893658-31D1-4333-9F1C-CE9CB3FD7F9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,10 +46,6 @@ Global
 		{AFC500BD-38E9-4DAD-9A2C-C419EE1C6A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFC500BD-38E9-4DAD-9A2C-C419EE1C6A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFC500BD-38E9-4DAD-9A2C-C419EE1C6A4D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F225DA46-E04D-4F9E-8547-868C21A03B95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F225DA46-E04D-4F9E-8547-868C21A03B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F225DA46-E04D-4F9E-8547-868C21A03B95}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F225DA46-E04D-4F9E-8547-868C21A03B95}.Release|Any CPU.Build.0 = Release|Any CPU
 		{25158000-3A93-4FB7-9F16-DC1DDA491C51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{25158000-3A93-4FB7-9F16-DC1DDA491C51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25158000-3A93-4FB7-9F16-DC1DDA491C51}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -62,10 +54,6 @@ Global
 		{883ED3DC-D903-48F5-99E1-D37EC7D5E9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{883ED3DC-D903-48F5-99E1-D37EC7D5E9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{883ED3DC-D903-48F5-99E1-D37EC7D5E9C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7C0AD74-D706-4461-A15F-9E8E961A1461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7C0AD74-D706-4461-A15F-9E8E961A1461}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7C0AD74-D706-4461-A15F-9E8E961A1461}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7C0AD74-D706-4461-A15F-9E8E961A1461}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A99A24AE-33B6-4EF6-9621-591DE4903158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A99A24AE-33B6-4EF6-9621-591DE4903158}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A99A24AE-33B6-4EF6-9621-591DE4903158}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -74,10 +62,18 @@ Global
 		{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8188EC4F-20AD-4C72-A59D-A83AF6F1F7F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8188EC4F-20AD-4C72-A59D-A83AF6F1F7F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8188EC4F-20AD-4C72-A59D-A83AF6F1F7F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8188EC4F-20AD-4C72-A59D-A83AF6F1F7F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3CE7C09-2327-4E89-801C-0A4FFD45E702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3CE7C09-2327-4E89-801C-0A4FFD45E702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3CE7C09-2327-4E89-801C-0A4FFD45E702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3CE7C09-2327-4E89-801C-0A4FFD45E702}.Release|Any CPU.Build.0 = Release|Any CPU
+		{810343EF-AF00-4FC2-86B9-0C3F555C8F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{810343EF-AF00-4FC2-86B9-0C3F555C8F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{810343EF-AF00-4FC2-86B9-0C3F555C8F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{810343EF-AF00-4FC2-86B9-0C3F555C8F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12893658-31D1-4333-9F1C-CE9CB3FD7F9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12893658-31D1-4333-9F1C-CE9CB3FD7F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12893658-31D1-4333-9F1C-CE9CB3FD7F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12893658-31D1-4333-9F1C-CE9CB3FD7F9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

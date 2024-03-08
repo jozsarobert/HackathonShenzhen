@@ -1,0 +1,6 @@
+@Reelables.Api.Fake_HostAddress = http://localhost:5191
+
+GET {{Reelables.Api.Fake_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

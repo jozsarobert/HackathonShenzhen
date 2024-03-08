@@ -4,9 +4,9 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
+        "reelables.api.fake": "StartDebugging",
         "neonesync.service": "StartDebugging",
-        "tracking.api": "StartDebugging",
-        "reelables.api.fake": "StartDebugging"
+        "tracking.api": "StartDebugging"
       }
     }
   }
