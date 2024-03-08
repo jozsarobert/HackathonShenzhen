@@ -8,7 +8,7 @@ services:
       container_name: sql-server-db
       image: mcr.microsoft.com/mssql/server:2022-latest
       ports:
-        - "1433:1433"
+        - "1434:1433"
       environment:
         SA_PASSWORD: "Shenzhen2024!"
         ACCEPT_EULA: "Y"
@@ -26,7 +26,8 @@ services:
     build:
       context: .
       dockerfile: Reelables.Api.Fake/Dockerfile
-
+    ports:
+        - "18001:8080"
   neonesync.service:
     image: ${DOCKER_REGISTRY-}neonesyncservice
     build:
@@ -39,4 +40,5 @@ services:
     build:
       context: .
       dockerfile: Tracking.Api/Dockerfile
-
+    ports:
+        - "18000:8080"
