@@ -22,6 +22,7 @@ services:
 
     ne-one-server:
         image: git.openlogisticsfoundation.org:5050/wg-digitalaircargo/ne-one:dev
+        hostname: neone
         ports:
             - "8080:8080"
         healthcheck:
@@ -56,9 +57,12 @@ services:
                 condition: service_healthy
         extra_hosts:
             - "host.docker.internal:host-gateway"
+        networks:
+            - hackathon
         
     keycloak:
         image: quay.io/keycloak/keycloak:23.0
+        hostname: keycloak
         ports:
             - "8989:8989"
         healthcheck:
@@ -79,7 +83,9 @@ services:
             - start-dev
             - --import-realm    
             - --hostname=localhost
-
+        networks:
+            - hackathon
+        
     graph-db:
         image: ontotext/graphdb:10.4.3
         ports:
@@ -89,7 +95,8 @@ services:
             interval: 10s
             timeout: 5s
             retries: 10
-
+        networks:
+            - hackathon
     graph-db-setup:
         image: ontotext/graphdb:10.4.3
         entrypoint: [ "/bin/bash", "-c" ]
@@ -103,5 +110,11 @@ services:
             - NEONE_REPO_ID=neone
         volumes:
             - "./graphdb/init.sh:/opt/neone/graphdb/init.sh"
-            - "./graphdb/neone-repository.ttl:/opt/neone/graphdb/neone-repository.ttl"        
+            - "./graphdb/neone-repository.ttl:/opt/neone/graphdb/neone-repository.ttl"    
+        networks:
+            - hackathon
+                    
 
+networks:
+  hackathon:
+    external: true

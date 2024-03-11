@@ -9,19 +9,30 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneRecord.Data.Model", "One
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracking.Data", "Tracking.Data\Tracking.Data.csproj", "{25158000-3A93-4FB7-9F16-DC1DDA491C51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeOneSync.Service", "NeOneSync.Service\NeOneSync.Service.csproj", "{883ED3DC-D903-48F5-99E1-D37EC7D5E9C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeOneSync.Service", "NeOneSync.Service\NeOneSync.Service.csproj", "{883ED3DC-D903-48F5-99E1-D37EC7D5E9C2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Neone.ServiceClient", "Neone.ServiceClient\Neone.ServiceClient.csproj", "{A99A24AE-33B6-4EF6-9621-591DE4903158}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{95F8F2C6-53E5-457C-963D-F3DADCD25F79}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\1R Data Model - December 2023 - 3.0.0 (1).pdf = Documentation\1R Data Model - December 2023 - 3.0.0 (1).pdf
+		Documentation\architecture.drawio = Documentation\architecture.drawio
+		Documentation\IATA-1R-CCL-Ontology (1).ttl = Documentation\IATA-1R-CCL-Ontology (1).ttl
+		Documentation\IATA-1R-DM-Ontology (1).ttl = Documentation\IATA-1R-DM-Ontology (1).ttl
+		Documentation\ONE Record API Collections.postman_collection.json = Documentation\ONE Record API Collections.postman_collection.json
+		Documentation\ONE-Record-API-OpenAPI.yaml = Documentation\ONE-Record-API-OpenAPI.yaml
+		Documentation\reelables-api-openapi-source.json = Documentation\reelables-api-openapi-source.json
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reelables.Api.Fake", "Reelables.Api.Fake\Reelables.Api.Fake.csproj", "{D3CE7C09-2327-4E89-801C-0A4FFD45E702}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reelables.Api.Fake", "Reelables.Api.Fake\Reelables.Api.Fake.csproj", "{D3CE7C09-2327-4E89-801C-0A4FFD45E702}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracking.Api", "Tracking.Api\Tracking.Api.csproj", "{810343EF-AF00-4FC2-86B9-0C3F555C8F98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracking.Api", "Tracking.Api\Tracking.Api.csproj", "{810343EF-AF00-4FC2-86B9-0C3F555C8F98}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{12893658-31D1-4333-9F1C-CE9CB3FD7F9E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reelables.Api.SDK", "Reelables.Api.SDK\Reelables.Api.SDK.csproj", "{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageContracts", "..\MessageContracts\MessageContracts.csproj", "{688B8CF8-A429-4615-811D-CC43D8CE0AF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +76,10 @@ Global
 		{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAF4FC3E-8F03-4CFF-8252-9E32FB69084A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{688B8CF8-A429-4615-811D-CC43D8CE0AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{688B8CF8-A429-4615-811D-CC43D8CE0AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{688B8CF8-A429-4615-811D-CC43D8CE0AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{688B8CF8-A429-4615-811D-CC43D8CE0AF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

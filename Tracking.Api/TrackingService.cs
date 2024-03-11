@@ -26,12 +26,12 @@ namespace Tracking.Api
             {
                 if (_logger.IsEnabled(LogLevel.Information))
                 {
-                    _logger.LogInformation("Tracking sevice polling for IOT device update: {time}", DateTimeOffset.Now);
+                    //_logger.LogInformation("Tracking sevice polling for IOT device update: {time}", DateTimeOffset.Now);
 
                     foreach (var assetId in assetIdList)
                     {
                         var response = await _assetApi.AssetsAssetIdGetWithHttpInfoAsync(assetId, Guid.NewGuid().ToString(),cancellationToken: stoppingToken);
-                        _logger.LogInformation($"{response.Data.Id} - {response.Data.Label.NfcId}");
+                        //_logger.LogInformation($"{response.Data.Id} - {response.Data.Label.NfcId}");
 
                     }
                 }
