@@ -16,7 +16,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8280
-      - BASE_PATH="http://reelables-api-fake:8180/v1/" 
+      - BASE_PATH="http://reelablesapi:8180/v1/" 
     ports:
       - "8280"
 

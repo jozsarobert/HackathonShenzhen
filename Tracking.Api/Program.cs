@@ -1,4 +1,7 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Reelables.Api.SDK.Api;
 using System.Runtime;
 using Tracking.Api;
@@ -9,6 +12,27 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddDbContext<TrackingDbContext>(opts => opts.UseSqlServer(builder.Configuration["ConnectionString:TrackingDb"]));
+builder.Services.Configure<MessagingConfig>(builder.Configuration.GetSection("Messaging"));
+
+builder.Services.AddMassTransit(x =>
+{
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        var messagingConfig = context.GetRequiredService<IOptions<MessagingConfig>>()?.Value;
+
+        cfg.Host(messagingConfig.Url, h =>
+        {
+            h.Username(messagingConfig.User);
+            h.Password(messagingConfig.Password);
+        });
+
+        cfg.ConfigureEndpoints(context);
+
+        cfg.UseNewtonsoftJsonDeserializer();
+        cfg.UseNewtonsoftJsonSerializer();
+    });
+});
 
 var reelablesApiConfig = new ReelablesApiConfig
 {

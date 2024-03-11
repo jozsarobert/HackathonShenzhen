@@ -3,6 +3,7 @@ version: '3.4'
 services:
   reelables-api-fake:
     image: ${DOCKER_REGISTRY-}reelablesapifake
+    hostname: reelablesapi
     build:
       context: .
       dockerfile: Reelables.Api.Fake/Dockerfile
