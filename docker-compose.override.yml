@@ -11,8 +11,6 @@ services:
   neonesync-service:
     environment:
       - DOTNET_ENVIRONMENT=Development
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
 
   tracking-api:
     environment:
