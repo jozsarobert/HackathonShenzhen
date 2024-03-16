@@ -420,7 +420,6 @@ namespace DataSeeder
                 ArrivalLocation = new Location(),
                 ReferredBookingOption = new Booking(),
                 DepartureLocation = new Location(),
-                CarrierDeclarationPlace = new Location(),
                 Shipment = new Shipment(),
                 WaybillType = "",
                 CarrierChargeCode = "",

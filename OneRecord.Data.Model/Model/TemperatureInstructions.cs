@@ -11,7 +11,8 @@ namespace OneRecord.Data.Model.Model
         public Value MinTemperature { get; set; }
         public Value MaxTemperature { get; set; }
 
-        public string PieceId { get; set; }
-        public string Id { get; set; }
+        public int PieceId { get; set; }
+        public int Id { get; set; }
+        public Piece Piece { get; set; }
     }
 }
