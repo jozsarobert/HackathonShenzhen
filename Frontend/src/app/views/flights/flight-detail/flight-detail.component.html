@@ -1,1 +1,25 @@
-<p>flight-detail works!</p>
+<!-- todo: thisw looks too similar to normal flights overview -->
+<c-row>
+  <c-col md="12" lg="12" xl="12">
+    <c-widget-stat-d
+      class="mb-4"
+      color="secondary"
+      [values]="flight.displayValues"
+    >
+      <span class="text-white"> {{ flight.flightNumber }}</span>
+    </c-widget-stat-d>
+  </c-col>
+</c-row>
+
+<c-row>
+  <c-col *ngFor="let shipment of shipments; index as i" md="12" lg="6" xl="6">
+    <c-widget-stat-d
+      [values]="shipment.values"
+      class="mb-4"
+      (click)="(null)"
+      [color]="shipment.color"
+    >
+      <span class="text-white"> {{ shipment.id }}</span>
+    </c-widget-stat-d>
+  </c-col>
+</c-row>

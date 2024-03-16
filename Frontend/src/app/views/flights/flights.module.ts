@@ -10,6 +10,7 @@ import {
   DropdownModule,
   FormModule,
   GridModule,
+  HeaderModule,
   NavbarModule,
   NavModule,
   ProgressBarComponent,
@@ -48,6 +49,7 @@ import { FlightDetailComponent } from './flight-detail/flight-detail.component';
     ChartjsComponent,
     ProgressComponent,
     ProgressBarComponent,
+    HeaderModule,
   ],
 })
 export class FlightsModule {}
