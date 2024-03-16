@@ -50,17 +50,32 @@ namespace DataSeeder
 
             var dbContext = new TrackingDbContext(options);
 
+            var pieces = new List<Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["",""],"goodDescription","ID112"),
+                                           GetPiece(GetDimensions(0.8, "MC"),GetValue(150.0, "Kg"), ["",""],"goodDescription","ID223")
+                                               };
+            var fligthInfo = new FlightInfo
+            {
+                FlightNo = "LX14",
+                DepartureDate = new DateTime(2024, 3, 16, 13, 10, 0),
+                ArrivalDate = new DateTime(2024, 3, 16, 18, 20, 0),
+                DepartureCode = "ZHR",
+                ArrivalCode = "JFK"
+            };
 
-            var activitySequence = GetActivitySequence();
-            var loading = GetLoading();
-            var shipment = GetShipment("721-1234568", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), new DateTime(2024, 3, 16, 18, 20, 0), "ZHR", "JFK", 50, ["COL"], "THERMOMETER", "0000007B", 200,
-                               new List<OneRecord.Data.Model.Model.Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["",""],"goodDescription","ID112"),
-                                                 GetPiece(GetDimensions(0.8, "MC"),GetValue(150.0, "Kg"), ["",""],"goodDescription","ID223")
-                                               },
+            var shipment = GetShipment("721-1234568", fligthInfo, 50, ["COL"], "THERMOMETER", "0000007B", 200,
+                              pieces,
                                "chocolate", 8, 2);
 
             dbContext.Shipment.Add(shipment);
             dbContext.SaveChanges();
+
+            var activitySequence = shipment.Waybill.ReferredBookingOption.ActivitySequences.First();
+
+            var loading = GetLoading(activitySequence.Activity, pieces);
+
+            dbContext.Loading.Add(loading);
+            dbContext.SaveChanges();
+
         }
 
         private ActivitySequence GetActivitySequence()
@@ -69,32 +84,6 @@ namespace DataSeeder
             {
                 Activity = new LogisticsActivity(),
                 SequenceNumber = ""
-            };
-
-            return result;
-
-        }
-        private Booking GetBooking()
-        {
-            var result = new Booking
-            {
-                ActivitySequences = new List<ActivitySequence>()
-                //IssuedForWaybill = new Waybill(),
-                //BookingStatus = "",
-                //WaybillPrefix = "",
-                //WaybillNumber = ""
-            };
-
-            return result;
-
-        }
-        private Context GetContext()
-        {
-            var result = new Context
-            {
-                Cargo = "Cargo",
-                Api = "Api",
-                Vocab = "Vocab"
             };
 
             return result;
@@ -113,19 +102,7 @@ namespace DataSeeder
             return result;
 
         }
-        private Geolocation GetGeolocation()
-        {
-            var result = new Geolocation
-            {
-                Elevation = new Value(),
-                GeolocationUnit = "",
-                Latitude = 0.0,
-                Longitude = 0.0
-            };
 
-            return result;
-
-        }
         private List<IotDevice> GetIotDevice(string serialNumber)
         {
             return [new IotDevice
@@ -140,145 +117,28 @@ namespace DataSeeder
             }
             ];
         }
-        private Loading GetLoading()
+        private Loading GetLoading(LogisticsActivity servedActivity, List<Piece> pieces)
         {
             var result = new Loading
             {
-                LoadedPieces = new List<Piece>(),
-                OnTransportMeans = new TransportMeans(),
-                LoadingPositionIdentifier = "",
-                LoadingType = ""
+                LoadedPieces = pieces,
+                LoadingType = "LOADING",
+                ServedActivity = servedActivity,
             };
 
             return result;
 
         }
-        private Location GetLocation()
-        {
-            var result = new Location
-            {
-                ForActions = new List<LogisticsAction>(),
-                Geolocation = new Geolocation(),
-                Code = "",
-                LocationName = "",
-                LocationType = "",
-            };
 
-            return result;
-
-        }
-        private LogisticsAction GetLogisticsAction()
-        {
-            var result = new LogisticsAction
-            {
-                ServedActivity = new LogisticsActivity(),
-                ActionEndTime = new DateTime(),
-                ActionStartTime = new DateTime(),
-                ActionTimeType = ""
-            };
-
-            return result;
-
-        }
-        private LogisticsActivity GetLogisticsActivity()
-        {
-            var result = new LogisticsActivity
-            {
-                ServedServices = new List<LogisticsService>(),
-                ExecutionStatus = ""
-            };
-
-            return result;
-
-        }
-        private LogisticsAgent GetLogisticsAgent()
-        {
-            var result = new LogisticsAgent();
-
-            return result;
-
-        }
-        private LogisticsObject GetLogisticsObject()
-        {
-            var result = new LogisticsObject
-            {
-                CompanyIdentifier = "",
-                SkeletonIndicator = false
-            };
-
-            return result;
-
-        }
-        private LogisticsService GetLogisticsService()
-        {
-            var result = new Booking
-            {
-                ActivitySequences = new List<ActivitySequence>()
-            };
-
-            return result;
-
-        }
-        private Measurement GetMeasurement()
-        {
-            var result = new Measurement
-            {
-                MeasurementValue = new Value(),
-                RecordedGeolocation = new Geolocation(),
-                MeasurementTimestamp = new DateTime()
-            };
-
-            return result;
-
-        }
-        private MovementTimes GetMovementTimes()
-        {
-            var result = new MovementTimes
-            {
-                Direction = "",
-                MovementMilestone = "",
-                MovementTimeType = "",
-                MovementTimestamp = new DateTime(),
-            };
-
-            return result;
-
-        }
-        private PhysicalLogisticsObject GetPhysicalLogisticsObject()
-        {
-            var result = new PhysicalLogisticsObject
-            {
-                AttachedIotDevices = new List<IotDevice>(),
-                InvolvedInActions = new List<LogisticsAction>()
-            };
-
-            return result;
-
-        }
         private Piece GetPiece(Dimensions dimensions, Value grossWeight, List<string> specialHandlingCodes, string goodDescription, string iotSerialnumber)
         {
             var result = new Piece
             {
-                //ContainedPieces = new List<Piece> (),
-                //ContentProductionCountry = "",
                 Dimensions = dimensions,
                 GrossWeight = grossWeight,
-                //OfShipment = new Shipment(),
-                //LoadType = "",
-                //FulfillsUldTypeCode = "",
-                //PackageMarkCoded = "",
                 SpecialHandlingCodes = specialHandlingCodes,
                 Coload = false,
                 GoodsDescription = goodDescription,
-                //NvdForCarriage = false,
-                //NvdForCustoms = false,
-                //PackagedeIdentifier = "",
-                //ShippingMarks = new List<string>(),
-                //Slac = 0,
-                //Stackable = false,
-                //TextualHandlingInstructions = new List<string>(),
-                //Turnable = false,
-                //Upid = ""
                 AttachedIotDevices = GetIotDevice(iotSerialnumber)
             };
 
@@ -290,22 +150,14 @@ namespace DataSeeder
             var result = new Sensor
             {
                 Measurements = new List<Measurement>(),
-                //PartOfIotDevice = new IotDevice(),
-                //Description = "",
-                //Name = "",
                 SensorType = sensorType,
-                //SerialNumber = ""
             };
 
             return result;
 
         }
         public Shipment GetShipment(string waybillNumber,
-                                   string flightNo,
-                                   DateTime departureDate,
-                                   DateTime arrivalDate,
-                                   string departureCode,
-                                   string arrivalCode,
+                                  FlightInfo flightInfo,
                                    double weight,
                                    List<string> specialHandlingCodes,
                                    string sensorType,
@@ -323,7 +175,7 @@ namespace DataSeeder
             {
                 new ActivitySequence
                 {
-                    Activity = GetTransportMovement(arrivalCode,departureCode,flightNo, departureDate,arrivalDate)
+                    Activity = GetTransportMovement(flightInfo.ArrivalCode,flightInfo.DepartureCode,flightInfo.FlightNo, flightInfo.DepartureDate, flightInfo.ArrivalDate)
                 }
             };
 
@@ -350,20 +202,7 @@ namespace DataSeeder
             };
 
         }
-        private TransportMeans GetTransportMeans()
-        {
-            var result = new TransportMeans
-            {
-                OperatedTransportMovements = new List<TransportMovement>(),
-                VehicleModel = "",
-                VehicleRegistration = "",
-                VehicleSize = "",
-                VehicleType = ""
-            };
 
-            return result;
-
-        }
         private TransportMovement GetTransportMovement(string arrivalCode, string departureCode, string flightNo, DateTime departureDateTime, DateTime arrivalDateTime)
         {
             var result = new TransportMovement
@@ -406,41 +245,19 @@ namespace DataSeeder
             {
                 NumericalValue = 0.0,
                 Unit = "",
-                //Dimensions = new Dimensions(),
-                //DimensionId = ""
             };
 
             return result;
 
         }
-        private Waybill GetWaybill()
+
+        public class FlightInfo
         {
-            var result = new Waybill
-            {
-                ArrivalLocation = new Location(),
-                ReferredBookingOption = new Booking(),
-                DepartureLocation = new Location(),
-                Shipment = new Shipment(),
-                WaybillType = "",
-                CarrierChargeCode = "",
-                OtherChargesIndicator = "",
-                ServiceCode = "",
-                WeightValueIndicator = "",
-                CustomsOriginCode = "",
-                AccountingInformation = "",
-                CarrierDeclarationDate = new DateTime(),
-                CarrierDeclarationSignature = "",
-                ConsignorDeclarationSignature = "",
-                DestinationCurrencyRate = 0.0,
-                ShippingInfo = "",
-                ShippingRefNo = "",
-                WaybillNumber = "",
-                WaybillPrefix = "",
-                ModularCheckNumber = false,
-            };
-
-            return result;
-
+            public string FlightNo { get; set; }
+            public DateTime DepartureDate { get; set; }
+            public DateTime ArrivalDate { get; set; }
+            public string DepartureCode { get; set; }
+            public string ArrivalCode { get; set; }
         }
     }
 }
