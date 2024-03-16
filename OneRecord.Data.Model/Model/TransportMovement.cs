@@ -17,17 +17,17 @@ namespace OneRecord.Data.Model.Model
         [DataMember(Name = "cargo:departureLocation", EmitDefaultValue = false)]
         public Location DepartureLocation { get; set; }
 
-        [DataMember(Name = "cargo:distanceCalculated", EmitDefaultValue = false)]
-        public Value DistanceCalculated { get; set; }
+        //[DataMember(Name = "cargo:distanceCalculated", EmitDefaultValue = false)]
+        //public Value DistanceCalculated { get; set; }
 
-        [DataMember(Name = "cargo:distanceMeasured", EmitDefaultValue = false)]
-        public Value DistanceMeasured { get; set; }
+        //[DataMember(Name = "cargo:distanceMeasured", EmitDefaultValue = false)]
+        //public Value DistanceMeasured { get; set; }
 
-        [DataMember(Name = "cargo:fuelAmountCalculated", EmitDefaultValue = false)]
-        public Value FuelAmountCalculated { get; set; }
+        //[DataMember(Name = "cargo:fuelAmountCalculated", EmitDefaultValue = false)]
+        //public Value FuelAmountCalculated { get; set; }
 
-        [DataMember(Name = "cargo:fuelAmountMeasured", EmitDefaultValue = false)]
-        public Value FuelAmountMeasured { get; set; }
+        //[DataMember(Name = "cargo:fuelAmountMeasured", EmitDefaultValue = false)]
+        //public Value FuelAmountMeasured { get; set; }
 
         [DataMember(Name = "cargo:movementTimes", EmitDefaultValue = false)]
         public List<MovementTimes> MovementTimes { get; set; }

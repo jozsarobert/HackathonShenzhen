@@ -43,8 +43,8 @@ namespace OneRecord.Data.Model.Model
         //[DataMember(Name = "cargo:packagingType", EmitDefaultValue = false)]
         //public PackagingType PackagingType { get; set; }
 
-        [DataMember(Name = "cargo:inPiece", EmitDefaultValue = false)]
-        public Piece InPiece { get; set; }
+        //[DataMember(Name = "cargo:inPiece", EmitDefaultValue = false)]
+        //public Piece InPiece { get; set; }
 
         //[DataMember(Name = "cargo:otherIdentifiers", EmitDefaultValue = false)]
         //public List<OtherIdentifier> OtherIdentifiers { get; set; }

@@ -10,4 +10,7 @@ public partial class Value
 
     [DataMember(Name = "cargo:unit", EmitDefaultValue = false)]
     public string Unit { get; set; }
+
+    public Dimensions Dimensions { get; set; }
+    public string DimensionId { get; set; }
 }
