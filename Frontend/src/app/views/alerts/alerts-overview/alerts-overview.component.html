@@ -1,0 +1,12 @@
+<c-row>
+  <c-col *ngFor="let shipment of alerts; index as i" md="12" lg="12" xl="12">
+    <c-widget-stat-d
+      [values]="shipment.values"
+      class="mb-4"
+      (click)="navigateToDetail(shipment.id)"
+      color="danger"
+    >
+      <span class="text-white"> {{ shipment.id }}</span>
+    </c-widget-stat-d>
+  </c-col>
+</c-row>

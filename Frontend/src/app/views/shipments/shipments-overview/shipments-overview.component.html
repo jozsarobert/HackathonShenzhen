@@ -1,0 +1,34 @@
+<c-row>
+  <c-col lg="6" xs="12">
+    <c-input-group class="mb-3">
+      <input
+        aria-describedby="button-addon2"
+        aria-label="Shipment No."
+        cFormControl
+        placeholder="Shipment No."
+      />
+      <button
+        cButton
+        color="secondary"
+        id="button-addon2"
+        type="button"
+        variant="outline"
+      >
+        <svg [cIcon]="icons.cilPlus"></svg>
+      </button>
+    </c-input-group>
+  </c-col>
+</c-row>
+
+<c-row>
+  <c-col *ngFor="let shipment of shipments; index as i" md="12" lg="12" xl="12">
+    <c-widget-stat-d
+      [values]="shipment.values"
+      class="mb-4"
+      (click)="navigateToDetail('shipment1')"
+      color="primary"
+    >
+      <span class="text-white"> {{ shipment.id }}</span>
+    </c-widget-stat-d>
+  </c-col>
+</c-row>
