@@ -13,12 +13,6 @@ namespace OneRecord.Data.Model.Model
             };
         }
 
-        //[DataMember(Name = "cargo:bookingRequest", EmitDefaultValue = false)]
-        //public BookingRequest BookingRequest { get; set; }
-
-        //[DataMember(Name = "cargo:updateBookingOptionRequests", EmitDefaultValue = false)]
-        //public BookingOptionRequest UpdateBookingOptionRequests { get; set; }
-
         [DataMember(Name = "cargo:issuedForWaybill", EmitDefaultValue = false)]
         public Waybill IssuedForWaybill { get; set; }
 

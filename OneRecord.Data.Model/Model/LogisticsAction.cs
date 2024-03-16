@@ -5,15 +5,6 @@ namespace OneRecord.Data.Model.Model;
 [DataContract(Name = "LogisticsAction")]
 public partial class LogisticsAction : LogisticsObject
 {
-    //[DataMember(Name = "cargo:contactDetails", EmitDefaultValue = false)]
-    //public List<ContactDetail> ContactDetails { get; set; }
-
-    //[DataMember(Name = "cargo:contactPersons", EmitDefaultValue = false)]
-    //public List<Person> ContactPersons { get; set; }
-
-    //[DataMember(Name = "cargo:locationOfPerformance", EmitDefaultValue = false)]
-    //public Location LocationOfPerformance { get; set; }
-
     [DataMember(Name = "cargo:servedActivity", EmitDefaultValue = false)]
     public LogisticsActivity ServedActivity { get; set; }
 
