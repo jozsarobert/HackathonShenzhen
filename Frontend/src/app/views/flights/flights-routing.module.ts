@@ -16,7 +16,7 @@ const routes: Routes = [
         component: FlightsOverviewComponent,
       },
       {
-        path: 'flight/:id',
+        path: 'detail/:id',
         pathMatch: 'full',
         component: FlightDetailComponent,
       },
