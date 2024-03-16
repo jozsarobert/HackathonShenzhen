@@ -17,13 +17,12 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BookingStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WaybillPrefix = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WaybillNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BookingRequestId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BookingStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WaybillPrefix = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WaybillNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -35,9 +34,9 @@ namespace Tracking.Data.Migrations
                 name: "Context",
                 columns: table => new
                 {
-                    Cargo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Api = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Vocab = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Cargo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Api = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Vocab = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -49,13 +48,13 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GeolocationElevationValue = table.Column<double>(type: "float", nullable: false),
-                    GeolocationElevationUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GeolocationUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GeolocationElevationValue = table.Column<double>(type: "float", nullable: true),
+                    GeolocationElevationUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GeolocationUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Latitude = table.Column<double>(type: "float", nullable: false),
                     Longitude = table.Column<double>(type: "float", nullable: false),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,15 +67,15 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TotalGrossWeightValue = table.Column<double>(type: "float", nullable: false),
-                    TotalGrossWeightUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Incoterms = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SpecialHandlingCodes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GoodsDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TextualHandlingInstructions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TotalGrossWeightValue = table.Column<double>(type: "float", nullable: true),
+                    TotalGrossWeightUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Incoterms = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpecialHandlingCodes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GoodsDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TextualHandlingInstructions = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -90,13 +89,13 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    VehicleModel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VehicleRegistration = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VehicleSize = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VehicleType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehicleModel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VehicleRegistration = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VehicleSize = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VehicleType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -110,10 +109,10 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SequenceNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SequenceNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BookingId = table.Column<int>(type: "int", nullable: true),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -131,14 +130,14 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GeolocationId = table.Column<int>(type: "int", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LocationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LocationType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrganizationId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GeolocationId = table.Column<int>(type: "int", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LocationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LocationType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OrganizationId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -148,8 +147,7 @@ namespace Tracking.Data.Migrations
                         name: "FK_Location_Geolocation_GeolocationId",
                         column: x => x.GeolocationId,
                         principalTable: "Geolocation",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -158,17 +156,17 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HeightValue = table.Column<double>(type: "float", nullable: false),
-                    HeightUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LenghtValue = table.Column<double>(type: "float", nullable: false),
-                    LengthUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VolumeValue = table.Column<double>(type: "float", nullable: false),
-                    VolumeUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WidthValue = table.Column<double>(type: "float", nullable: false),
-                    WidthUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HeightValue = table.Column<double>(type: "float", nullable: true),
+                    HeightUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LenghtValue = table.Column<double>(type: "float", nullable: true),
+                    LengthUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VolumeValue = table.Column<double>(type: "float", nullable: true),
+                    VolumeUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WidthValue = table.Column<double>(type: "float", nullable: true),
+                    WidthUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ShipmentId = table.Column<int>(type: "int", nullable: true),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -186,19 +184,19 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ArrivalLocationId = table.Column<int>(type: "int", nullable: false),
-                    DepartureLocationId = table.Column<int>(type: "int", nullable: false),
-                    OperatingTransportMeansId = table.Column<int>(type: "int", nullable: false),
-                    FuelType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ModeCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ModeQualifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Seal = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TransportIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArrivalLocationId = table.Column<int>(type: "int", nullable: true),
+                    DepartureLocationId = table.Column<int>(type: "int", nullable: true),
+                    OperatingTransportMeansId = table.Column<int>(type: "int", nullable: true),
+                    FuelType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ModeQualifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Seal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TransportIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false),
-                    ExecutionStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ExecutionStatus = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -207,8 +205,7 @@ namespace Tracking.Data.Migrations
                         name: "FK_TransportMovement_Location_ArrivalLocationId",
                         column: x => x.ArrivalLocationId,
                         principalTable: "Location",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TransportMovement_Location_DepartureLocationId",
                         column: x => x.DepartureLocationId,
@@ -219,8 +216,7 @@ namespace Tracking.Data.Migrations
                         name: "FK_TransportMovement_TransportMeans_OperatingTransportMeansId",
                         column: x => x.OperatingTransportMeansId,
                         principalTable: "TransportMeans",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -229,30 +225,30 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BillingDetailsId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BillingDetailsId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReferredBookingOptionId = table.Column<int>(type: "int", nullable: false),
                     ShipmentId = table.Column<int>(type: "int", nullable: false),
-                    ArrivalLocationId = table.Column<int>(type: "int", nullable: false),
-                    DepartureLocationId = table.Column<int>(type: "int", nullable: false),
-                    WaybillType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CarrierChargeCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OtherChargesIndicator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ServiceCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WeightValueIndicator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomsOriginCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AccountingInformation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArrivalLocationId = table.Column<int>(type: "int", nullable: true),
+                    DepartureLocationId = table.Column<int>(type: "int", nullable: true),
+                    WaybillType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CarrierChargeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OtherChargesIndicator = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ServiceCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WeightValueIndicator = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomsOriginCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccountingInformation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CarrierDeclarationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CarrierDeclarationSignature = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ConsignorDeclarationSignature = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CarrierDeclarationSignature = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConsignorDeclarationSignature = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DestinationCurrencyRate = table.Column<double>(type: "float", nullable: false),
-                    ShippingInfo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShippingRefNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WaybillNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WaybillPrefix = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShippingInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ShippingRefNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WaybillNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WaybillPrefix = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ModularCheckNumber = table.Column<bool>(type: "bit", nullable: false),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -268,8 +264,7 @@ namespace Tracking.Data.Migrations
                         name: "FK_Waybill_Location_ArrivalLocationId",
                         column: x => x.ArrivalLocationId,
                         principalTable: "Location",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Waybill_Location_DepartureLocationId",
                         column: x => x.DepartureLocationId,
@@ -289,17 +284,17 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OnTransportMeansId = table.Column<int>(type: "int", nullable: false),
-                    LoadingPositionIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LoadingType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OnTransportMeansId = table.Column<int>(type: "int", nullable: true),
+                    LoadingPositionIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LoadingType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TransportMovementId = table.Column<int>(type: "int", nullable: true),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false),
                     ActionEndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ActionStartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ActionTimeType = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ActionTimeType = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -308,8 +303,7 @@ namespace Tracking.Data.Migrations
                         name: "FK_Loading_TransportMeans_OnTransportMeansId",
                         column: x => x.OnTransportMeansId,
                         principalTable: "TransportMeans",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Loading_TransportMovement_TransportMovementId",
                         column: x => x.TransportMovementId,
@@ -323,13 +317,13 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Direction = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MovementMilestone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MovementTimeType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Direction = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MovementMilestone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MovementTimeType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MovementTimestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TransportMovementId = table.Column<int>(type: "int", nullable: true),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -347,31 +341,29 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ContentProductionCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DimensionsId = table.Column<int>(type: "int", nullable: false),
-                    GrossWeightValue = table.Column<double>(type: "float", nullable: false),
-                    GrossWeightUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OfShipmentId = table.Column<int>(type: "int", nullable: false),
-                    LoadType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FulfillsUldTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PackageMarkCoded = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SpecialHandlingCodes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContentProductionCountry = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DimensionsId = table.Column<int>(type: "int", nullable: true),
+                    GrossWeightValue = table.Column<double>(type: "float", nullable: true),
+                    GrossWeightUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OfShipmentId = table.Column<int>(type: "int", nullable: true),
+                    LoadType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FulfillsUldTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PackageMarkCoded = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SpecialHandlingCodes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Coload = table.Column<bool>(type: "bit", nullable: false),
-                    GoodsDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GoodsDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NvdForCarriage = table.Column<bool>(type: "bit", nullable: false),
                     NvdForCustoms = table.Column<bool>(type: "bit", nullable: false),
-                    PackagedeIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShippingMarks = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PackagedeIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Slac = table.Column<int>(type: "int", nullable: false),
                     Stackable = table.Column<bool>(type: "bit", nullable: false),
-                    TextualHandlingInstructions = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Turnable = table.Column<bool>(type: "bit", nullable: false),
-                    Upid = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Upid = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LoadingId = table.Column<int>(type: "int", nullable: true),
                     PieceId = table.Column<int>(type: "int", nullable: true),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -397,8 +389,7 @@ namespace Tracking.Data.Migrations
                         name: "FK_Piece_Shipment_OfShipmentId",
                         column: x => x.OfShipmentId,
                         principalTable: "Shipment",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -407,10 +398,10 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MinTemperatureValue = table.Column<double>(type: "float", nullable: false),
-                    MinTemperatureUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaxTemperatureValue = table.Column<double>(type: "float", nullable: false),
-                    MaxTemperatureUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MinTemperatureValue = table.Column<double>(type: "float", nullable: true),
+                    MinTemperatureUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaxTemperatureValue = table.Column<double>(type: "float", nullable: true),
+                    MaxTemperatureUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PieceId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -430,19 +421,19 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AssociatedObject = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DeviceModel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AssociatedObject = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeviceModel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IotDeviceId = table.Column<int>(type: "int", nullable: true),
                     LocationId = table.Column<int>(type: "int", nullable: true),
                     PieceId = table.Column<int>(type: "int", nullable: true),
                     SensorId = table.Column<int>(type: "int", nullable: true),
                     TransportMeansId = table.Column<int>(type: "int", nullable: true),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -476,14 +467,14 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SensorType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SensorType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IotDeviceId = table.Column<int>(type: "int", nullable: false),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -503,13 +494,13 @@ namespace Tracking.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MeasurementValue = table.Column<double>(type: "float", nullable: false),
-                    MeasurementUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RecordedGeolocationId = table.Column<int>(type: "int", nullable: false),
+                    MeasurementValue = table.Column<double>(type: "float", nullable: true),
+                    MeasurementUnit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RecordedGeolocationId = table.Column<int>(type: "int", nullable: true),
                     MeasurementTimestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SensorId = table.Column<int>(type: "int", nullable: true),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

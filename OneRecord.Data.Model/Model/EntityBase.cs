@@ -4,6 +4,14 @@ namespace OneRecord.Data.Model.Model
 {
     public abstract class EntityBase
     {
+        public EntityBase()
+        {
+            Type = new List<string>
+            {
+               "cargo:LogisticsObject"
+            };
+        }
+
         [DataMember(Name = "@id", EmitDefaultValue = false)]
         public string NeonId { get; set; }
 

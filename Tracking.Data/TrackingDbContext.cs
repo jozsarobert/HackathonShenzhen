@@ -53,6 +53,9 @@ namespace Tracking.Data
             modelBuilder.Ignore<LogisticsActivity>();
             modelBuilder.Ignore<LogisticsService>();
             modelBuilder.Ignore<PhysicalLogisticsObject>();
+
+            //modelBuilder.Entity<EntityBase>().Ignore(c => c.Type);
+
             //modelBuilder.Ignore<Value>();
 
             modelBuilder.Entity<Booking>()

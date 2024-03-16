@@ -61,17 +61,11 @@ namespace OneRecord.Data.Model.Model
         [DataMember(Name = "cargo:packagedeIdentifier", EmitDefaultValue = false)]
         public string PackagedeIdentifier { get; set; }
 
-        [DataMember(Name = "cargo:shippingMarks", EmitDefaultValue = false)]
-        public List<string> ShippingMarks { get; set; }
-
         [DataMember(Name = "cargo:slac", EmitDefaultValue = false)]
         public int Slac { get; set; }
 
         [DataMember(Name = "cargo:stackable", EmitDefaultValue = true)]
         public bool Stackable { get; set; }
-
-        [DataMember(Name = "cargo:textualHandlingInstructions", EmitDefaultValue = false)]
-        public List<string> TextualHandlingInstructions { get; set; }
 
         [DataMember(Name = "cargo:turnable", EmitDefaultValue = true)]
         public bool Turnable { get; set; }

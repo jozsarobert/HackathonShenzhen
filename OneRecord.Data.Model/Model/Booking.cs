@@ -17,7 +17,7 @@ namespace OneRecord.Data.Model.Model
         public Waybill IssuedForWaybill { get; set; }
 
         [DataMember(Name = "cargo:bookingStatus", EmitDefaultValue = false)]
-        public string BookingStatus { get; set; }
+        public string? BookingStatus { get; set; }
 
         [DataMember(Name = "cargo:waybillPrefix", EmitDefaultValue = false)]
         public string WaybillPrefix { get; set; }
@@ -25,6 +25,5 @@ namespace OneRecord.Data.Model.Model
         [DataMember(Name = "cargo:waybillNumber", EmitDefaultValue = false)]
         public string WaybillNumber { get; set; }
 
-        public string BookingRequestId { get; internal set; }
     }
 }

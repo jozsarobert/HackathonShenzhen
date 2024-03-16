@@ -34,15 +34,12 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SequenceNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -60,35 +57,25 @@ namespace Tracking.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("BookingRequestId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("BookingStatus")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SkeletonIndicator")
                         .HasColumnType("bit");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WaybillNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WaybillPrefix")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -101,15 +88,12 @@ namespace Tracking.Data.Migrations
             modelBuilder.Entity("OneRecord.Data.Model.Model.Context", b =>
                 {
                     b.Property<string>("Api")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Cargo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Vocab")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Context");
@@ -124,14 +108,12 @@ namespace Tracking.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ShipmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -150,7 +132,6 @@ namespace Tracking.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("GeolocationUnit")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Latitude")
@@ -160,11 +141,9 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -181,19 +160,15 @@ namespace Tracking.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AssociatedObject")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeviceModel")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("IotDeviceId")
@@ -203,11 +178,9 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PieceId")
@@ -217,7 +190,6 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SerialNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SkeletonIndicator")
@@ -227,7 +199,6 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -262,26 +233,21 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ActionTimeType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LoadingPositionIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LoadingType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OnTransportMeansId")
+                    b.Property<int?>("OnTransportMeansId")
                         .HasColumnType("int");
 
                     b.Property<bool>("SkeletonIndicator")
@@ -291,7 +257,6 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -314,37 +279,30 @@ namespace Tracking.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GeolocationId")
+                    b.Property<int?>("GeolocationId")
                         .HasColumnType("int");
 
                     b.Property<string>("LocationName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LocationType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrganizationId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SkeletonIndicator")
                         .HasColumnType("bit");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -368,17 +326,15 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RecordedGeolocationId")
+                    b.Property<int?>("RecordedGeolocationId")
                         .HasColumnType("int");
 
                     b.Property<int?>("SensorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -399,29 +355,24 @@ namespace Tracking.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Direction")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MovementMilestone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MovementTimeType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("MovementTimestamp")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TransportMovementId")
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -443,33 +394,27 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("CompanyIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContentProductionCountry")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DimensionsId")
+                    b.Property<int?>("DimensionsId")
                         .HasColumnType("int");
 
                     b.Property<string>("FulfillsUldTypeCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GoodsDescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LoadType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("LoadingId")
                         .HasColumnType("int");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("NvdForCarriage")
@@ -478,23 +423,17 @@ namespace Tracking.Data.Migrations
                     b.Property<bool>("NvdForCustoms")
                         .HasColumnType("bit");
 
-                    b.Property<int>("OfShipmentId")
+                    b.Property<int?>("OfShipmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("PackageMarkCoded")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PackagedeIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PieceId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ShippingMarks")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SkeletonIndicator")
                         .HasColumnType("bit");
@@ -503,25 +442,18 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SpecialHandlingCodes")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Stackable")
                         .HasColumnType("bit");
 
-                    b.Property<string>("TextualHandlingInstructions")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Turnable")
                         .HasColumnType("bit");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Upid")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -548,37 +480,30 @@ namespace Tracking.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CompanyIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IotDeviceId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SensorType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SerialNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SkeletonIndicator")
                         .HasColumnType("bit");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -599,34 +524,27 @@ namespace Tracking.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CompanyIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GoodsDescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Incoterms")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SkeletonIndicator")
                         .HasColumnType("bit");
 
                     b.Property<string>("SpecialHandlingCodes")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TextualHandlingInstructions")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -662,34 +580,27 @@ namespace Tracking.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CompanyIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SkeletonIndicator")
                         .HasColumnType("bit");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VehicleModel")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VehicleRegistration")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VehicleSize")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("VehicleType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -707,52 +618,43 @@ namespace Tracking.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArrivalLocationId")
+                    b.Property<int?>("ArrivalLocationId")
                         .HasColumnType("int");
 
                     b.Property<string>("CompanyIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DepartureLocationId")
+                    b.Property<int?>("DepartureLocationId")
                         .HasColumnType("int");
 
                     b.Property<string>("ExecutionStatus")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FuelType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ModeCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ModeQualifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OperatingTransportMeansId")
+                    b.Property<int?>("OperatingTransportMeansId")
                         .HasColumnType("int");
 
                     b.Property<string>("Seal")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SkeletonIndicator")
                         .HasColumnType("bit");
 
                     b.Property<string>("TransportIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -777,40 +679,33 @@ namespace Tracking.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AccountingInformation")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ArrivalLocationId")
+                    b.Property<int?>("ArrivalLocationId")
                         .HasColumnType("int");
 
                     b.Property<string>("BillingDetailsId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CarrierChargeCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CarrierDeclarationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CarrierDeclarationSignature")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyIdentifier")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConsignorDeclarationSignature")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CustomsOriginCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DepartureLocationId")
+                    b.Property<int?>("DepartureLocationId")
                         .HasColumnType("int");
 
                     b.Property<double>("DestinationCurrencyRate")
@@ -820,52 +715,42 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("NeonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OtherChargesIndicator")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ReferredBookingOptionId")
                         .HasColumnType("int");
 
                     b.Property<string>("ServiceCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ShipmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("ShippingInfo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShippingRefNo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SkeletonIndicator")
                         .HasColumnType("bit");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WaybillNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WaybillPrefix")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WaybillType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WeightValueIndicator")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -906,7 +791,6 @@ namespace Tracking.Data.Migrations
                                 .HasColumnName("HeightValue");
 
                             b1.Property<string>("Unit")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("HeightUnit");
 
@@ -928,7 +812,6 @@ namespace Tracking.Data.Migrations
                                 .HasColumnName("LenghtValue");
 
                             b1.Property<string>("Unit")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("LengthUnit");
 
@@ -950,7 +833,6 @@ namespace Tracking.Data.Migrations
                                 .HasColumnName("VolumeValue");
 
                             b1.Property<string>("Unit")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("VolumeUnit");
 
@@ -972,7 +854,6 @@ namespace Tracking.Data.Migrations
                                 .HasColumnName("WidthValue");
 
                             b1.Property<string>("Unit")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("WidthUnit");
 
@@ -984,17 +865,13 @@ namespace Tracking.Data.Migrations
                                 .HasForeignKey("DimensionsId");
                         });
 
-                    b.Navigation("Height")
-                        .IsRequired();
+                    b.Navigation("Height");
 
-                    b.Navigation("Length")
-                        .IsRequired();
+                    b.Navigation("Length");
 
-                    b.Navigation("Volume")
-                        .IsRequired();
+                    b.Navigation("Volume");
 
-                    b.Navigation("Width")
-                        .IsRequired();
+                    b.Navigation("Width");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Geolocation", b =>
@@ -1009,7 +886,6 @@ namespace Tracking.Data.Migrations
                                 .HasColumnName("GeolocationElevationValue");
 
                             b1.Property<string>("Unit")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("GeolocationElevationUnit");
 
@@ -1021,8 +897,7 @@ namespace Tracking.Data.Migrations
                                 .HasForeignKey("GeolocationId");
                         });
 
-                    b.Navigation("Elevation")
-                        .IsRequired();
+                    b.Navigation("Elevation");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.IotDevice", b =>
@@ -1052,9 +927,7 @@ namespace Tracking.Data.Migrations
                 {
                     b.HasOne("OneRecord.Data.Model.Model.TransportMeans", "OnTransportMeans")
                         .WithMany()
-                        .HasForeignKey("OnTransportMeansId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OnTransportMeansId");
 
                     b.HasOne("OneRecord.Data.Model.Model.TransportMovement", null)
                         .WithMany("LoadingActions")
@@ -1067,9 +940,7 @@ namespace Tracking.Data.Migrations
                 {
                     b.HasOne("OneRecord.Data.Model.Model.Geolocation", "Geolocation")
                         .WithMany()
-                        .HasForeignKey("GeolocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GeolocationId");
 
                     b.Navigation("Geolocation");
                 });
@@ -1079,8 +950,7 @@ namespace Tracking.Data.Migrations
                     b.HasOne("OneRecord.Data.Model.Model.Geolocation", "RecordedGeolocation")
                         .WithMany()
                         .HasForeignKey("RecordedGeolocationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("OneRecord.Data.Model.Model.Sensor", null)
                         .WithMany("Measurements")
@@ -1096,7 +966,6 @@ namespace Tracking.Data.Migrations
                                 .HasColumnName("MeasurementValue");
 
                             b1.Property<string>("Unit")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("MeasurementUnit");
 
@@ -1108,8 +977,7 @@ namespace Tracking.Data.Migrations
                                 .HasForeignKey("MeasurementId");
                         });
 
-                    b.Navigation("MeasurementValue")
-                        .IsRequired();
+                    b.Navigation("MeasurementValue");
 
                     b.Navigation("RecordedGeolocation");
                 });
@@ -1126,8 +994,7 @@ namespace Tracking.Data.Migrations
                     b.HasOne("OneRecord.Data.Model.Model.Dimensions", "Dimensions")
                         .WithMany()
                         .HasForeignKey("DimensionsId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("OneRecord.Data.Model.Model.Loading", null)
                         .WithMany("LoadedPieces")
@@ -1135,9 +1002,7 @@ namespace Tracking.Data.Migrations
 
                     b.HasOne("OneRecord.Data.Model.Model.Shipment", "OfShipment")
                         .WithMany("Pieces")
-                        .HasForeignKey("OfShipmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OfShipmentId");
 
                     b.HasOne("OneRecord.Data.Model.Model.Piece", null)
                         .WithMany("ContainedPieces")
@@ -1153,7 +1018,6 @@ namespace Tracking.Data.Migrations
                                 .HasColumnName("GrossWeightValue");
 
                             b1.Property<string>("Unit")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("GrossWeightUnit");
 
@@ -1167,8 +1031,7 @@ namespace Tracking.Data.Migrations
 
                     b.Navigation("Dimensions");
 
-                    b.Navigation("GrossWeight")
-                        .IsRequired();
+                    b.Navigation("GrossWeight");
 
                     b.Navigation("OfShipment");
                 });
@@ -1196,7 +1059,6 @@ namespace Tracking.Data.Migrations
                                 .HasColumnName("TotalGrossWeightValue");
 
                             b1.Property<string>("Unit")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("TotalGrossWeightUnit");
 
@@ -1208,8 +1070,7 @@ namespace Tracking.Data.Migrations
                                 .HasForeignKey("ShipmentId");
                         });
 
-                    b.Navigation("TotalGrossWeight")
-                        .IsRequired();
+                    b.Navigation("TotalGrossWeight");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.TemperatureInstructions", b =>
@@ -1230,7 +1091,6 @@ namespace Tracking.Data.Migrations
                                 .HasColumnName("MaxTemperatureValue");
 
                             b1.Property<string>("Unit")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("MaxTemperatureUnit");
 
@@ -1252,7 +1112,6 @@ namespace Tracking.Data.Migrations
                                 .HasColumnName("MinTemperatureValue");
 
                             b1.Property<string>("Unit")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)")
                                 .HasColumnName("MinTemperatureUnit");
 
@@ -1264,11 +1123,9 @@ namespace Tracking.Data.Migrations
                                 .HasForeignKey("TemperatureInstructionsId");
                         });
 
-                    b.Navigation("MaxTemperature")
-                        .IsRequired();
+                    b.Navigation("MaxTemperature");
 
-                    b.Navigation("MinTemperature")
-                        .IsRequired();
+                    b.Navigation("MinTemperature");
 
                     b.Navigation("Piece");
                 });
@@ -1277,21 +1134,16 @@ namespace Tracking.Data.Migrations
                 {
                     b.HasOne("OneRecord.Data.Model.Model.Location", "ArrivalLocation")
                         .WithMany()
-                        .HasForeignKey("ArrivalLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ArrivalLocationId");
 
                     b.HasOne("OneRecord.Data.Model.Model.Location", "DepartureLocation")
                         .WithMany()
                         .HasForeignKey("DepartureLocationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("OneRecord.Data.Model.Model.TransportMeans", "OperatingTransportMeans")
                         .WithMany("OperatedTransportMovements")
-                        .HasForeignKey("OperatingTransportMeansId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OperatingTransportMeansId");
 
                     b.Navigation("ArrivalLocation");
 
@@ -1304,15 +1156,12 @@ namespace Tracking.Data.Migrations
                 {
                     b.HasOne("OneRecord.Data.Model.Model.Location", "ArrivalLocation")
                         .WithMany()
-                        .HasForeignKey("ArrivalLocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ArrivalLocationId");
 
                     b.HasOne("OneRecord.Data.Model.Model.Location", "DepartureLocation")
                         .WithMany()
                         .HasForeignKey("DepartureLocationId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("OneRecord.Data.Model.Model.Booking", "ReferredBookingOption")
                         .WithOne("IssuedForWaybill")
@@ -1339,8 +1188,7 @@ namespace Tracking.Data.Migrations
                 {
                     b.Navigation("ActivitySequences");
 
-                    b.Navigation("IssuedForWaybill")
-                        .IsRequired();
+                    b.Navigation("IssuedForWaybill");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.IotDevice", b =>
@@ -1366,8 +1214,7 @@ namespace Tracking.Data.Migrations
 
                     b.Navigation("ContainedPieces");
 
-                    b.Navigation("TemperatureInstructions")
-                        .IsRequired();
+                    b.Navigation("TemperatureInstructions");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Sensor", b =>
@@ -1383,8 +1230,7 @@ namespace Tracking.Data.Migrations
 
                     b.Navigation("TotalDimensions");
 
-                    b.Navigation("Waybill")
-                        .IsRequired();
+                    b.Navigation("Waybill");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMeans", b =>
