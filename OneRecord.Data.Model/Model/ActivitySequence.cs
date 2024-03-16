@@ -1,0 +1,14 @@
+using System.Runtime.Serialization;
+
+namespace OneRecord.Data.Model.Model
+{
+    [DataContract(Name = "ActivitySequence")]
+    public partial class ActivitySequence : EntityBase
+    {
+        [DataMember(Name = "cargo:activity", EmitDefaultValue = false)]
+        public LogisticsActivity Activity { get; set; }
+
+        [DataMember(Name = "cargo:sequenceNumber", EmitDefaultValue = false)]
+        public string SequenceNumber { get; set; }
+    }
+}
