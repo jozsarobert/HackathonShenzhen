@@ -46,7 +46,7 @@ namespace Tracking.Data.Repositories
                     Id = x.Id,
                     WaybillNumber = x.Waybill.WaybillNumber,
                     HasAlert = false, // todo move to calculation logic
-                    Pieces = x.Pieces.Select(y=> y.Id).ToList(),
+                    PieceIds = x.Pieces.Select(y=> y.Id).ToList(),
                 }).ToList();
 
             return new FlightModel

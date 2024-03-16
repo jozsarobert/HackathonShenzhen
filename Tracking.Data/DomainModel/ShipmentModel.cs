@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public string WaybillNumber { get; set; }
         public List<FlightModel> Flights { get; set; }
-        public List<int> Pieces { get; set; }
+        public List<int> PieceIds { get; set; }
         public bool HasAlert { get; set; }
     }
 }

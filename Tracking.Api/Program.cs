@@ -20,8 +20,10 @@ builder.Services.AddScoped<IPieceRepository, PieceRepository>();
 builder.Services.AddScoped<IAlertRepository, AlertRepository>();
 builder.Services.AddScoped<IShipmentRepository, ShipmentRepository>();
 builder.Services.AddScoped<IFlightRepository, FlightRepository>();
-builder.Services.AddTransient<IFlightService, FlightService>();
-builder.Services.AddTransient<IAlertService, AlertService>();
+builder.Services.AddScoped<IFlightService, FlightService>();
+builder.Services.AddScoped<IAlertService, AlertService>();
+builder.Services.AddScoped<IPieceService, PieceService>();
+builder.Services.AddScoped<IShipmentService, ShipmentService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

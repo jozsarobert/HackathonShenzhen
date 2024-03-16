@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tracking.Api.Dto;
+using Tracking.Api.Services;
 
 namespace Tracking.Api.Controllers
 {
@@ -8,16 +9,16 @@ namespace Tracking.Api.Controllers
     [ApiController]
     public class ShipmentController : ControllerBase
     {
-
-        public ShipmentController() { }
+        private readonly IShipmentService _shipmentService;
+        public ShipmentController(IShipmentService shipmentService)
+        {
+            _shipmentService = shipmentService;
+        }
 
         [HttpGet("getbyid")]
-        public ShipmentDto GetShipmentById(string id)
+        public ShipmentDto GetShipmentById(int id)
         {
-            return new ShipmentDto
-            {
-
-            };
+            return _shipmentService.GetShipmentById(id);
         }
     }
 }

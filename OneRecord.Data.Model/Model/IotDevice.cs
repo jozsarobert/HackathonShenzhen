@@ -28,5 +28,6 @@ namespace OneRecord.Data.Model.Model
 
         [DataMember(Name = "cargo:serialNumber", EmitDefaultValue = false)]
         public string SerialNumber { get; set; }
+        public int PhysicalLogisticsObjectId { get; set; }
     }
 }

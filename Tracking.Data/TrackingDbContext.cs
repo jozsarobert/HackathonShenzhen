@@ -10,53 +10,31 @@ namespace Tracking.Data
     public class TrackingDbContext : DbContext
     {
         public TrackingDbContext(DbContextOptions options) : base(options) { }
-
         public DbSet<ActivitySequence> ActivitySequence { get; set; }
         public DbSet<Booking> Booking { get; set; }
-
         public DbSet<Context> Context { get; set; }
-
         public DbSet<Dimensions> Dimensions { get; set; }
-
-
         public DbSet<Geolocation> Geolocation { get; set; }
         public DbSet<IotDevice> IotDevice { get; set; }
-
         public DbSet<Loading> Loading { get; set; }
-        //public DbSet<LoadingActivity> LoadingActivity { get; set; }
-
         public DbSet<Location> Location { get; set; }
         public DbSet<Measurement> Measurement { get; set; }
         public DbSet<MovementTimes> MovementTimes { get; set; }
-
         public DbSet<Piece> Piece { get; set; }
-
         public DbSet<Sensor> Sensor { get; set; }
         public DbSet<Shipment> Shipment { get; set; }
         public DbSet<TransportMeans> TransportMeans { get; set; }
         public DbSet<TransportMovement> TransportMovement { get; set; }
-        //public DbSet<Value> Value { get; set; }
         public DbSet<Waybill> Waybill { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<EntityBase>(b =>
-            //{
-            //    b.Key(e => e.Id);
-            //    b.Property(e => e.Id).ForSqlServer().UseIdentity();
-            //});
-
-
             modelBuilder.Ignore<EntityBase>();
             modelBuilder.Ignore<LogisticsObject>();
             modelBuilder.Ignore<LogisticsAction>();
             //modelBuilder.Ignore<LogisticsActivity>();
             modelBuilder.Ignore<LogisticsService>();
-            modelBuilder.Ignore<PhysicalLogisticsObject>();
-
-            //modelBuilder.Entity<EntityBase>().Ignore(c => c.Type);
-
-            //modelBuilder.Ignore<Value>();
+            //modelBuilder.Ignore<PhysicalLogisticsObject>();
 
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.IssuedForWaybill)
@@ -161,6 +139,13 @@ namespace Tracking.Data
                .WithMany()
                //.HasForeignKey(w => w.DepartureLocationId)
                .OnDelete(DeleteBehavior.NoAction); // Specify the desired behavior here
+
+            modelBuilder.Entity<PhysicalLogisticsObject>()
+                 .HasMany(plo => plo.AttachedIotDevices
+                 ) // Assuming 'IotDevices' is the collection navigation property
+                 .WithOne()
+                 .HasForeignKey(iotDevice => iotDevice.PhysicalLogisticsObjectId) // Assuming 'PhysicalLogisticsObjectId' is the foreign key property in 'IotDevice'
+                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<TemperatureInstructions>()
                 .OwnsOne(d => d.MinTemperature, v =>

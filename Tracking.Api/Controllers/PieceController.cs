@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tracking.Api.Dto;
+using Tracking.Api.Services;
+using Tracking.Data.Repositories;
 
 namespace Tracking.Api.Controllers
 {
@@ -8,21 +10,22 @@ namespace Tracking.Api.Controllers
     [ApiController]
     public class PieceController : ControllerBase
     {
-        public PieceController()
+        private readonly IPieceService _pieceService;
+        public PieceController(IPieceService pieceService)
         {
-            
+            _pieceService = pieceService;
         }
 
         [HttpGet("getbyid")]
-        public PieceDto GetPieceById(string id) 
+        public PieceDto GetPieceById(int id) 
         {
-            return new PieceDto { Id = id };
+            return _pieceService.GetPieceById(id);
         }
 
         [HttpGet("getbyshipmentid")]
-        public IEnumerable<PieceDto> GetPiecesByShipmentId(string id)
+        public IEnumerable<PieceDto> GetPiecesByShipmentId(int id)
         {
-            return new List<PieceDto> { new PieceDto { Id = id } };
+            return _pieceService.GetPieceByShipmentId(id);
         }
     }
 }

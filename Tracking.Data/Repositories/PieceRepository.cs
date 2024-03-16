@@ -44,20 +44,37 @@ namespace Tracking.Data.Repositories
 
             }).FirstOrDefault();
 
-            result.AlertType = GetAlert(id);
+            var movementId = _dbContext.Loading
+                .Include(x => x.LoadedPieces)
+                .Include(x => x.ServedActivity)
+                .Where(x => x.LoadedPieces.Select(x => x.Id).Contains(id))
+                .Where(x => x.LoadingType == "LOADING")
+                .Select(x => x.ServedActivity.Id)
+                .FirstOrDefault();
 
+            var flight = _dbContext.TransportMovement.Where(x => x.Id == movementId)
+                .Include(x => x.ArrivalLocation)
+                .Include(x => x.DepartureLocation)
+                .Include(x=> x.MovementTimes)
+                .Select(x => new FlightModel
+                {
+                    OriginCode = x.DepartureLocation.Code,
+                    DestinationlCode = x.ArrivalLocation.Code,
+                    FlightNo =  x.TransportIdentifier,
+                    DepartureDateTime = x.MovementTimes.Where(y => y.Direction == "OUTBOUND").FirstOrDefault().MovementTimestamp,
+                    ArrivalDateTime = x.MovementTimes.Where(y => y.Direction == "INBOUND").FirstOrDefault().MovementTimestamp,
+
+                }).FirstOrDefault();
+     
+
+            result.AlertType = GetAlert(id);
+            result.Flight = flight;
             return result;
         }
 
         private string GetAlert(int id)
         {
             return null;
-        }
-
-        public List<PieceModel> GetPieces()
-        {
-            var result = _dbContext.Piece.Select(x => new PieceModel { }).ToList();
-            return result;
         }
 
         public async Task UpdateSensorData(int id, string serialNumber, double? temperature, double? elevation, double? latitude, double? longitude, DateTime timeStamp)
@@ -112,6 +129,21 @@ namespace Tracking.Data.Repositories
 
             await _dbContext.SaveChangesAsync();
 
+        }
+
+        public List<PieceModel> GetPieceByShipmentId(int id)
+        {
+            var pieceIds =_dbContext.Shipment.Include(x => x.Pieces)
+                .SelectMany(x => x.Pieces.Select(y => y.Id)).ToList();
+
+            var pieces = new List<PieceModel>();
+
+            foreach (var pieceId in pieceIds)
+            {
+                pieces.Add(GetPieceById(pieceId));
+            }
+
+            return pieces;
         }
     }
 }

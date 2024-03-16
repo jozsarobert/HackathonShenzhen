@@ -20,14 +20,14 @@ namespace Tracking.Api.Services
         {
             var result = _flightRepository.GetFlightByDateAndFlightNo(date, flightNo);
 
-            var shipments = result.Shipments.Select(x => new { x.Id, x.Pieces });
+            var shipments = result.Shipments.Select(x => new { x.Id, x.PieceIds });
 
             var shipmentPieceDictionary = new Dictionary<int, List<PieceDto>>();
 
             foreach (var shipment in shipments)
             {
                 var pieceList = new List<PieceDto>();
-                foreach (var item in shipment.Pieces)
+                foreach (var item in shipment.PieceIds)
                 {
                     var piece = _pieceRepository.GetPieceById(item);
                     var pieceDto = _mapper.Map<PieceDto>(piece);
