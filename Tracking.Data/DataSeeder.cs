@@ -24,13 +24,10 @@ namespace Tracking.Data
         #region "Shipment 2"
         // Shipment 2 (location deviation case): ID 724-87654321 (ZRH-JFK) – total 2 pieces, weight 400 KG, volume 2.2MC
         // 
-        // Piece 1: ID333 with IOT device ID334 (100kg, 0.6 MC)
-        // Piece 2: ID444 with IOT device ID445 (300kg, 1.6 MC)
+        // Piece 1: ID333 with IOT device ID334 (100kg, 0.6 MC) booked on LX14/16MAR with ETD 1310.
+        // Piece 2: ID444 with IOT device ID445 (300kg, 1.6 MC) booked on LX14/17MAR with ETD 1310
         // 
         // The nature of the shipment is electronics (eCommerce).
-        // 
-        // Piece 1 is booked on LX14/16MAR with ETD 1310.
-        // Piece 2 is booked on LX14/17MAR with ETD 1310
         // 
         #endregion
 
@@ -63,11 +60,21 @@ namespace Tracking.Data
             var physicalLogisticsObject = GetPhysicalLogisticsObject();
             //var piece = GetPiece();
             //var sensor = GetSensor();
-            var shipment = GetShipment("721-1234568", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), "ZHR", "JFK", 50, ["COL"], "THERMOMETER", "0000007B", 200,
+            var shipment1 = GetShipment("721-1234568", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), "ZHR", "JFK", 50, ["COL"], "THERMOMETER", "0000007B", 200,
                                new List<Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["",""],"goodDescription","ID112"),
                                                  GetPiece(GetDimensions(0.8, "MC"),GetValue(150.0, "Kg"), ["",""],"goodDescription","ID223")
                                                },
                                "chocolate",8,2);
+            var shipment2 = GetShipment("724-87654321", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), "ZHR", "JFK", 50, ["COL"], "GEOLOCATION", "0000008B", 400,
+                               new List<Piece> { GetPiece(GetDimensions(0.6, "MC"),GetValue(100.0, "Kg"), ["",""],"goodDescription","ID333"),
+                                                 GetPiece(GetDimensions(1.6, "MC"),GetValue(300.0, "Kg"), ["",""],"goodDescription","ID444")
+                                               },
+                               "chocolate", 8, 2);
+            var shipment3 = GetShipment("724-87654321", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), "ZHR", "JFK", 50, ["COL"], "GEOLOCATION", "0000008B", 400,
+                               new List<Piece> { GetPiece(GetDimensions(0.6, "MC"),GetValue(100.0, "Kg"), ["",""],"goodDescription","ID333"),
+                                                 GetPiece(GetDimensions(1.6, "MC"),GetValue(300.0, "Kg"), ["",""],"goodDescription","ID444")
+                                               },
+                               "chocolate", 8, 2);
             var transportMeans = GetTransportMeans();
             var transportMovement = GetTransportMovement();
             //var value = GetValue();
@@ -141,7 +148,7 @@ namespace Tracking.Data
             {
                 //Height = new Value(),
                 //Length = new Value(),
-                Volume = new Value(),
+                Volume = GetValue(value, unit),
                 //Width = new Value(),
             };
 
@@ -336,46 +343,46 @@ namespace Tracking.Data
 
         }
         public static Shipment GetShipment(string waybillNumber,
-                                   string flightNo,
-                                   DateTime departureDate,
-                                   string departureCode,
-                                   string arrivalCode,
-                                   double weight,
-                                   List<string> specialHandlingCodes,
-                                   string sensorType,
-                                   string serialNumber,
-                                   double totalWeight,
-                                   List<Piece> pieces,
-                                   string goodDescription,
-                                   double? maxTemperature = null,
-                                   double? minTemperature = null)
+                                           string flightNo,
+                                           DateTime departureDate,
+                                           string departureCode,
+                                           string arrivalCode,
+                                           double weight,
+                                           List<string> specialHandlingCodes,
+                                           string sensorType,
+                                           string serialNumber,
+                                           double totalWeight,
+                                           List<Piece> pieces,
+                                           string goodDescription,
+                                           double? maxTemperature = null,
+                                           double? minTemperature = null)
 
-        {
-            //var bookingOptionRequest = specialHandlingCodes.Contains("COL") ? new BookingOptionRequest
-            //{
-            //    BookingShipmentDetails = new BookingShipment
-            //    {
-            //        TemperatureInstructions = new TemperatureInstructions
-            //        {
-            //            MinTemperature = new Value { NumericalValue = minTemperature.Value, Unit = "Celsius" },
-            //            MaxTemperature = new Value { NumericalValue = maxTemperature.Value, Unit = "Celsius" },
-            //        }
-            //    }
-            //} : null;
+                {
+                    //var bookingOptionRequest = specialHandlingCodes.Contains("COL") ? new BookingOptionRequest
+                    //{
+                    //    BookingShipmentDetails = new BookingShipment
+                    //    {
+                    //        TemperatureInstructions = new TemperatureInstructions
+                    //        {
+                    //            MinTemperature = new Value { NumericalValue = minTemperature.Value, Unit = "Celsius" },
+                    //            MaxTemperature = new Value { NumericalValue = maxTemperature.Value, Unit = "Celsius" },
+                    //        }
+                    //    }
+                    //} : null;
 
-            return new Shipment
-            {
-                Waybill = new Waybill { WaybillNumber = waybillNumber },
-                Pieces = pieces,
-                SpecialHandlingCodes = specialHandlingCodes,
-                TotalGrossWeight = new Value { NumericalValue = totalWeight, Unit = "Kg", DimensionId = "" },
-                TotalDimensions = new List<Dimensions>(),
-                Incoterms = "",
-                GoodsDescription = goodDescription,
-                TextualHandlingInstructions = new List<string>()
-            };
+                    return new Shipment
+                    {
+                        Waybill = new Waybill { WaybillNumber = waybillNumber },
+                        Pieces = pieces,
+                        SpecialHandlingCodes = specialHandlingCodes,
+                        TotalGrossWeight = new Value { NumericalValue = totalWeight, Unit = "Kg", DimensionId = "" },
+                        TotalDimensions = new List<Dimensions>(),
+                        Incoterms = "",
+                        GoodsDescription = goodDescription,
+                        TextualHandlingInstructions = new List<string>()
+                    };
 
-        }
+                }
         private TransportMeans GetTransportMeans()
         {
             var result = new TransportMeans
@@ -414,8 +421,8 @@ namespace Tracking.Data
         {
             var result = new Value
             {
-                NumericalValue = 0.0,
-                Unit = "",
+                NumericalValue = value,
+                Unit = unit,
                 //Dimensions = new Dimensions(),
                 //DimensionId = ""
             };
