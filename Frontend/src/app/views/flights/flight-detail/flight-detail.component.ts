@@ -1,58 +1,105 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FlightsService } from 'src/app/services/flights/flights.service';
+import { FlightDto } from 'src/model/flightDto';
 
 @Component({
   selector: 'app-flight-detail',
   templateUrl: './flight-detail.component.html',
   styleUrls: ['./flight-detail.component.scss'],
 })
-export class FlightDetailComponent {
-  public constructor(private route: ActivatedRoute, private router: Router) {}
 
-  // todo replace mock
-  flight = {
-    flightNumber: 'LX14',
-    displayValues: [
-      { title: 'Date', value: '16.03.2024' },
-      { title: 'Origin', value: 'ZRH' },
-      { title: 'Destination', value: 'JFK' },
-    ],
-  };
+// todo: get flight data via router param or fetch if not existing
+export class FlightDetailComponent implements OnInit {
+  flight: FlightDto | undefined = undefined;
+  flightDisplayValues: any = undefined;
 
-  // todo replace mock
-  shipments = [
-    {
-      id: '724-14329302',
-      color: 'danger',
-      values: [
-        { title: 'Flight', value: 'LX138' },
-        { title: 'Dest', value: 'HKG' },
-        { title: 'Date', value: 'todo' },
-        { title: 'SMC', value: 'COL' },
-        { title: 'SLA', value: '2.0 - 5.0 C°' },
-        { title: 'Temp', value: '2.0°C' },
-        { title: 'Status', value: 'OK' },
-      ],
-    },
-    {
-      id: '724-14329303',
-      color: 'success',
-      values: [
-        { title: 'Pieces', value: '2' },
-        { title: 'Status', value: 'OK' },
-      ],
-    },
-    {
-      id: '724-14329304',
-      color: 'success',
-      values: [
-        { title: 'Pieces', value: '5' },
-        { title: 'Status', value: 'OK' },
-      ],
-    },
-  ];
+  flightId: string | null = null; // via url
+
+  shipmentsDisplayValues: any = [];
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private flightsService: FlightsService
+  ) {
+    this.flight =
+      this.router?.getCurrentNavigation()?.extras?.state?.['flight'];
+
+    // via url
+    this.route.paramMap.subscribe((params) => {
+      this.flightId = params.get('id');
+    });
+
+    // todo fetch from API
+    if (!this.flight && this.flightId) {
+      this.flightsService
+        .mockGetFlightById(this.flightId)
+        .subscribe((flight) => {
+          this.flight = flight;
+        });
+    }
+
+    if (this.flight) {
+      this.setFlightDisplayValues(this.flight);
+
+      this.flight?.shipments?.forEach((shipment) => {
+        this.shipmentsDisplayValues.push({
+          awb: shipment.waybillNumber,
+          color: shipment.hasAlert ? 'danger' : 'success',
+          values: [
+            { title: 'Pieces', value: shipment.pieces?.length },
+            { title: 'Status', value: shipment.hasAlert ? 'Alert' : 'OK' },
+          ],
+        });
+      });
+    }
+  }
+
+  public ngOnInit(): void {}
+
+  // todo why all this data?
+  // shipments = [
+  //   {
+  //     id: '724-14329302',
+  //     color: 'danger',
+  //     values: [
+  //       { title: 'Flight', value: 'LX138' },
+  //       { title: 'Dest', value: 'HKG' },
+  //       { title: 'Date', value: 'todo' },
+  //       { title: 'SMC', value: 'COL' },
+  //       { title: 'SLA', value: '2.0 - 5.0 C°' },
+  //       { title: 'Temp', value: '2.0°C' },
+  //       { title: 'Status', value: 'OK' },
+  //     ],
+  //   },
+  //   {
+  //     id: '724-14329303',
+  //     color: 'success',
+  //     values: [
+  //       { title: 'Pieces', value: '2' },
+  //       { title: 'Status', value: 'OK' },
+  //     ],
+  //   },
+  //   {
+  //     id: '724-14329304',
+  //     color: 'success',
+  //     values: [
+  //       { title: 'Pieces', value: '5' },
+  //       { title: 'Status', value: 'OK' },
+  //     ],
+  //   },
+  // ];
 
   public navigateToShipmentDetail(shipmentId: string): void {
     this.router.navigate([`shipments/detail/${shipmentId}`]);
+  }
+
+  public setFlightDisplayValues(flight: FlightDto): void {
+    this.flightDisplayValues = [
+      { title: 'Date', value: flight.departureDateTime },
+      { title: 'Origin', value: flight.originCode },
+      { title: 'Destination', value: flight.destinationlCode },
+    ];
   }
 }

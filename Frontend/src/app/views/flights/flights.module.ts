@@ -26,11 +26,13 @@ import { IconModule } from '@coreui/icons-angular';
 import { FlightsOverviewComponent } from './flights-overview/flights-overview.component';
 import { FlightsRoutingModule } from './flights-routing.module';
 import { FlightDetailComponent } from './flight-detail/flight-detail.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [FlightsOverviewComponent, FlightDetailComponent],
   imports: [
     CommonModule,
+    RouterModule,
     FlightsRoutingModule,
     ButtonModule,
     ButtonGroupModule,

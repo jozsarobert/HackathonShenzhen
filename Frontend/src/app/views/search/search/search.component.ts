@@ -32,7 +32,6 @@ export class SearchComponent implements OnInit {
   public flightHasAlert: boolean = false; // loop through shipments and check if any has alert
 
   public constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private flightsService: FlightsService
   ) {}
@@ -103,7 +102,9 @@ export class SearchComponent implements OnInit {
   }
 
   public navigateToFlightDetail(flightId: string): void {
-    this.router.navigate([`flights/detail/${flightId}`]);
+    this.router.navigate([`flights/detail/${flightId}`], {
+      state: { flight: this.flight },
+    });
   }
 
   // private unsubscribeFromStatusChanges(): void {

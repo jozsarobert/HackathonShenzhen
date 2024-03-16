@@ -60,4 +60,29 @@ export class FlightsService {
       ],
     });
   }
+
+  // todo replace with backend
+  public mockGetFlightById(id: string): Observable<FlightDto> {
+    return of({
+      flightNo: 'LX14',
+      originCode: 'ZRH',
+      departureDateTime: '16.03.2024',
+      destinationlCode: 'JFK',
+      arrivalDateTime: '2023-01-01T06:00', // todo
+      shipments: [
+        {
+          id: 'todo',
+          waybillNumber: '724-14329302',
+          pieces: ['piece1', 'piece2'],
+          hasAlert: false,
+        },
+        {
+          id: 'todo',
+          waybillNumber: '724-14329302',
+          pieces: ['piece1', 'piece2'],
+          hasAlert: true,
+        },
+      ],
+    });
+  }
 }
