@@ -13,7 +13,7 @@ export const navItems: INavData[] = [
     name: 'Status',
   },
   {
-    name: 'Alerts',
+    name: 'Alerts (2)',
     url: '/alerts',
     iconComponent: { name: 'cil-bell-exclamation' },
   },
@@ -35,5 +35,10 @@ export const navItems: INavData[] = [
     name: 'Shipments',
     url: '/shipments',
     iconComponent: { name: 'cil-inbox' },
+  },
+  {
+    name: 'Pieces',
+    url: '/pieces',
+    iconComponent: { name: 'cil-puzzle' },
   },
 ];

@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
   ButtonGroupModule,
   ButtonModule,
+  CalloutModule,
   CardModule,
   CollapseModule,
   DropdownModule,
@@ -50,6 +51,7 @@ import { FlightDetailComponent } from './flight-detail/flight-detail.component';
     ProgressComponent,
     ProgressBarComponent,
     HeaderModule,
+    CalloutModule,
   ],
 })
 export class FlightsModule {}

@@ -4,7 +4,7 @@
       [values]="piece.values"
       class="mb-4"
       (click)="navigateToPieceDetail('piece1')"
-      color="info"
+      [color]="piece.color"
     >
       <span class="text-white"> {{ piece.id }}</span>
     </c-widget-stat-d>

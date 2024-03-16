@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-flight-detail',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./flight-detail.component.scss'],
 })
 export class FlightDetailComponent {
+  public constructor(private route: ActivatedRoute, private router: Router) {}
+
   // todo replace mock
   flight = {
     flightNumber: 'LX14',
@@ -14,13 +17,6 @@ export class FlightDetailComponent {
       { title: 'Origin', value: 'ZRH' },
       { title: 'Destination', value: 'JFK' },
     ],
-    // id: 'flight1234',
-    // flightNumber: 'LX15',
-    // date: '16.03.2024',
-    // origin: 'ZRH',
-    // destination: 'JFK',
-    // shipments: ['shipment1', 'shipment2'],
-    // status: 'alert',
   };
 
   // todo replace mock
@@ -55,4 +51,8 @@ export class FlightDetailComponent {
       ],
     },
   ];
+
+  public navigateToShipmentDetail(shipmentId: string): void {
+    this.router.navigate([`shipments/detail/${shipmentId}`]);
+  }
 }
