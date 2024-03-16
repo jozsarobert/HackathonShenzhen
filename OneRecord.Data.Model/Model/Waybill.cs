@@ -32,32 +32,8 @@ namespace OneRecord.Data.Model.Model
         [DataMember(Name = "cargo:departureLocation", EmitDefaultValue = false)]
         public Location DepartureLocation { get; set; }
 
-        //[DataMember(Name = "cargo:billingDetails", EmitDefaultValue = false)]
-        //public BillingDetails BillingDetails { get; set; }
-
         [DataMember(Name = "cargo:carrierDeclarationPlace", EmitDefaultValue = false)]
         public Location CarrierDeclarationPlace { get; set; }
-
-        //[DataMember(Name = "cargo:declaredValueForCustoms", EmitDefaultValue = false)]
-        //public CurrencyValue DeclaredValueForCustoms { get; set; }
-
-        //[DataMember(Name = "cargo:declaredValueForCarriage", EmitDefaultValue = false)]
-        //public CurrencyValue DeclaredValueForCarriage { get; set; }
-
-        //[DataMember(Name = "cargo:masterWaybill", EmitDefaultValue = false)]
-        //public Waybill MasterWaybill { get; set; }
-
-        //[DataMember(Name = "cargo:houseWaybills", EmitDefaultValue = false)]
-        //public List<Waybill> HouseWaybills { get; set; }
-
-        //[DataMember(Name = "cargo:involvedParties", EmitDefaultValue = false)]
-        //public List<Party> InvolvedParties { get; set; }
-
-        //[DataMember(Name = "cargo:waybillLineItems", EmitDefaultValue = false)]
-        //public List<WaybillLineItem> WaybillLineItems { get; set; }
-
-        //[DataMember(Name = "cargo:otherCharges", EmitDefaultValue = false)]
-        //public List<OtherCharge> OtherCharges { get; set; }
 
         [DataMember(Name = "cargo:shipment", EmitDefaultValue = false)]
         public Shipment Shipment { get; set; }
@@ -92,9 +68,6 @@ namespace OneRecord.Data.Model.Model
         [DataMember(Name = "cargo:consignorDeclarationSignature", EmitDefaultValue = false)]
         public string ConsignorDeclarationSignature { get; set; }
 
-        //[DataMember(Name = "cargo:destinationCharges", EmitDefaultValue = false)]
-        //public List<CurrencyValue> DestinationCharges { get; set; }
-
         [DataMember(Name = "cargo:destinationCurrencyRate", EmitDefaultValue = false)]
         public double DestinationCurrencyRate { get; set; }
 
@@ -112,12 +85,5 @@ namespace OneRecord.Data.Model.Model
 
         [DataMember(Name = "cargo:modularCheckNumber", EmitDefaultValue = false)]
         public bool ModularCheckNumber { get; set; }
-
-        //[DataMember(Name = "cargo:destinationCurrencyCode", EmitDefaultValue = false)]
-        //public string DestinationCurrencyCode { get; set; }
-
-        //[DataMember(Name = "cargo:originCurrency", EmitDefaultValue = false)]
-        //public string OriginCurrency { get; set; }
-
     }
 }

@@ -19,12 +19,6 @@ namespace OneRecord.Data.Model.Model
             Cargo = "cargo:"
         };
 
-        //[DataMember(Name = "cargo:contentProducts", EmitDefaultValue = false)]
-        //public List<Product> ContentProducts { get; set; }
-
-        //[DataMember(Name = "cargo:containedItems", EmitDefaultValue = false)]
-        //public List<Item> ContainedItems { get; set; }
-
         [DataMember(Name = "cargo:containedPieces", EmitDefaultValue = false)]
         public List<Piece> ContainedPieces { get; set; }
 
@@ -39,27 +33,6 @@ namespace OneRecord.Data.Model.Model
 
         [DataMember(Name = "cargo:ofShipment", EmitDefaultValue = false)]
         public Shipment OfShipment { get; set; }
-
-        //[DataMember(Name = "cargo:packagingType", EmitDefaultValue = false)]
-        //public PackagingType PackagingType { get; set; }
-
-        //[DataMember(Name = "cargo:inPiece", EmitDefaultValue = false)]
-        //public Piece InPiece { get; set; }
-
-        //[DataMember(Name = "cargo:otherIdentifiers", EmitDefaultValue = false)]
-        //public List<OtherIdentifier> OtherIdentifiers { get; set; }
-
-        //[DataMember(Name = "cargo:involvedParties", EmitDefaultValue = false)]
-        //public List<Party> InvolvedParties { get; set; }
-
-        //[DataMember(Name = "cargo:customsInformation", EmitDefaultValue = false)]
-        //public List<CustomsInformation> CustomsInformation { get; set; }
-
-        //[DataMember(Name = "cargo:securityDeclaration", EmitDefaultValue = false)]
-        //public SecurityDeclaration SecurityDeclaration { get; set; }
-
-        //[DataMember(Name = "cargo:volumetricWeight", EmitDefaultValue = false)]
-        //public VolumetricWeight VolumetricWeight { get; set; }
 
         [DataMember(Name = "cargo:loadType", EmitDefaultValue = false)]
         public string LoadType { get; set; }
@@ -105,27 +78,6 @@ namespace OneRecord.Data.Model.Model
 
         [DataMember(Name = "cargo:upid", EmitDefaultValue = false)]
         public string Upid { get; set; }
-
-        //[DataMember(Name = "cargo:containedPieceInPiece", EmitDefaultValue = false)]
-        //public Piece ContainedPieceInPiece { get; set; }
-
-        //[DataMember(Name = "cargo:contentDescribedByProducts", EmitDefaultValue = false)]
-        //public List<Product> ContentDescribedByProducts { get; set; }
-
-        //[DataMember(Name = "cargo:contentProductionCountry", EmitDefaultValue = false)]
-        //public Country ContentProductionCountry { get; set; }
-
-        //[DataMember(Name = "cargo:partOfShipment", EmitDefaultValue = false)]
-        //public Shipment PartOfShipment { get; set; }
-
-        //[DataMember(Name = "cargo:uldReference", EmitDefaultValue = false)]
-        //public LoadingUnit UldReference { get; set; }
-
-        //[DataMember(Name = "cargo:declaredValueForCarriage", EmitDefaultValue = false)]
-        //public string DeclaredValueForCarriage { get; set; }
-
-        //[DataMember(Name = "cargo:declaredValueForCustoms", EmitDefaultValue = false)]
-        //public string DeclaredValueForCustoms { get; set; }
     }
 
 }

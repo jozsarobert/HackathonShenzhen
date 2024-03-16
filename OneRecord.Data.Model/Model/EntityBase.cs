@@ -9,10 +9,5 @@ namespace OneRecord.Data.Model.Model
 
         [DataMember(Name = "@type", EmitDefaultValue = false)]
         public List<string> Type { get; init; }
-
-        //public virtual string ToJson()
-        //{
-        //    return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
-        //}
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#pragma warning disable VSSpell001 // Spell Check
+
+using Microsoft.EntityFrameworkCore;
 using OneRecord.Data.Model.Model;
 
 

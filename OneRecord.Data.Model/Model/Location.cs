@@ -13,9 +13,6 @@ public partial class Location : PhysicalLogisticsObject
         };
     }
 
-    //[DataMember(Name = "cargo:address", EmitDefaultValue = false)]
-    //public Address Address { get; set; }
-
     [DataMember(Name = "cargo:forActions", EmitDefaultValue = false)]
     public List<LogisticsAction> ForActions { get; set; }
 

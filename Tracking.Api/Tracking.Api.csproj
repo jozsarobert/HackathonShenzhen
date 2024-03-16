@@ -21,7 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    
     <ProjectReference Include="..\MessageContracts\MessageContracts.csproj" />
+    
     <ProjectReference Include="..\Reelables.Api.SDK\Reelables.Api.SDK.csproj" />
     <ProjectReference Include="..\Tracking.Data\Tracking.Data.csproj" />
   </ItemGroup>
