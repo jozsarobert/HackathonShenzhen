@@ -44,11 +44,11 @@ namespace OneRecord.Data.Model.Model
         //[DataMember(Name = "cargo:declaredValueForCarriage", EmitDefaultValue = false)]
         //public CurrencyValue DeclaredValueForCarriage { get; set; }
 
-        [DataMember(Name = "cargo:masterWaybill", EmitDefaultValue = false)]
-        public Waybill MasterWaybill { get; set; }
+        //[DataMember(Name = "cargo:masterWaybill", EmitDefaultValue = false)]
+        //public Waybill MasterWaybill { get; set; }
 
-        [DataMember(Name = "cargo:houseWaybills", EmitDefaultValue = false)]
-        public List<Waybill> HouseWaybills { get; set; }
+        //[DataMember(Name = "cargo:houseWaybills", EmitDefaultValue = false)]
+        //public List<Waybill> HouseWaybills { get; set; }
 
         //[DataMember(Name = "cargo:involvedParties", EmitDefaultValue = false)]
         //public List<Party> InvolvedParties { get; set; }
