@@ -7,7 +7,7 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-search' },
   },
 
-  // Status test
+  // Status
   {
     title: true,
     name: 'Status',
@@ -17,11 +17,13 @@ export const navItems: INavData[] = [
     url: '/alerts',
     iconComponent: { name: 'cil-bell-exclamation' },
   },
-  {
-    name: 'Warnings',
-    url: '/warnings',
-    iconComponent: { name: 'cil-alarm' },
-  },
+
+  // todo: define what are warnings
+  // {
+  //   name: 'Warnings',
+  //   url: '/warnings',
+  //   iconComponent: { name: 'cil-alarm' },
+  // },
 
   // todo icon
   {

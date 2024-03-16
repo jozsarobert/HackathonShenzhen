@@ -1,1 +1,32 @@
-<p>flights-overview works!</p>
+<c-row>
+  <c-col lg="6" xs="12">
+    <c-input-group class="mb-3">
+      <input aria-label="Server" cFormControl placeholder="Date" />
+      <span cInputGroupText> <svg [cIcon]="icons.cilCalendar"></svg></span>
+
+      <input aria-label="Username" cFormControl placeholder="Flight No." />
+      <button
+        cButton
+        color="secondary"
+        id="button-addon2"
+        type="button"
+        variant="outline"
+      >
+        <svg [cIcon]="icons.cilSearch"></svg>
+      </button>
+    </c-input-group>
+  </c-col>
+</c-row>
+
+<c-row>
+  <c-col *ngFor="let flight of flights; index as i" md="12" lg="12" xl="12">
+    <c-widget-stat-d
+      [values]="flight.values"
+      class="mb-4"
+      (click)="navigateToDetail('flight1234')"
+      color="danger"
+    >
+      <span class="text-white"> {{ flight.id }}</span>
+    </c-widget-stat-d>
+  </c-col>
+</c-row>
