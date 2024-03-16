@@ -42,22 +42,6 @@ namespace Tracking.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "LoadingActivity",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoadingIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false),
-                    ExecutionStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LoadingActivity", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TransportMeans",
                 columns: table => new
                 {
@@ -91,37 +75,6 @@ namespace Tracking.Data.Migrations
                         name: "FK_ActivitySequence_Booking_BookingId",
                         column: x => x.BookingId,
                         principalTable: "Booking",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Loading",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OnTransportMeansId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    LoadingPositionIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LoadingType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LoadingActivityId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false),
-                    ActionEndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ActionStartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ActionTimeType = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Loading", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Loading_LoadingActivity_LoadingActivityId",
-                        column: x => x.LoadingActivityId,
-                        principalTable: "LoadingActivity",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Loading_TransportMeans_OnTransportMeansId",
-                        column: x => x.OnTransportMeansId,
-                        principalTable: "TransportMeans",
                         principalColumn: "Id");
                 });
 
@@ -229,71 +182,6 @@ namespace Tracking.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Piece",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ContentProductionCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DimensionsId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    GrossWeightValue = table.Column<double>(type: "float", nullable: false),
-                    GrossWeightUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GrossWeight_DimensionsId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    GrossWeight_DimensionId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OfShipmentId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    LoadType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FulfillsUldTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PackageMarkCoded = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SpecialHandlingCodes = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Coload = table.Column<bool>(type: "bit", nullable: false),
-                    GoodsDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NvdForCarriage = table.Column<bool>(type: "bit", nullable: false),
-                    NvdForCustoms = table.Column<bool>(type: "bit", nullable: false),
-                    PackagedeIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShippingMarks = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Slac = table.Column<int>(type: "int", nullable: false),
-                    Stackable = table.Column<bool>(type: "bit", nullable: false),
-                    TextualHandlingInstructions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Turnable = table.Column<bool>(type: "bit", nullable: false),
-                    Upid = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LoadingId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    PieceId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Piece", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Piece_Dimensions_DimensionsId",
-                        column: x => x.DimensionsId,
-                        principalTable: "Dimensions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Piece_Dimensions_GrossWeight_DimensionsId",
-                        column: x => x.GrossWeight_DimensionsId,
-                        principalTable: "Dimensions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Piece_Loading_LoadingId",
-                        column: x => x.LoadingId,
-                        principalTable: "Loading",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Piece_Piece_PieceId",
-                        column: x => x.PieceId,
-                        principalTable: "Piece",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Piece_Shipment_OfShipmentId",
-                        column: x => x.OfShipmentId,
-                        principalTable: "Shipment",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TransportMovement",
                 columns: table => new
                 {
@@ -395,6 +283,37 @@ namespace Tracking.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Loading",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    OnTransportMeansId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    LoadingPositionIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LoadingType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TransportMovementId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false),
+                    ActionEndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ActionStartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ActionTimeType = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Loading", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Loading_TransportMeans_OnTransportMeansId",
+                        column: x => x.OnTransportMeansId,
+                        principalTable: "TransportMeans",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Loading_TransportMovement_TransportMovementId",
+                        column: x => x.TransportMovementId,
+                        principalTable: "TransportMovement",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MovementTimes",
                 columns: table => new
                 {
@@ -413,6 +332,71 @@ namespace Tracking.Data.Migrations
                         name: "FK_MovementTimes_TransportMovement_TransportMovementId",
                         column: x => x.TransportMovementId,
                         principalTable: "TransportMovement",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Piece",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ContentProductionCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DimensionsId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    GrossWeightValue = table.Column<double>(type: "float", nullable: false),
+                    GrossWeightUnit = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GrossWeight_DimensionsId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    GrossWeight_DimensionId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OfShipmentId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    LoadType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FulfillsUldTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PackageMarkCoded = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SpecialHandlingCodes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Coload = table.Column<bool>(type: "bit", nullable: false),
+                    GoodsDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NvdForCarriage = table.Column<bool>(type: "bit", nullable: false),
+                    NvdForCustoms = table.Column<bool>(type: "bit", nullable: false),
+                    PackagedeIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShippingMarks = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Slac = table.Column<int>(type: "int", nullable: false),
+                    Stackable = table.Column<bool>(type: "bit", nullable: false),
+                    TextualHandlingInstructions = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Turnable = table.Column<bool>(type: "bit", nullable: false),
+                    Upid = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LoadingId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    PieceId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Piece", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Piece_Dimensions_DimensionsId",
+                        column: x => x.DimensionsId,
+                        principalTable: "Dimensions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Piece_Dimensions_GrossWeight_DimensionsId",
+                        column: x => x.GrossWeight_DimensionsId,
+                        principalTable: "Dimensions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Piece_Loading_LoadingId",
+                        column: x => x.LoadingId,
+                        principalTable: "Loading",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Piece_Piece_PieceId",
+                        column: x => x.PieceId,
+                        principalTable: "Piece",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Piece_Shipment_OfShipmentId",
+                        column: x => x.OfShipmentId,
+                        principalTable: "Shipment",
                         principalColumn: "Id");
                 });
 
@@ -562,14 +546,14 @@ namespace Tracking.Data.Migrations
                 column: "TransportMeansId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Loading_LoadingActivityId",
-                table: "Loading",
-                column: "LoadingActivityId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Loading_OnTransportMeansId",
                 table: "Loading",
                 column: "OnTransportMeansId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Loading_TransportMovementId",
+                table: "Loading",
+                column: "TransportMovementId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Location_GeolocationId",
@@ -716,6 +700,14 @@ namespace Tracking.Data.Migrations
                 table: "IotDevice");
 
             migrationBuilder.DropForeignKey(
+                name: "FK_TransportMovement_Location_ArrivalLocationId",
+                table: "TransportMovement");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_TransportMovement_Location_DepartureLocationId",
+                table: "TransportMovement");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_IotDevice_Piece_PieceId",
                 table: "IotDevice");
 
@@ -739,9 +731,6 @@ namespace Tracking.Data.Migrations
                 name: "Waybill");
 
             migrationBuilder.DropTable(
-                name: "TransportMovement");
-
-            migrationBuilder.DropTable(
                 name: "Booking");
 
             migrationBuilder.DropTable(
@@ -763,7 +752,7 @@ namespace Tracking.Data.Migrations
                 name: "Loading");
 
             migrationBuilder.DropTable(
-                name: "LoadingActivity");
+                name: "TransportMovement");
 
             migrationBuilder.DropTable(
                 name: "Sensor");

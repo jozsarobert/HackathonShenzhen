@@ -6,12 +6,18 @@ using Reelables.Api.SDK.Api;
 using System.Runtime;
 using Tracking.Api;
 using Tracking.Data;
+using Tracking.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddDbContext<TrackingDbContext>(opts => opts.UseSqlServer(builder.Configuration["ConnectionString:TrackingDb"]));
+
+builder.Services.AddScoped<IPieceRepository, PieceRepository>();
+builder.Services.AddScoped<IPieceRepository, PieceRepository>();
+builder.Services.AddScoped<IShipmentRepository, ShipmentRepository>();
+builder.Services.AddScoped<IFlightRepository, FlightRepository>();
 builder.Services.Configure<MessagingConfig>(builder.Configuration.GetSection("Messaging"));
 
 builder.Services.AddMassTransit(x =>
@@ -51,11 +57,10 @@ builder.Services.AddTransient<IAssetsApi, AssetsApi>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseAuthorization();
 

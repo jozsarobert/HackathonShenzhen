@@ -11,6 +11,9 @@ namespace OneRecord.Data.Model.Model
         [DataMember(Name = "cargo:arrivalLocation", EmitDefaultValue = false)]
         public Location ArrivalLocation { get; set; }
 
+        [DataMember(Name = "cargo:loadingActions", EmitDefaultValue = false)]
+        public List<Loading> LoadingActions { get; set; }
+
         //[DataMember(Name = "cargo:co2Emissions", EmitDefaultValue = false)]
         //public List<Co2Emissions> Co2Emissions { get; set; }
 

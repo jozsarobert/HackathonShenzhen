@@ -12,7 +12,7 @@ using Tracking.Data;
 namespace Tracking.Data.Migrations
 {
     [DbContext(typeof(TrackingDbContext))]
-    [Migration("20240316051155_Init")]
+    [Migration("20240316081326_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -234,9 +234,6 @@ namespace Tracking.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LoadingActivityId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("LoadingPositionIdentifier")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -251,50 +248,22 @@ namespace Tracking.Data.Migrations
                     b.Property<bool>("SkeletonIndicator")
                         .HasColumnType("bit");
 
+                    b.Property<string>("TransportMovementId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LoadingActivityId");
-
                     b.HasIndex("OnTransportMeansId");
+
+                    b.HasIndex("TransportMovementId");
 
                     b.ToTable("Loading");
 
                     b.HasDiscriminator().HasValue("Loading");
-                });
-
-            modelBuilder.Entity("OneRecord.Data.Model.Model.LoadingActivity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CompanyIdentifier")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExecutionStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LoadingIdentifier")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("SkeletonIndicator")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LoadingActivity");
-
-                    b.HasDiscriminator().HasValue("LoadingActivity");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Location", b =>
@@ -1013,13 +982,13 @@ namespace Tracking.Data.Migrations
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Loading", b =>
                 {
-                    b.HasOne("OneRecord.Data.Model.Model.LoadingActivity", null)
-                        .WithMany("LoadingActions")
-                        .HasForeignKey("LoadingActivityId");
-
                     b.HasOne("OneRecord.Data.Model.Model.TransportMeans", "OnTransportMeans")
                         .WithMany()
                         .HasForeignKey("OnTransportMeansId");
+
+                    b.HasOne("OneRecord.Data.Model.Model.TransportMovement", null)
+                        .WithMany("LoadingActions")
+                        .HasForeignKey("TransportMovementId");
 
                     b.Navigation("OnTransportMeans");
                 });
@@ -1303,11 +1272,6 @@ namespace Tracking.Data.Migrations
                     b.Navigation("LoadedPieces");
                 });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.LoadingActivity", b =>
-                {
-                    b.Navigation("LoadingActions");
-                });
-
             modelBuilder.Entity("OneRecord.Data.Model.Model.Location", b =>
                 {
                     b.Navigation("AttachedIotDevices");
@@ -1346,6 +1310,8 @@ namespace Tracking.Data.Migrations
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMovement", b =>
                 {
+                    b.Navigation("LoadingActions");
+
                     b.Navigation("MovementTimes");
                 });
 #pragma warning restore 612, 618
