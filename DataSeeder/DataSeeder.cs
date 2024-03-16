@@ -2,10 +2,9 @@
 
 using Microsoft.EntityFrameworkCore;
 using OneRecord.Data.Model.Model;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Tracking.Data;
 
-namespace Tracking.Data
+namespace DataSeeder
 {
     public class DataSeeder
     {
@@ -25,10 +24,13 @@ namespace Tracking.Data
         #region "Shipment 2"
         // Shipment 2 (location deviation case): ID 724-87654321 (ZRH-JFK) – total 2 pieces, weight 400 KG, volume 2.2MC
         // 
-        // Piece 1: ID333 with IOT device ID334 (100kg, 0.6 MC) booked on LX14/16MAR with ETD 1310.
-        // Piece 2: ID444 with IOT device ID445 (300kg, 1.6 MC) booked on LX14/17MAR with ETD 1310
+        // Piece 1: ID333 with IOT device ID334 (100kg, 0.6 MC)
+        // Piece 2: ID444 with IOT device ID445 (300kg, 1.6 MC)
         // 
         // The nature of the shipment is electronics (eCommerce).
+        // 
+        // Piece 1 is booked on LX14/16MAR with ETD 1310.
+        // Piece 2 is booked on LX14/17MAR with ETD 1310
         // 
         #endregion
 
@@ -51,25 +53,14 @@ namespace Tracking.Data
 
             var activitySequence = GetActivitySequence();
             var loading = GetLoading();
-            var shipment = GetShipment("721-1234568", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), new DateTime(2024,3,16,18,20,0),"ZHR", "JFK", 50, ["COL"], "THERMOMETER", "0000007B", 200,
-                               new List<Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["",""],"goodDescription","ID112"),
+            var shipment = GetShipment("721-1234568", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), new DateTime(2024, 3, 16, 18, 20, 0), "ZHR", "JFK", 50, ["COL"], "THERMOMETER", "0000007B", 200,
+                               new List<OneRecord.Data.Model.Model.Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["",""],"goodDescription","ID112"),
                                                  GetPiece(GetDimensions(0.8, "MC"),GetValue(150.0, "Kg"), ["",""],"goodDescription","ID223")
                                                },
-                               "chocolate",8,2);
-            var shipment2 = GetShipment("724-87654321", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), "ZHR", "JFK", 50, ["COL"], "GEOLOCATION", "0000008B", 400,
-                               new List<Piece> { GetPiece(GetDimensions(0.6, "MC"),GetValue(100.0, "Kg"), ["",""],"goodDescription","ID333"),
-                                                 GetPiece(GetDimensions(1.6, "MC"),GetValue(300.0, "Kg"), ["",""],"goodDescription","ID444")
-                                               },
                                "chocolate", 8, 2);
-            var shipment3 = GetShipment("724-87654321", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), "ZHR", "JFK", 50, ["COL"], "GEOLOCATION", "0000008B", 400,
-                               new List<Piece> { GetPiece(GetDimensions(0.6, "MC"),GetValue(100.0, "Kg"), ["",""],"goodDescription","ID333"),
-                                                 GetPiece(GetDimensions(1.6, "MC"),GetValue(300.0, "Kg"), ["",""],"goodDescription","ID444")
-                                               },
-                               "chocolate", 8, 2);
-            var transportMeans = GetTransportMeans();
-            var transportMovement = GetTransportMovement();
-            //var value = GetValue();
-            var waybill = GetWaybill();
+
+            dbContext.Shipment.Add(shipment);
+            dbContext.SaveChanges();
         }
 
         private ActivitySequence GetActivitySequence()
@@ -115,7 +106,7 @@ namespace Tracking.Data
             {
                 //Height = new Value(),
                 //Length = new Value(),
-                Volume = GetValue(value, unit),
+                Volume = new Value(),
                 //Width = new Value(),
             };
 
@@ -137,16 +128,16 @@ namespace Tracking.Data
         }
         private List<IotDevice> GetIotDevice(string serialNumber)
         {
-            return [ new IotDevice
-                        {
-                            SerialNumber = serialNumber,
-                            DeviceModel = "Reelables smart label",
-                            ConnectedSensors =
+            return [new IotDevice
+            {
+                SerialNumber = serialNumber,
+                DeviceModel = "Reelables smart label",
+                ConnectedSensors =
                             [
                                 GetSensor("THERMOMETER"),
                                 GetSensor("GEOLOCATION")
                             ]
-                        }
+            }
             ];
         }
         private Loading GetLoading()
@@ -264,7 +255,7 @@ namespace Tracking.Data
             return result;
 
         }
-        private Piece GetPiece(Dimensions dimensions, Value grossWeight, List<String> specialHandlingCodes, string goodDescription, string iotSerialnumber)
+        private Piece GetPiece(Dimensions dimensions, Value grossWeight, List<string> specialHandlingCodes, string goodDescription, string iotSerialnumber)
         {
             var result = new Piece
             {
@@ -326,11 +317,11 @@ namespace Tracking.Data
                                    double? minTemperature = null)
 
         {
-            
+
 
             var activitySequences = new List<ActivitySequence>
             {
-                new ActivitySequence 
+                new ActivitySequence
                 {
                     Activity = GetTransportMovement(arrivalCode,departureCode,flightNo, departureDate,arrivalDate)
                 }
@@ -340,8 +331,9 @@ namespace Tracking.Data
 
             return new Shipment
             {
-                Waybill = new Waybill { 
-                    WaybillNumber = waybillNumber, 
+                Waybill = new Waybill
+                {
+                    WaybillNumber = waybillNumber,
                     ReferredBookingOption = new Booking
                     {
                         ActivitySequences = activitySequences,
@@ -350,14 +342,14 @@ namespace Tracking.Data
                 },
                 Pieces = pieces,
                 SpecialHandlingCodes = specialHandlingCodes,
-                TotalGrossWeight = new Value { NumericalValue = totalWeight, Unit = "Kg"},
+                TotalGrossWeight = new Value { NumericalValue = totalWeight, Unit = "Kg" },
                 TotalDimensions = new List<Dimensions>(),
                 Incoterms = "",
                 GoodsDescription = goodDescription,
                 TextualHandlingInstructions = new List<string>()
             };
 
-                }
+        }
         private TransportMeans GetTransportMeans()
         {
             var result = new TransportMeans
@@ -382,7 +374,7 @@ namespace Tracking.Data
                     Code = arrivalCode
                 },
 
-                DepartureLocation = new Location 
+                DepartureLocation = new Location
                 {
                     Code = departureCode
                 },
@@ -412,8 +404,8 @@ namespace Tracking.Data
         {
             var result = new Value
             {
-                NumericalValue = value,
-                Unit = unit,
+                NumericalValue = 0.0,
+                Unit = "",
                 //Dimensions = new Dimensions(),
                 //DimensionId = ""
             };
@@ -425,27 +417,27 @@ namespace Tracking.Data
         {
             var result = new Waybill
             {
-              ArrivalLocation  = new Location(),
-              ReferredBookingOption  = new Booking(),
-              DepartureLocation  = new Location(),
-              CarrierDeclarationPlace  = new Location(),
-              Shipment  = new Shipment(),
-              WaybillType  = "",
-              CarrierChargeCode  = "",
-              OtherChargesIndicator  = "",
-              ServiceCode  = "",
-              WeightValueIndicator  = "",
-              CustomsOriginCode  = "",
-              AccountingInformation  = "",
-              CarrierDeclarationDate  = new DateTime(),
-              CarrierDeclarationSignature  = "",
-              ConsignorDeclarationSignature  = "",
-              DestinationCurrencyRate  = 0.0,
-              ShippingInfo  = "",
-              ShippingRefNo  = "",
-              WaybillNumber  = "",
-              WaybillPrefix  = "",
-              ModularCheckNumber  = false,
+                ArrivalLocation = new Location(),
+                ReferredBookingOption = new Booking(),
+                DepartureLocation = new Location(),
+                CarrierDeclarationPlace = new Location(),
+                Shipment = new Shipment(),
+                WaybillType = "",
+                CarrierChargeCode = "",
+                OtherChargesIndicator = "",
+                ServiceCode = "",
+                WeightValueIndicator = "",
+                CustomsOriginCode = "",
+                AccountingInformation = "",
+                CarrierDeclarationDate = new DateTime(),
+                CarrierDeclarationSignature = "",
+                ConsignorDeclarationSignature = "",
+                DestinationCurrencyRate = 0.0,
+                ShippingInfo = "",
+                ShippingRefNo = "",
+                WaybillNumber = "",
+                WaybillPrefix = "",
+                ModularCheckNumber = false,
             };
 
             return result;

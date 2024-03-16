@@ -17,15 +17,24 @@ namespace Tracking.Data.Repositories
 
         public FlightModel GetFlightByDateAndFlightNo(DateTime date, string flightNo)
         {
-            //var flight = _dbContext.TransportMovement
-            //    .Where(x=> x.TransportIdentifier ==  flightNo && x.MovementTimes.Any(y=> y.MovementTimestamp.Date == date && y.Direction == "OUTBOUND"))
-            //    .Select(x=> new
-            //    {
-            //        x.ArrivalLocation,
-            //        x.DepartureLocation,
-            //        x.TransportIdentifier,
-            //        x.Load
-            //    });
+            var flight = _dbContext.TransportMovement
+                .Where(x => x.TransportIdentifier == flightNo && x.MovementTimes.Any(y => y.MovementTimestamp.Date == date && y.Direction == "OUTBOUND"))
+                .Select(x => new
+                {
+                    x.ArrivalLocation,
+                    x.DepartureLocation,
+                    x.TransportIdentifier,
+                    LoadingActions = x.LoadingActions.Select( y=> new
+                    {
+                        WaybillNumber = y.LoadedPieces.Select(p=> new { 
+                            p.OfShipment.Waybill.WaybillNumber,
+                            p.GrossWeight,
+                            p.Dimensions,
+                            p.Id,
+                            
+                        })
+                    }) 
+                });
 
             throw new NotImplementedException();
         }

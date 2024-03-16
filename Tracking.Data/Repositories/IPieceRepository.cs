@@ -4,6 +4,7 @@ namespace Tracking.Data.Repositories
 {
     public interface IPieceRepository
     {
-        public PieceModel GetPieceById(string id);
+        PieceModel GetPieceById(int id);
+        Task UpdateSensorData(int id, string serialNumber, double? temperature, double? elevation, double? latitude, double? longitude, DateTime timeStamp);
     }
 }
