@@ -27,5 +27,11 @@ namespace Tracking.Api.Controllers
         {
             return _pieceService.GetPieceByShipmentId(id);
         }
+
+        [HttpGet("updatesensor")]
+        public void UpdateSensor(int id, string serialNumber, double temperature)
+        {
+             _pieceService.UpdateSensorData(id, serialNumber,temperature);
+        }
     }
 }

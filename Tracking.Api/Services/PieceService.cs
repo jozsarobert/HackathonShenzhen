@@ -27,5 +27,10 @@ namespace Tracking.Api.Services
             return _mapper.Map<List<PieceDto>>(result);
 
         }
+
+        public void UpdateSensorData(int id, string serialNumber, double temperature)
+        {
+            _pieceRepository.UpdateSensorData(id, serialNumber, temperature, null, null, null, DateTime.UtcNow);
+        }
     }
 }

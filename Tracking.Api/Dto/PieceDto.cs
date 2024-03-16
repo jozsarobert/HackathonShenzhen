@@ -13,5 +13,8 @@ namespace Tracking.Api.Dto
         public FlightModel Flight { get; set; }
         public string? AlertType { get; set; }
         public List<MeasuredTemperature> TemperatureHistory { get; set; }
+        public double? MinTemperature { get; set; }
+        public double? MaxTemperature { get; set; }
+        public bool HasAlert => AlertType != null;
     }
 }

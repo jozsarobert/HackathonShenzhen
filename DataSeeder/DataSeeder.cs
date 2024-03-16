@@ -55,7 +55,7 @@ namespace DataSeeder
                                                };
             var fligthInfo = new FlightInfo
             {
-                FlightNo = "LX15",
+                FlightNo = "LX14",
                 DepartureDate = new DateTime(2024, 3, 16, 13, 10, 0),
                 ArrivalDate = new DateTime(2024, 3, 16, 18, 20, 0),
                 DepartureCode = "ZHR",
@@ -251,8 +251,8 @@ namespace DataSeeder
         {
             var result = new Value
             {
-                NumericalValue = 0.0,
-                Unit = "",
+                NumericalValue = value,
+                Unit = unit,
             };
 
             return result;
