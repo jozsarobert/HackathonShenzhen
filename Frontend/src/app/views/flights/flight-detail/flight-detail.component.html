@@ -16,10 +16,10 @@
     <c-widget-stat-d
       [values]="shipment.values"
       class="mb-4"
-      (click)="(null)"
+      (click)="navigateToShipmentDetail(shipment.id)"
       [color]="shipment.color"
     >
-      <span class="text-white"> {{ shipment.id }}</span>
+      <span class="text-white"> AWB {{ shipment.id }}</span>
     </c-widget-stat-d>
   </c-col>
 </c-row>

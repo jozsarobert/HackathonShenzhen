@@ -23,9 +23,10 @@ import { IconModule } from '@coreui/icons-angular';
 import { PieceDetailComponent } from './piece-detail/piece-detail.component';
 import { PiecesRoutingModule } from './pieces-routing.module';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
+import { PiecesOverviewComponent } from './pieces-overview/pieces-overview.component';
 
 @NgModule({
-  declarations: [PieceDetailComponent],
+  declarations: [PieceDetailComponent, PiecesOverviewComponent],
   imports: [
     CommonModule,
     PiecesRoutingModule,

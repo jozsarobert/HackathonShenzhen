@@ -1,124 +1,101 @@
-<c-row>
-  <c-col lg="8" xs="12">
-    <form cForm>
-      <!-- Shipment Number-->
-      <div class="mb-3">
-        <input
-          cFormControl
-          id="inputShipmentNo-1"
-          type="text"
-          placeholder="Shipment No."
-        />
+<c-container>
+  <c-row class="justify-content-md-center">
+    <c-col lg="2"></c-col>
+    <c-col>
+      <div cListGroup>
+        <button
+          cListGroupItem
+          class="d-flex justify-content-between align-items-center"
+          color="danger"
+          (click)="navigateToPage('alerts')"
+        >
+          There are 2 Shipments with Alerts!
+          <c-badge color="danger" shape="rounded-pill">2</c-badge>
+        </button>
       </div>
+    </c-col>
+    <c-col lg="2"></c-col>
+  </c-row>
 
-      <!-- Flight -->
-      <c-input-group class="mb-3">
-        <input aria-label="Username" cFormControl placeholder="Flight No." />
+  <div style="margin: 30px"></div>
 
-        <input aria-label="Server" cFormControl placeholder="Date" />
-        <span cInputGroupText> <svg [cIcon]="icons.cilCalendar"></svg></span>
-      </c-input-group>
+  <c-row>
+    <c-col lg="2"></c-col>
+    <c-col>
+      <form cForm>
+        <!-- Shipment Number-->
+        <div class="mb-3">
+          <input
+            cFormControl
+            id="inputShipmentNo-1"
+            type="text"
+            placeholder="Shipment No."
+            sizing="lg"
+          />
+        </div>
 
-      <!-- Shipment Origin -->
-      <div class="mb-3">
-        <input
-          cFormControl
-          id="inputShipmentOrigin-1"
-          type="text"
-          placeholder="Shipment Origin"
-        />
-      </div>
+        <!-- Flight -->
+        <c-input-group class="mb-3">
+          <input
+            aria-label="Username"
+            cFormControl
+            placeholder="Flight No."
+            sizing="lg"
+          />
 
-      <!-- Shipment Destination -->
-      <div class="mb-3">
-        <input
-          cFormControl
-          id="inputShipmentDestination-1"
-          type="text"
-          placeholder="Shipment Dest"
-        />
-      </div>
+          <input
+            aria-label="Server"
+            cFormControl
+            placeholder="Date"
+            sizing="lg"
+          />
+          <span cInputGroupText> <svg [cIcon]="icons.cilCalendar"></svg></span>
+        </c-input-group>
 
-      <!-- Piece ID -->
-      <div class="mb-3">
-        <input
-          cFormControl
-          id="inputShipmentDestination-1"
-          type="text"
-          placeholder="Piece ID"
-        />
-      </div>
+        <!-- Shipment Origin -->
+        <div class="mb-3">
+          <input
+            cFormControl
+            id="inputShipmentOrigin-1"
+            type="text"
+            placeholder="Origin"
+            sizing="lg"
+          />
+        </div>
 
-      <input cButton color="primary" type="submit" />
-    </form>
-  </c-col>
+        <!-- Shipment Destination -->
+        <div class="mb-3">
+          <input
+            cFormControl
+            id="inputShipmentDestination-1"
+            type="text"
+            placeholder="Destination"
+            sizing="lg"
+          />
+        </div>
 
-  <c-col lg="4" xs="12">
-    <div cListGroup>
-      <button
-        cListGroupItem
-        class="d-flex justify-content-between align-items-center"
-        color="danger"
-        (click)="navigateToPage('alerts')"
-      >
-        Alert
-        <c-badge color="primary" shape="rounded-pill">2</c-badge>
-      </button>
-      <button
-        cListGroupItem
-        class="d-flex justify-content-between align-items-center"
-        color="warning"
-      >
-        Warning
-        <c-badge color="primary" shape="rounded-pill">5</c-badge>
-      </button>
-    </div>
-  </c-col>
-</c-row>
+        <!-- Piece ID -->
+        <div class="mb-3">
+          <input
+            cFormControl
+            id="inputShipmentDestination-1"
+            type="text"
+            placeholder="Piece ID"
+            sizing="lg"
+          />
+        </div>
 
-<div style="padding-bottom: 25px"></div>
+        <!--input cButton color="primary" type="submit" value="Search" /-->
 
-<!--c-row>
-  <table cTable responsive="true">
-    <thead>
-      <tr>
-        <th scope="col">Shipment</th>
-        <th scope="col">Flight</th>
-        <th scope="col">Flight Date</th>
-        <th scope="col">SHC</th>
-        <th scope="col">SLA</th>
-        <th scope="col">Actual</th>
-        <th scope="col">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-        <td>Cell</td>
-      </tr>
-    </tbody>
-  </table>
-</c-row>-->
+        <div class="d-grid gap-2">
+          <button cButton type="submit" color="primary">
+            Search <svg cIcon name="cilSearch" size="md" width="24"></svg>
+          </button>
+        </div>
+      </form>
+    </c-col>
+    <c-col lg="2"></c-col>
+  </c-row>
+
+  <div style="padding-bottom: 25px"></div>
+</c-container>
