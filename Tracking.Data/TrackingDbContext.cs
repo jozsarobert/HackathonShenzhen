@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using OneRecord.Data.Model.Model;
+using System.Xml;
 
 
 namespace Tracking.Data
@@ -39,8 +40,15 @@ namespace Tracking.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<EntityBase>(b =>
+            //{
+            //    b.Key(e => e.Id);
+            //    b.Property(e => e.Id).ForSqlServer().UseIdentity();
+            //});
+
+
             modelBuilder.Ignore<EntityBase>();
-            modelBuilder.Ignore<LogisticsObject>(); 
+            modelBuilder.Ignore<LogisticsObject>();
             modelBuilder.Ignore<LogisticsAction>();
             modelBuilder.Ignore<LogisticsActivity>();
             modelBuilder.Ignore<LogisticsService>();
@@ -131,6 +139,28 @@ namespace Tracking.Data
                 .WithMany()
                 //.HasForeignKey(p => p.Dimensions.Id)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Piece>()
+                .HasOne(d => d.TemperatureInstructions)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+
+            modelBuilder.Entity<TemperatureInstructions>()
+                .OwnsOne(d => d.MinTemperature, v =>
+                {
+                    v.Property(p => p.Unit).HasColumnName("MinTemperatureUnit");
+                    v.Property(p => p.NumericalValue).HasColumnName("MinTemperatureValue");
+                });
+
+            modelBuilder.Entity<TemperatureInstructions>()
+                .OwnsOne(d => d.MaxTemperature, v =>
+                {
+                    v.Property(p => p.Unit).HasColumnName("MaxTemperatureUnit");
+                    v.Property(p => p.NumericalValue).HasColumnName("MaxTemperatureValue");
+                });
+
 
             modelBuilder.Entity<Context>().HasNoKey(); // Assuming Context is the entity type causing the error
             //modelBuilder.Entity<Value>().HasNoKey(); // Assuming Context is the entity type causing the error

@@ -16,7 +16,7 @@ namespace Tracking.Data.Repositories
             _dbContext = dbContext;
         }
 
-        public PieceModel GetPieceById(string id)
+        public PieceModel GetPieceById(int id)
         {
             var result = _dbContext.Piece.Where(x => x.Id == id).Select(x => new PieceModel
             {
@@ -32,7 +32,7 @@ namespace Tracking.Data.Repositories
             return result;
         }
 
-        public async Task UpdateSensorData(string id, string serialNumber, double? temperature, double? elevation, double? latitude, double? longitude, DateTime timeStamp)
+        public async Task UpdateSensorData(int id, string serialNumber, double? temperature, double? elevation, double? latitude, double? longitude, DateTime timeStamp)
         {
             var iotDevices = _dbContext.Piece.Where(x => x.Id == id).FirstOrDefault().AttachedIotDevices;
 

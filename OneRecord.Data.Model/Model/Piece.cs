@@ -78,6 +78,9 @@ namespace OneRecord.Data.Model.Model
 
         [DataMember(Name = "cargo:upid", EmitDefaultValue = false)]
         public string Upid { get; set; }
+
+        [DataMember(Name = "cargo:upid", EmitDefaultValue = false)]
+        public TemperatureInstructions TemperatureInstructions { get; set; }
     }
 
 }

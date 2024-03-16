@@ -2,10 +2,9 @@
 
 using Microsoft.EntityFrameworkCore;
 using OneRecord.Data.Model.Model;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+using Tracking.Data;
 
-namespace Tracking.Data
+namespace DataSeeder
 {
     public class DataSeeder
     {
@@ -54,11 +53,11 @@ namespace Tracking.Data
 
             var activitySequence = GetActivitySequence();
             var loading = GetLoading();
-            var shipment = GetShipment("721-1234568", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), new DateTime(2024,3,16,18,20,0),"ZHR", "JFK", 50, ["COL"], "THERMOMETER", "0000007B", 200,
-                               new List<Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["",""],"goodDescription","ID112"),
+            var shipment = GetShipment("721-1234568", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), new DateTime(2024, 3, 16, 18, 20, 0), "ZHR", "JFK", 50, ["COL"], "THERMOMETER", "0000007B", 200,
+                               new List<OneRecord.Data.Model.Model.Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["",""],"goodDescription","ID112"),
                                                  GetPiece(GetDimensions(0.8, "MC"),GetValue(150.0, "Kg"), ["",""],"goodDescription","ID223")
                                                },
-                               "chocolate",8,2);
+                               "chocolate", 8, 2);
 
             dbContext.Shipment.Add(shipment);
             dbContext.SaveChanges();
@@ -129,16 +128,16 @@ namespace Tracking.Data
         }
         private List<IotDevice> GetIotDevice(string serialNumber)
         {
-            return [ new IotDevice
-                        {
-                            SerialNumber = serialNumber,
-                            DeviceModel = "Reelables smart label",
-                            ConnectedSensors =
+            return [new IotDevice
+            {
+                SerialNumber = serialNumber,
+                DeviceModel = "Reelables smart label",
+                ConnectedSensors =
                             [
                                 GetSensor("THERMOMETER"),
                                 GetSensor("GEOLOCATION")
                             ]
-                        }
+            }
             ];
         }
         private Loading GetLoading()
@@ -256,7 +255,7 @@ namespace Tracking.Data
             return result;
 
         }
-        private Piece GetPiece(Dimensions dimensions, Value grossWeight, List<String> specialHandlingCodes, string goodDescription, string iotSerialnumber)
+        private Piece GetPiece(Dimensions dimensions, Value grossWeight, List<string> specialHandlingCodes, string goodDescription, string iotSerialnumber)
         {
             var result = new Piece
             {
@@ -318,11 +317,11 @@ namespace Tracking.Data
                                    double? minTemperature = null)
 
         {
-            
+
 
             var activitySequences = new List<ActivitySequence>
             {
-                new ActivitySequence 
+                new ActivitySequence
                 {
                     Activity = GetTransportMovement(arrivalCode,departureCode,flightNo, departureDate,arrivalDate)
                 }
@@ -332,8 +331,9 @@ namespace Tracking.Data
 
             return new Shipment
             {
-                Waybill = new Waybill { 
-                    WaybillNumber = waybillNumber, 
+                Waybill = new Waybill
+                {
+                    WaybillNumber = waybillNumber,
                     ReferredBookingOption = new Booking
                     {
                         ActivitySequences = activitySequences,
@@ -342,7 +342,7 @@ namespace Tracking.Data
                 },
                 Pieces = pieces,
                 SpecialHandlingCodes = specialHandlingCodes,
-                TotalGrossWeight = new Value { NumericalValue = totalWeight, Unit = "Kg"},
+                TotalGrossWeight = new Value { NumericalValue = totalWeight, Unit = "Kg" },
                 TotalDimensions = new List<Dimensions>(),
                 Incoterms = "",
                 GoodsDescription = goodDescription,
@@ -374,7 +374,7 @@ namespace Tracking.Data
                     Code = arrivalCode
                 },
 
-                DepartureLocation = new Location 
+                DepartureLocation = new Location
                 {
                     Code = departureCode
                 },
@@ -417,27 +417,27 @@ namespace Tracking.Data
         {
             var result = new Waybill
             {
-              ArrivalLocation  = new Location(),
-              ReferredBookingOption  = new Booking(),
-              DepartureLocation  = new Location(),
-              CarrierDeclarationPlace  = new Location(),
-              Shipment  = new Shipment(),
-              WaybillType  = "",
-              CarrierChargeCode  = "",
-              OtherChargesIndicator  = "",
-              ServiceCode  = "",
-              WeightValueIndicator  = "",
-              CustomsOriginCode  = "",
-              AccountingInformation  = "",
-              CarrierDeclarationDate  = new DateTime(),
-              CarrierDeclarationSignature  = "",
-              ConsignorDeclarationSignature  = "",
-              DestinationCurrencyRate  = 0.0,
-              ShippingInfo  = "",
-              ShippingRefNo  = "",
-              WaybillNumber  = "",
-              WaybillPrefix  = "",
-              ModularCheckNumber  = false,
+                ArrivalLocation = new Location(),
+                ReferredBookingOption = new Booking(),
+                DepartureLocation = new Location(),
+                CarrierDeclarationPlace = new Location(),
+                Shipment = new Shipment(),
+                WaybillType = "",
+                CarrierChargeCode = "",
+                OtherChargesIndicator = "",
+                ServiceCode = "",
+                WeightValueIndicator = "",
+                CustomsOriginCode = "",
+                AccountingInformation = "",
+                CarrierDeclarationDate = new DateTime(),
+                CarrierDeclarationSignature = "",
+                ConsignorDeclarationSignature = "",
+                DestinationCurrencyRate = 0.0,
+                ShippingInfo = "",
+                ShippingRefNo = "",
+                WaybillNumber = "",
+                WaybillPrefix = "",
+                ModularCheckNumber = false,
             };
 
             return result;
