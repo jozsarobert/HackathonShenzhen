@@ -18,6 +18,6 @@ export interface FlightModel {
     departureDateTime?: string;
     destinationlCode?: string | null;
     arrivalDateTime?: string;
-    readonly shipments?: Array<ShipmentModel> | null;
+    shipments?: Array<ShipmentModel> | null;
 }
 

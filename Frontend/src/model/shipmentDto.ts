@@ -9,14 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { PieceDto } from './pieceDto';
 import { FlightDto } from './flightDto';
 
 
 export interface ShipmentDto { 
-    id?: string | null;
+    id?: number;
     waybillNumber?: string | null;
     flights?: Array<FlightDto> | null;
-    pieces?: Array<string> | null;
-    hasAlert?: boolean;
+    pieces?: Array<PieceDto> | null;
+    readonly hasAlert?: boolean;
 }
 

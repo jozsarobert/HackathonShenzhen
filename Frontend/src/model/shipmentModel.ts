@@ -13,10 +13,10 @@ import { FlightModel } from './flightModel';
 
 
 export interface ShipmentModel { 
-    id?: string | null;
+    id?: number;
     waybillNumber?: string | null;
-    shipment?: Array<FlightModel> | null;
-    pieces?: Array<string> | null;
+    flights?: Array<FlightModel> | null;
+    pieceIds?: Array<number> | null;
     hasAlert?: boolean;
 }
 
