@@ -1,5 +1,10 @@
 <c-row>
-  <c-col *ngFor="let piece of pieces; index as i" md="12" lg="6" xl="6">
+  <c-col
+    *ngFor="let piece of piecesDisplayValues; index as i"
+    md="12"
+    lg="6"
+    xl="6"
+  >
     <c-widget-stat-d
       [values]="piece.values"
       class="mb-4"

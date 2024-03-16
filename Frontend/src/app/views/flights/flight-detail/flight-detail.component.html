@@ -12,7 +12,9 @@
 </c-row>
 
 <c-row>
-  <c-col> Shipments on this flight: </c-col>
+  <c-col>
+    <h4>Shipments on this Flight:</h4>
+  </c-col>
 </c-row>
 
 <c-row>
@@ -25,10 +27,10 @@
     <c-widget-stat-d
       [values]="shipment.values"
       class="mb-4"
-      (click)="navigateToShipmentDetail(shipment.awb)"
+      (click)="navigateToShipmentDetail(shipment)"
       [color]="shipment.color"
     >
-      <span class="text-white"> AWB {{ shipment.id }}</span>
+      <span class="text-white"> AWB {{ shipment.awb }}</span>
     </c-widget-stat-d>
   </c-col>
 </c-row>

@@ -57,6 +57,18 @@ export class FlightsService {
           pieces: ['piece1', 'piece2'],
           hasAlert: true,
         },
+        {
+          id: 'todo',
+          waybillNumber: '724-14329302',
+          pieces: ['piece1', 'piece2'],
+          hasAlert: false,
+        },
+        {
+          id: 'todo',
+          waybillNumber: '724-14329302',
+          pieces: ['piece1', 'piece2'],
+          hasAlert: false,
+        },
       ],
     });
   }
@@ -81,6 +93,18 @@ export class FlightsService {
           waybillNumber: '724-14329302',
           pieces: ['piece1', 'piece2'],
           hasAlert: true,
+        },
+        {
+          id: 'todo',
+          waybillNumber: '724-14329302',
+          pieces: ['piece1', 'piece2'],
+          hasAlert: false,
+        },
+        {
+          id: 'todo',
+          waybillNumber: '724-14329302',
+          pieces: ['piece1', 'piece2'],
+          hasAlert: false,
         },
       ],
     });

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightsService } from 'src/app/services/flights/flights.service';
 import { FlightDto } from 'src/model/flightDto';
+import { ShipmentDto } from 'src/model/shipmentDto';
 
 @Component({
   selector: 'app-flight-detail',
@@ -10,7 +11,7 @@ import { FlightDto } from 'src/model/flightDto';
 })
 
 // todo: get flight data via router param or fetch if not existing
-export class FlightDetailComponent implements OnInit {
+export class FlightDetailComponent {
   flight: FlightDto | undefined = undefined;
   flightDisplayValues: any = undefined;
 
@@ -45,6 +46,7 @@ export class FlightDetailComponent implements OnInit {
 
       this.flight?.shipments?.forEach((shipment) => {
         this.shipmentsDisplayValues.push({
+          id: shipment.id,
           awb: shipment.waybillNumber,
           color: shipment.hasAlert ? 'danger' : 'success',
           values: [
@@ -55,8 +57,6 @@ export class FlightDetailComponent implements OnInit {
       });
     }
   }
-
-  public ngOnInit(): void {}
 
   // todo why all this data?
   // shipments = [
@@ -91,8 +91,10 @@ export class FlightDetailComponent implements OnInit {
   //   },
   // ];
 
-  public navigateToShipmentDetail(shipmentId: string): void {
-    this.router.navigate([`shipments/detail/${shipmentId}`]);
+  public navigateToShipmentDetail(shipment: ShipmentDto): void {
+    this.router.navigate([`shipments/detail/${shipment.id}`], {
+      state: { shipment: shipment },
+    });
   }
 
   public setFlightDisplayValues(flight: FlightDto): void {
