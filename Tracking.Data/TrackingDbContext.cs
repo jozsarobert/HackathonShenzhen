@@ -50,7 +50,7 @@ namespace Tracking.Data
             modelBuilder.Ignore<EntityBase>();
             modelBuilder.Ignore<LogisticsObject>();
             modelBuilder.Ignore<LogisticsAction>();
-            modelBuilder.Ignore<LogisticsActivity>();
+            //modelBuilder.Ignore<LogisticsActivity>();
             modelBuilder.Ignore<LogisticsService>();
             modelBuilder.Ignore<PhysicalLogisticsObject>();
 

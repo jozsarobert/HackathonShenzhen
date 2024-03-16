@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tracking.Api.Dto;
+using Tracking.Api.Services;
 
 namespace Tracking.Api.Controllers
 {
@@ -8,17 +9,17 @@ namespace Tracking.Api.Controllers
     [ApiController]
     public class FlightController : ControllerBase
     {
-        public FlightController()
+        private readonly IFlightService _flightService;  
+        public FlightController(IFlightService flightService)
         {
-            
+            _flightService = flightService;
         }
 
         [HttpGet("getbyflight")]
         public FlightDto GetShipmentsForFlight(string flightNo, DateTime date)
         {
-            return new FlightDto
-            {
-            };
+            Console.WriteLine("test");
+            return _flightService.GetFlightByDateAndFlightNo(date, flightNo);
         }
     }
 }

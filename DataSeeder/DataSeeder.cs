@@ -50,21 +50,19 @@ namespace DataSeeder
 
             var dbContext = new TrackingDbContext(options);
 
-            var pieces = new List<Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["",""],"goodDescription","ID112"),
-                                           GetPiece(GetDimensions(0.8, "MC"),GetValue(150.0, "Kg"), ["",""],"goodDescription","ID223")
+            var pieces = new List<Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["COL",""],"goodDescription","ID112", 2, 8),
+                                           GetPiece(GetDimensions(0.8, "MC"),GetValue(150.0, "Kg"), ["COL",""],"goodDescription","ID223", 2,8)
                                                };
             var fligthInfo = new FlightInfo
             {
-                FlightNo = "LX14",
+                FlightNo = "LX15",
                 DepartureDate = new DateTime(2024, 3, 16, 13, 10, 0),
                 ArrivalDate = new DateTime(2024, 3, 16, 18, 20, 0),
                 DepartureCode = "ZHR",
                 ArrivalCode = "JFK"
             };
 
-            var shipment = GetShipment("721-1234568", fligthInfo, 50, ["COL"], "THERMOMETER", "0000007B", 200,
-                              pieces,
-                               "chocolate", 8, 2);
+            var shipment = GetShipment("721-1234568", fligthInfo, ["COL"], 200, pieces, "chocolate");
 
             dbContext.Shipment.Add(shipment);
             dbContext.SaveChanges();
@@ -78,25 +76,15 @@ namespace DataSeeder
 
         }
 
-        private ActivitySequence GetActivitySequence()
-        {
-            var result = new ActivitySequence
-            {
-                Activity = new LogisticsActivity(),
-                SequenceNumber = ""
-            };
-
-            return result;
-
-        }
         private Dimensions GetDimensions(double value, string unit)
         {
             var result = new Dimensions
             {
-                //Height = new Value(),
-                //Length = new Value(),
-                Volume = new Value(),
-                //Width = new Value(),
+                Volume = new Value
+                {
+                    NumericalValue = value,
+                    Unit = unit
+                },
             };
 
             return result;
@@ -130,7 +118,7 @@ namespace DataSeeder
 
         }
 
-        private Piece GetPiece(Dimensions dimensions, Value grossWeight, List<string> specialHandlingCodes, string goodDescription, string iotSerialnumber)
+        private Piece GetPiece(Dimensions dimensions, Value grossWeight, List<string> specialHandlingCodes, string goodDescription, string iotSerialnumber, double? minTemperature, double? maxTemperamenture)
         {
             var result = new Piece
             {
@@ -139,8 +127,33 @@ namespace DataSeeder
                 SpecialHandlingCodes = specialHandlingCodes,
                 Coload = false,
                 GoodsDescription = goodDescription,
-                AttachedIotDevices = GetIotDevice(iotSerialnumber)
+                AttachedIotDevices = GetIotDevice(iotSerialnumber),
             };
+
+            if (minTemperature.HasValue || maxTemperamenture.HasValue)
+            {
+                result.TemperatureInstructions = new TemperatureInstructions();
+
+                if (minTemperature.HasValue)
+                {
+                    result.TemperatureInstructions.MinTemperature = new Value
+                    {
+                        NumericalValue = minTemperature.Value,
+                        Unit = "CELSIUS"
+                    };
+                }
+
+                if (maxTemperamenture.HasValue)
+                {
+                    result.TemperatureInstructions.MaxTemperature = new Value
+                    {
+                        NumericalValue = maxTemperamenture.Value,
+                        Unit = "CELSIUS"
+                    };
+                }
+
+
+            }
 
             return result;
 
@@ -158,15 +171,10 @@ namespace DataSeeder
         }
         public Shipment GetShipment(string waybillNumber,
                                   FlightInfo flightInfo,
-                                   double weight,
                                    List<string> specialHandlingCodes,
-                                   string sensorType,
-                                   string serialNumber,
                                    double totalWeight,
                                    List<Piece> pieces,
-                                   string goodDescription,
-                                   double? maxTemperature = null,
-                                   double? minTemperature = null)
+                                   string goodDescription)
 
         {
 

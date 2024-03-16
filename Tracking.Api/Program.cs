@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Reelables.Api.SDK.Api;
+using System.Reflection;
 using System.Runtime;
 using Tracking.Api;
+using Tracking.Api.Services;
 using Tracking.Data;
 using Tracking.Data.Repositories;
 
@@ -15,9 +17,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TrackingDbContext>(opts => opts.UseSqlServer(builder.Configuration["ConnectionString:TrackingDb"]));
 
 builder.Services.AddScoped<IPieceRepository, PieceRepository>();
-builder.Services.AddScoped<IPieceRepository, PieceRepository>();
+builder.Services.AddScoped<IAlertRepository, AlertRepository>();
 builder.Services.AddScoped<IShipmentRepository, ShipmentRepository>();
 builder.Services.AddScoped<IFlightRepository, FlightRepository>();
+builder.Services.AddTransient<IFlightService, FlightService>();
+builder.Services.AddTransient<IAlertService, AlertService>();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 builder.Services.Configure<MessagingConfig>(builder.Configuration.GetSection("Messaging"));
 
 builder.Services.AddMassTransit(x =>
@@ -52,7 +59,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHostedService<TrackingService>();
+//builder.Services.AddHostedService<TrackingService>();
 builder.Services.AddTransient<IAssetsApi, AssetsApi>();
 var app = builder.Build();
 

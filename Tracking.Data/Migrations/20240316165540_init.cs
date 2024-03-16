@@ -104,27 +104,6 @@ namespace Tracking.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActivitySequence",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SequenceNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BookingId = table.Column<int>(type: "int", nullable: true),
-                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActivitySequence", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ActivitySequence_Booking_BookingId",
-                        column: x => x.BookingId,
-                        principalTable: "Booking",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Location",
                 columns: table => new
                 {
@@ -179,11 +158,13 @@ namespace Tracking.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TransportMovement",
+                name: "LogisticsActivity",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ExecutionStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
                     ArrivalLocationId = table.Column<int>(type: "int", nullable: true),
                     DepartureLocationId = table.Column<int>(type: "int", nullable: true),
                     OperatingTransportMeansId = table.Column<int>(type: "int", nullable: true),
@@ -195,25 +176,24 @@ namespace Tracking.Data.Migrations
                     NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false),
-                    ExecutionStatus = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TransportMovement", x => x.Id);
+                    table.PrimaryKey("PK_LogisticsActivity", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TransportMovement_Location_ArrivalLocationId",
+                        name: "FK_LogisticsActivity_Location_ArrivalLocationId",
                         column: x => x.ArrivalLocationId,
                         principalTable: "Location",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_TransportMovement_Location_DepartureLocationId",
+                        name: "FK_LogisticsActivity_Location_DepartureLocationId",
                         column: x => x.DepartureLocationId,
                         principalTable: "Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TransportMovement_TransportMeans_OperatingTransportMeansId",
+                        name: "FK_LogisticsActivity_TransportMeans_OperatingTransportMeansId",
                         column: x => x.OperatingTransportMeansId,
                         principalTable: "TransportMeans",
                         principalColumn: "Id");
@@ -279,6 +259,33 @@ namespace Tracking.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ActivitySequence",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ActivityId = table.Column<int>(type: "int", nullable: true),
+                    SequenceNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookingId = table.Column<int>(type: "int", nullable: true),
+                    NeonId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActivitySequence", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActivitySequence_Booking_BookingId",
+                        column: x => x.BookingId,
+                        principalTable: "Booking",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ActivitySequence_LogisticsActivity_ActivityId",
+                        column: x => x.ActivityId,
+                        principalTable: "LogisticsActivity",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Loading",
                 columns: table => new
                 {
@@ -292,6 +299,7 @@ namespace Tracking.Data.Migrations
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyIdentifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SkeletonIndicator = table.Column<bool>(type: "bit", nullable: false),
+                    ServedActivityId = table.Column<int>(type: "int", nullable: true),
                     ActionEndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ActionStartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ActionTimeType = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -300,14 +308,19 @@ namespace Tracking.Data.Migrations
                 {
                     table.PrimaryKey("PK_Loading", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Loading_LogisticsActivity_ServedActivityId",
+                        column: x => x.ServedActivityId,
+                        principalTable: "LogisticsActivity",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Loading_LogisticsActivity_TransportMovementId",
+                        column: x => x.TransportMovementId,
+                        principalTable: "LogisticsActivity",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_Loading_TransportMeans_OnTransportMeansId",
                         column: x => x.OnTransportMeansId,
                         principalTable: "TransportMeans",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Loading_TransportMovement_TransportMovementId",
-                        column: x => x.TransportMovementId,
-                        principalTable: "TransportMovement",
                         principalColumn: "Id");
                 });
 
@@ -329,9 +342,9 @@ namespace Tracking.Data.Migrations
                 {
                     table.PrimaryKey("PK_MovementTimes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MovementTimes_TransportMovement_TransportMovementId",
+                        name: "FK_MovementTimes_LogisticsActivity_TransportMovementId",
                         column: x => x.TransportMovementId,
-                        principalTable: "TransportMovement",
+                        principalTable: "LogisticsActivity",
                         principalColumn: "Id");
                 });
 
@@ -519,6 +532,11 @@ namespace Tracking.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ActivitySequence_ActivityId",
+                table: "ActivitySequence",
+                column: "ActivityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ActivitySequence_BookingId",
                 table: "ActivitySequence",
                 column: "BookingId");
@@ -559,6 +577,11 @@ namespace Tracking.Data.Migrations
                 column: "OnTransportMeansId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Loading_ServedActivityId",
+                table: "Loading",
+                column: "ServedActivityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Loading_TransportMovementId",
                 table: "Loading",
                 column: "TransportMovementId");
@@ -567,6 +590,21 @@ namespace Tracking.Data.Migrations
                 name: "IX_Location_GeolocationId",
                 table: "Location",
                 column: "GeolocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LogisticsActivity_ArrivalLocationId",
+                table: "LogisticsActivity",
+                column: "ArrivalLocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LogisticsActivity_DepartureLocationId",
+                table: "LogisticsActivity",
+                column: "DepartureLocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LogisticsActivity_OperatingTransportMeansId",
+                table: "LogisticsActivity",
+                column: "OperatingTransportMeansId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Measurement_RecordedGeolocationId",
@@ -615,21 +653,6 @@ namespace Tracking.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TransportMovement_ArrivalLocationId",
-                table: "TransportMovement",
-                column: "ArrivalLocationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TransportMovement_DepartureLocationId",
-                table: "TransportMovement",
-                column: "DepartureLocationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TransportMovement_OperatingTransportMeansId",
-                table: "TransportMovement",
-                column: "OperatingTransportMeansId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Waybill_ArrivalLocationId",
                 table: "Waybill",
                 column: "ArrivalLocationId");
@@ -663,6 +686,14 @@ namespace Tracking.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
+                name: "FK_Loading_LogisticsActivity_ServedActivityId",
+                table: "Loading");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Loading_LogisticsActivity_TransportMovementId",
+                table: "Loading");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_Dimensions_Shipment_ShipmentId",
                 table: "Dimensions");
 
@@ -673,14 +704,6 @@ namespace Tracking.Data.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_IotDevice_Location_LocationId",
                 table: "IotDevice");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_TransportMovement_Location_ArrivalLocationId",
-                table: "TransportMovement");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_TransportMovement_Location_DepartureLocationId",
-                table: "TransportMovement");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_IotDevice_Piece_PieceId",
@@ -712,6 +735,9 @@ namespace Tracking.Data.Migrations
                 name: "Booking");
 
             migrationBuilder.DropTable(
+                name: "LogisticsActivity");
+
+            migrationBuilder.DropTable(
                 name: "Shipment");
 
             migrationBuilder.DropTable(
@@ -728,9 +754,6 @@ namespace Tracking.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Loading");
-
-            migrationBuilder.DropTable(
-                name: "TransportMovement");
 
             migrationBuilder.DropTable(
                 name: "Sensor");

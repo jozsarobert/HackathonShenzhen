@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,31 +13,52 @@ namespace Tracking.Data.Repositories
         private readonly TrackingDbContext _dbContext;
         public FlightRepository(TrackingDbContext dbContext)
         {
-            _dbContext = dbContext;   
+            _dbContext = dbContext;
         }
 
         public FlightModel GetFlightByDateAndFlightNo(DateTime date, string flightNo)
         {
+
             var flight = _dbContext.TransportMovement
-                .Where(x => x.TransportIdentifier == flightNo && x.MovementTimes.Any(y => y.MovementTimestamp.Date == date && y.Direction == "OUTBOUND"))
+                .Include(x => x.MovementTimes)
+                .Include(x => x.LoadingActions).ThenInclude(x=>x.LoadedPieces).ThenInclude(x=>x.OfShipment)
+                .Where(x => x.TransportIdentifier == flightNo && x.MovementTimes.Any(y => y.MovementTimestamp.Date.Date == date.Date && y.Direction == "OUTBOUND"))
                 .Select(x => new
                 {
+                    x.Id,
                     x.ArrivalLocation,
                     x.DepartureLocation,
                     x.TransportIdentifier,
-                    LoadingActions = x.LoadingActions.Select( y=> new
-                    {
-                        WaybillNumber = y.LoadedPieces.Select(p=> new { 
-                            p.OfShipment.Waybill.WaybillNumber,
-                            p.GrossWeight,
-                            p.Dimensions,
-                            p.Id,
-                            
-                        })
-                    }) 
-                });
+                    DepartureDateTime = x.MovementTimes.Where(y => y.Direction == "OUTBOUND").FirstOrDefault().MovementTimestamp,
+                    ArrivalDateTime = x.MovementTimes.Where(y => y.Direction == "INBOUND").FirstOrDefault().MovementTimestamp,
 
-            throw new NotImplementedException();
+                }).FirstOrDefault();
+
+            var ids = _dbContext.Loading
+                .Where(x=> x.ServedActivity.Id == flight.Id)
+                .Include(x=>x.LoadedPieces)
+                .ThenInclude(x=> x.OfShipment).Select(x=> x.Id).ToList();
+
+            var shipmentList = _dbContext.Shipment.Where(x => ids.Contains(x.Id)).
+                Select(x => new ShipmentModel
+                {
+                    Flights = null,
+                    Id = x.Id,
+                    WaybillNumber = x.Waybill.WaybillNumber,
+                    HasAlert = false, // todo move to calculation logic
+                    Pieces = x.Pieces.Select(y=> y.Id).ToList(),
+                }).ToList();
+
+            return new FlightModel
+            {
+                ArrivalDateTime = flight.ArrivalDateTime,
+                DepartureDateTime = flight.DepartureDateTime,
+                DestinationlCode = flight.ArrivalLocation.Code,
+                FlightNo = flightNo,
+                OriginCode = flight.DepartureLocation.Code,
+                Shipments = shipmentList,
+            };
+
         }
     }
 }

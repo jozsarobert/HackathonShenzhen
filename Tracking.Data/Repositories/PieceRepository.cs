@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,12 +19,39 @@ namespace Tracking.Data.Repositories
 
         public PieceModel GetPieceById(int id)
         {
-            var result = _dbContext.Piece.Where(x => x.Id == id).Select(x => new PieceModel
+            var result = _dbContext.Piece
+                .Include(x=> x.GrossWeight)
+                .Include(x=> x.TemperatureInstructions)
+                .Include(x=> x.Dimensions).ThenInclude(x=>x.Volume)
+                .Where(x => x.Id == id).Select(x => new PieceModel
             {
+                Id = x.Id,
+                Weight = new Weight
+                {
+                    Unit = x.GrossWeight.Unit,
+                    Value = x.GrossWeight.NumericalValue
+                },
+                Volume = new Volume
+                {                    
+                    Value = x.Dimensions.Volume.NumericalValue,
+                    Unit = x.Dimensions.Volume.Unit
+                },
+                IsTemperatureControlled = x.TemperatureInstructions != null,
+                MinTemperature = x.TemperatureInstructions.MinTemperature.NumericalValue,
+                MaxTemperature = x.TemperatureInstructions.MaxTemperature.NumericalValue,
+                
+                
 
             }).FirstOrDefault();
 
+            result.AlertType = GetAlert(id);
+
             return result;
+        }
+
+        private string GetAlert(int id)
+        {
+            return null;
         }
 
         public List<PieceModel> GetPieces()

@@ -30,6 +30,9 @@ namespace Tracking.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ActivityId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("BookingId")
                         .HasColumnType("int");
 
@@ -43,6 +46,8 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
 
                     b.HasIndex("BookingId");
 
@@ -250,6 +255,9 @@ namespace Tracking.Data.Migrations
                     b.Property<int?>("OnTransportMeansId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ServedActivityId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("SkeletonIndicator")
                         .HasColumnType("bit");
 
@@ -262,6 +270,8 @@ namespace Tracking.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OnTransportMeansId");
+
+                    b.HasIndex("ServedActivityId");
 
                     b.HasIndex("TransportMovementId");
 
@@ -312,6 +322,43 @@ namespace Tracking.Data.Migrations
                     b.ToTable("Location");
 
                     b.HasDiscriminator().HasValue("Location");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.LogisticsActivity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CompanyIdentifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
+
+                    b.Property<string>("ExecutionStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NeonId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("SkeletonIndicator")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LogisticsActivity");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("LogisticsActivity");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Measurement", b =>
@@ -610,66 +657,6 @@ namespace Tracking.Data.Migrations
                     b.HasDiscriminator().HasValue("TransportMeans");
                 });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMovement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("ArrivalLocationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CompanyIdentifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DepartureLocationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ExecutionStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FuelType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ModeCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ModeQualifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NeonId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OperatingTransportMeansId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Seal")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("SkeletonIndicator")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("TransportIdentifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArrivalLocationId");
-
-                    b.HasIndex("DepartureLocationId");
-
-                    b.HasIndex("OperatingTransportMeansId");
-
-                    b.ToTable("TransportMovement");
-
-                    b.HasDiscriminator().HasValue("TransportMovement");
-                });
-
             modelBuilder.Entity("OneRecord.Data.Model.Model.Waybill", b =>
                 {
                     b.Property<int>("Id")
@@ -768,11 +755,54 @@ namespace Tracking.Data.Migrations
                     b.ToTable("Waybill");
                 });
 
+            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMovement", b =>
+                {
+                    b.HasBaseType("OneRecord.Data.Model.Model.LogisticsActivity");
+
+                    b.Property<int?>("ArrivalLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DepartureLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FuelType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModeCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModeQualifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OperatingTransportMeansId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Seal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransportIdentifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("ArrivalLocationId");
+
+                    b.HasIndex("DepartureLocationId");
+
+                    b.HasIndex("OperatingTransportMeansId");
+
+                    b.HasDiscriminator().HasValue("TransportMovement");
+                });
+
             modelBuilder.Entity("OneRecord.Data.Model.Model.ActivitySequence", b =>
                 {
+                    b.HasOne("OneRecord.Data.Model.Model.LogisticsActivity", "Activity")
+                        .WithMany()
+                        .HasForeignKey("ActivityId");
+
                     b.HasOne("OneRecord.Data.Model.Model.Booking", null)
                         .WithMany("ActivitySequences")
                         .HasForeignKey("BookingId");
+
+                    b.Navigation("Activity");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Dimensions", b =>
@@ -929,11 +959,17 @@ namespace Tracking.Data.Migrations
                         .WithMany()
                         .HasForeignKey("OnTransportMeansId");
 
+                    b.HasOne("OneRecord.Data.Model.Model.LogisticsActivity", "ServedActivity")
+                        .WithMany()
+                        .HasForeignKey("ServedActivityId");
+
                     b.HasOne("OneRecord.Data.Model.Model.TransportMovement", null)
                         .WithMany("LoadingActions")
                         .HasForeignKey("TransportMovementId");
 
                     b.Navigation("OnTransportMeans");
+
+                    b.Navigation("ServedActivity");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Location", b =>
@@ -1130,28 +1166,6 @@ namespace Tracking.Data.Migrations
                     b.Navigation("Piece");
                 });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMovement", b =>
-                {
-                    b.HasOne("OneRecord.Data.Model.Model.Location", "ArrivalLocation")
-                        .WithMany()
-                        .HasForeignKey("ArrivalLocationId");
-
-                    b.HasOne("OneRecord.Data.Model.Model.Location", "DepartureLocation")
-                        .WithMany()
-                        .HasForeignKey("DepartureLocationId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("OneRecord.Data.Model.Model.TransportMeans", "OperatingTransportMeans")
-                        .WithMany("OperatedTransportMovements")
-                        .HasForeignKey("OperatingTransportMeansId");
-
-                    b.Navigation("ArrivalLocation");
-
-                    b.Navigation("DepartureLocation");
-
-                    b.Navigation("OperatingTransportMeans");
-                });
-
             modelBuilder.Entity("OneRecord.Data.Model.Model.Waybill", b =>
                 {
                     b.HasOne("OneRecord.Data.Model.Model.Location", "ArrivalLocation")
@@ -1182,6 +1196,28 @@ namespace Tracking.Data.Migrations
                     b.Navigation("ReferredBookingOption");
 
                     b.Navigation("Shipment");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMovement", b =>
+                {
+                    b.HasOne("OneRecord.Data.Model.Model.Location", "ArrivalLocation")
+                        .WithMany()
+                        .HasForeignKey("ArrivalLocationId");
+
+                    b.HasOne("OneRecord.Data.Model.Model.Location", "DepartureLocation")
+                        .WithMany()
+                        .HasForeignKey("DepartureLocationId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("OneRecord.Data.Model.Model.TransportMeans", "OperatingTransportMeans")
+                        .WithMany("OperatedTransportMovements")
+                        .HasForeignKey("OperatingTransportMeansId");
+
+                    b.Navigation("ArrivalLocation");
+
+                    b.Navigation("DepartureLocation");
+
+                    b.Navigation("OperatingTransportMeans");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Booking", b =>

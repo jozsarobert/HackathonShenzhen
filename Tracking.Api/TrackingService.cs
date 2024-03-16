@@ -35,9 +35,9 @@ namespace Tracking.Api
 
                     foreach (var assetId in assetIdList)
                     {
-                        var response = await _assetApi.AssetsAssetIdGetWithHttpInfoAsync(assetId, Guid.NewGuid().ToString(), cancellationToken: stoppingToken);
+                       var response = await _assetApi.AssetsAssetIdGetWithHttpInfoAsync(assetId, Guid.NewGuid().ToString(), cancellationToken: stoppingToken);
                         
-                        timestampDictionary.TryGetValue(assetId, out var lastTimeStamp);
+                       timestampDictionary.TryGetValue(assetId, out var lastTimeStamp);
                         //response.Data.Temperatures.Items
 
 
