@@ -1,32 +1,54 @@
-<c-row>
-  <c-col lg="6" xs="12">
-    <c-input-group class="mb-3">
-      <input aria-label="Server" cFormControl placeholder="Date" />
-      <span cInputGroupText> <svg [cIcon]="icons.cilCalendar"></svg></span>
+<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+  <c-row class="justify-content-md-center">
+    <c-col lg="6" xs="12">
+      <c-input-group class="mb-3">
+        <input
+          formControlName="date"
+          cFormControl
+          placeholder="Date"
+          sizing="lg"
+        />
+        <span cInputGroupText> <svg [cIcon]="icons.cilCalendar"></svg></span>
 
-      <input aria-label="Username" cFormControl placeholder="Flight No." />
-      <button
-        cButton
-        color="secondary"
-        id="button-addon2"
-        type="button"
-        variant="outline"
+        <input
+          cFormControl
+          placeholder="Flight No."
+          formControlName="flightNumber"
+          sizing="lg"
+        />
+        <button
+          cButton
+          color="secondary"
+          id="button-addon2"
+          type="submit"
+          variant="outline"
+        >
+          <svg [cIcon]="icons.cilSearch"></svg>
+        </button>
+      </c-input-group>
+    </c-col>
+  </c-row>
+</form>
+
+<c-row>
+  <ng-container *ngIf="flights?.length > 0; else noDataTemplate">
+    <c-col *ngFor="let flight of flights; index as i" md="12" lg="12" xl="12">
+      <c-widget-stat-d
+        [values]="flight.values"
+        class="mb-4"
+        (click)="navigateToDetail('flight1234')"
+        color="danger"
       >
-        <svg [cIcon]="icons.cilSearch"></svg>
-      </button>
-    </c-input-group>
-  </c-col>
+        <span class="text-white"> {{ flight.id }}</span>
+      </c-widget-stat-d>
+    </c-col>
+  </ng-container>
 </c-row>
 
-<c-row>
-  <c-col *ngFor="let flight of flights; index as i" md="12" lg="12" xl="12">
-    <c-widget-stat-d
-      [values]="flight.values"
-      class="mb-4"
-      (click)="navigateToDetail('flight1234')"
-      color="danger"
-    >
-      <span class="text-white"> {{ flight.id }}</span>
-    </c-widget-stat-d>
-  </c-col>
-</c-row>
+<ng-template #noDataTemplate>
+  <c-row class="text-align-center">
+    <c-col lg="12" xs="12">
+      <c-callout color="info"> No Data to Display :&#40; </c-callout>
+    </c-col>
+  </c-row>
+</ng-template>

@@ -19,6 +19,9 @@ const routes: Routes = [
         path: 'detail/:id',
         pathMatch: 'full',
         component: ShipmentDetailComponent,
+        data: {
+          title: 'Pieces',
+        },
       },
     ],
   },

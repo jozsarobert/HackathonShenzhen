@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { cilArrowRight, cilChartPie, cilPlus } from '@coreui/icons';
+import { cilPlus, cilSearch } from '@coreui/icons';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ShipmentsStateSelectors } from '../../../state/shipments/shipments.selectors';
@@ -13,7 +13,7 @@ import { ShipmentsStateSelectors } from '../../../state/shipments/shipments.sele
 export class ShipmentsOverviewComponent implements OnInit {
   public shipments$: Observable<string[] | undefined> | undefined;
 
-  icons = { cilChartPie, cilArrowRight, cilPlus };
+  icons = { cilPlus, cilSearch };
 
   public constructor(
     private route: ActivatedRoute,

@@ -1,2 +1,11 @@
 // Here you can add other styles
 
+.vr {
+  display: none;
+}
+
+c-widget-stat-d {
+  c-col:not(:last-child) {
+    border-right: 1px solid lightgrey;
+  }
+}

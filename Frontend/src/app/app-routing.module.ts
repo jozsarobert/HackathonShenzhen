@@ -43,6 +43,11 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'pieces',
+        loadChildren: () =>
+          import('./views/pieces/pieces.module').then((m) => m.PiecesModule),
+      },
+      {
         path: 'piece/:id',
         loadChildren: () =>
           import('./views/pieces/pieces.module').then((m) => m.PiecesModule),
