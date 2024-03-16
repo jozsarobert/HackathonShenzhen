@@ -140,12 +140,24 @@ namespace Tracking.Data
                 //.HasForeignKey(p => p.Dimensions.Id)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<TransportMovement>()
+               .HasOne(tm => tm.DepartureLocation)
+               .WithMany()
+               .OnDelete(DeleteBehavior.Restrict);
+
+
+
             modelBuilder.Entity<Piece>()
-                .HasOne(d => d.TemperatureInstructions)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Restrict);
+                   .HasOne(p => p.TemperatureInstructions)
+                   .WithOne(ti => ti.Piece)
+                   .HasForeignKey<TemperatureInstructions>(ti => ti.PieceId);
 
 
+            modelBuilder.Entity<Waybill>()
+               .HasOne(w => w.DepartureLocation)
+               .WithMany()
+               //.HasForeignKey(w => w.DepartureLocationId)
+               .OnDelete(DeleteBehavior.NoAction); // Specify the desired behavior here
 
             modelBuilder.Entity<TemperatureInstructions>()
                 .OwnsOne(d => d.MinTemperature, v =>
@@ -161,6 +173,10 @@ namespace Tracking.Data
                     v.Property(p => p.NumericalValue).HasColumnName("MaxTemperatureValue");
                 });
 
+            modelBuilder.Entity<Waybill>()
+                .HasOne(w => w.ReferredBookingOption)
+                .WithOne(b => b.IssuedForWaybill)
+                .HasForeignKey<Waybill>(w => w.ReferredBookingOptionId);
 
             modelBuilder.Entity<Context>().HasNoKey(); // Assuming Context is the entity type causing the error
             //modelBuilder.Entity<Value>().HasNoKey(); // Assuming Context is the entity type causing the error

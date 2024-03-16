@@ -14,8 +14,8 @@ namespace OneRecord.Data.Model.Model
         }
 
         public string BillingDetailsId { get; set; }
-        public string ReferredBookingOptionId { get; internal set; }
-        public string ShipmentId { get; internal set; }
+        public int ReferredBookingOptionId { get; internal set; }
+        public int ShipmentId { get; internal set; }
 
         [DataMember(Name = "@context", EmitDefaultValue = true)]
         public Context Context = new Context
@@ -31,9 +31,6 @@ namespace OneRecord.Data.Model.Model
 
         [DataMember(Name = "cargo:departureLocation", EmitDefaultValue = false)]
         public Location DepartureLocation { get; set; }
-
-        [DataMember(Name = "cargo:carrierDeclarationPlace", EmitDefaultValue = false)]
-        public Location CarrierDeclarationPlace { get; set; }
 
         [DataMember(Name = "cargo:shipment", EmitDefaultValue = false)]
         public Shipment Shipment { get; set; }

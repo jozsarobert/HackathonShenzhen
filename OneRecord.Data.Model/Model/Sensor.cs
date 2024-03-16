@@ -22,6 +22,6 @@ namespace OneRecord.Data.Model.Model
 
         [DataMember(Name = "cargo:serialNumber", EmitDefaultValue = false)]
         public string SerialNumber { get; set; }
-        public string IotDeviceId { get; internal set; }
+        public int IotDeviceId { get; internal set; }
     }
 }
