@@ -6,6 +6,14 @@ namespace Tracking.Data.Model;
 [DataContract(Name = "Location")]
 public partial class Location : PhysicalLogisticsObject
 {
+    public Location()
+    {
+        Type = new List<string>
+        {
+            "cargo:Location"
+        };
+    }
+
     [DataMember(Name = "cargo:address", EmitDefaultValue = false)]
     public Address Address { get; set; }
 

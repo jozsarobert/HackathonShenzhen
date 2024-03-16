@@ -9,7 +9,7 @@ public abstract class EntityBase
     public string Id { get; set; }
 
     [DataMember(Name = "@type", EmitDefaultValue = false)]
-    public List<string> Type { get; set; }
+    public List<string> Type { get; init; }
 
     public virtual string ToJson()
     {

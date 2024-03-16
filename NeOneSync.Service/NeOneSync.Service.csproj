@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MessageContracts\MessageContracts.csproj" />
+    <ProjectReference Include="..\MessageContracts\MessageContracts.csproj" />
     <ProjectReference Include="..\OneRecord.Api.SDK\OneRecord.Api.SDK.csproj" />
   </ItemGroup>
 </Project>

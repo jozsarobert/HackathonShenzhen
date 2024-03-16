@@ -6,6 +6,15 @@ namespace Tracking.Data.Model;
 [DataContract(Name = "TransportLegs")]
 public class TransportLegs : LogisticsObject
 {
+    public TransportLegs()
+    {
+        Type = new List<string>
+        {
+            "cargo:TransportLegs",
+            "cargo:LogisticsObject"
+        };
+    }
+
     [DataMember(Name = "@context", EmitDefaultValue = true)]
     public Context Context = new Context
     {

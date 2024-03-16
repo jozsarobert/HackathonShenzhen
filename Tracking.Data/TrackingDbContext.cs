@@ -141,7 +141,7 @@ namespace Tracking.Data
                 .HasForeignKey<Waybill>(w => w.BillingDetailsId); // Assuming BillingDetailsId is the foreign key in Waybill
 
             modelBuilder.Entity<Booking>()
-                .HasOne(b => b.ForBookingRequest)
+                .HasOne(b => b.BookingRequest)
                 .WithOne(br => br.Booking)
                 .HasForeignKey<Booking>(b => b.BookingRequestId); // Assuming BookingRequestId is the foreign key in Booking
 
@@ -165,15 +165,15 @@ namespace Tracking.Data
                .WithOne(p => p.ForBookingOptions)
                .HasForeignKey<Price>(p => p.BookingOptionId); // Assuming BookingOptionId is the foreign key in Price
 
-            modelBuilder.Entity<BookingOption>()
-                .HasOne(bo => bo.Routing)
-                .WithOne(r => r.ForBookingOptions)
-                .HasForeignKey<Routing>(r => r.BookingOptionId); // Assuming BookingOptionId is the foreign key in Routing
+            //modelBuilder.Entity<BookingOption>()
+            //    .HasOne(bo => bo.r)
+            //    .WithOne(r => r.ForBookingOptions)
+            //    .HasForeignKey<Routing>(r => r.BookingOptionId); // Assuming BookingOptionId is the foreign key in Routing
 
-            modelBuilder.Entity<BookingOptionRequest>()
-                .HasOne(bor => bor.RoutingPreference)
-                .WithOne(r => r.ForBookingOptionRequest)
-                .HasForeignKey<Routing>(r => r.BookingOptionRequestId); // Assuming BookingOptionRequestId is the foreign key in Routing
+            //modelBuilder.Entity<BookingOptionRequest>()
+            //    .HasOne(bor => bor.TransportLegs)
+            //    .WithOne(r => r.ForBookingOptionRequest)
+            //    .HasForeignKey<Routing>(r => r.BookingOptionRequestId); // Assuming BookingOptionRequestId is the foreign key in Routing
 
             modelBuilder.Entity<BookingOptionRequest>()
                 .HasOne(bor => bor.TimePreferences)
