@@ -56,18 +56,18 @@ namespace Tracking.Data
                                                  GetPiece(GetDimensions(0.8, "MC"),GetValue(150.0, "Kg"), ["",""],"goodDescription","ID223")
                                                },
                                "chocolate",8,2);
-            var shipment2 = GetShipment("724-87654321", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), "ZHR", "JFK", 50, ["COL"], "GEOLOCATION", "0000008B", 400,
+            var shipment2 = GetShipment("724-87654321", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), new DateTime(2024,3,16,16,0,0) ,"ZHR", "JFK", 50, ["COL"], "GEOLOCATION", "0000008B", 400,
                                new List<Piece> { GetPiece(GetDimensions(0.6, "MC"),GetValue(100.0, "Kg"), ["",""],"goodDescription","ID333"),
                                                  GetPiece(GetDimensions(1.6, "MC"),GetValue(300.0, "Kg"), ["",""],"goodDescription","ID444")
                                                },
                                "chocolate", 8, 2);
-            var shipment3 = GetShipment("724-87654321", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), "ZHR", "JFK", 50, ["COL"], "GEOLOCATION", "0000008B", 400,
+            var shipment3 = GetShipment("724-87654321", "LX14", new DateTime(2024, 3, 16, 13, 10, 0), new DateTime(2024, 3, 16, 16, 0, 0), "ZHR", "JFK", 50, ["COL"], "GEOLOCATION", "0000008B", 400,
                                new List<Piece> { GetPiece(GetDimensions(0.6, "MC"),GetValue(100.0, "Kg"), ["",""],"goodDescription","ID333"),
                                                  GetPiece(GetDimensions(1.6, "MC"),GetValue(300.0, "Kg"), ["",""],"goodDescription","ID444")
                                                },
                                "chocolate", 8, 2);
             var transportMeans = GetTransportMeans();
-            var transportMovement = GetTransportMovement();
+            var transportMovement = GetTransportMovement(default,default,default,default,default);
             //var value = GetValue();
             var waybill = GetWaybill();
         }
