@@ -22,7 +22,7 @@ namespace Tracking.Data
         public DbSet<IotDevice> IotDevice { get; set; }
 
         public DbSet<Loading> Loading { get; set; }
-        public DbSet<LoadingActivity> LoadingActivity { get; set; }
+        //public DbSet<LoadingActivity> LoadingActivity { get; set; }
 
         public DbSet<Location> Location { get; set; }
         public DbSet<Measurement> Measurement { get; set; }

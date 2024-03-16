@@ -1,0 +1,12 @@
+<c-row>
+  <c-col *ngFor="let piece of pieces; index as i" md="12" lg="6" xl="6">
+    <c-widget-stat-d
+      [values]="piece.values"
+      class="mb-4"
+      (click)="navigateToPieceDetail('piece1')"
+      color="info"
+    >
+      <span class="text-white"> {{ piece.id }}</span>
+    </c-widget-stat-d>
+  </c-col>
+</c-row>
