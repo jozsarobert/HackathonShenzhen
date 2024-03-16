@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 namespace OneRecord.Data.Model.Model;
 
 [DataContract(Name = "Measurement")]
-public partial class Measurement : EntityBase
+public partial class Measurement : EntityBase //TODO remove inheritance it is value object
 {
     [DataMember(Name = "cargo:measurementValue", EmitDefaultValue = false)]
     public Value MeasurementValue { get; set; }

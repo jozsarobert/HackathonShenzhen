@@ -14,13 +14,13 @@ namespace Tracking.Api.Controllers
         }
 
         [HttpGet("getbyid")]
-        public PieceDto GetPieceById(int id) 
+        public PieceDto GetPieceById(string id) 
         {
             return new PieceDto { Id = id };
         }
 
         [HttpGet("getbyshipmentid")]
-        public IEnumerable< PieceDto> GetPiecesByShipmentId(int id)
+        public IEnumerable<PieceDto> GetPiecesByShipmentId(string id)
         {
             return new List<PieceDto> { new PieceDto { Id = id } };
         }

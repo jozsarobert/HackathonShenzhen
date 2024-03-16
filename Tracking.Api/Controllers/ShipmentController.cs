@@ -12,16 +12,12 @@ namespace Tracking.Api.Controllers
         public ShipmentController() { }
 
         [HttpGet("getbyid")]
-        public ShipmmentDto GetShipmentById(string id)
+        public ShipmentDto GetShipmentById(string id)
         {
-            return new ShipmmentDto
+            return new ShipmentDto
             {
 
             };
         }
-
-
-
-
     }
 }
