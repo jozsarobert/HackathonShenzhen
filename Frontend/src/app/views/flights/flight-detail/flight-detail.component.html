@@ -4,22 +4,33 @@
     <c-widget-stat-d
       class="mb-4"
       color="secondary"
-      [values]="flight.displayValues"
+      [values]="flightDisplayValues"
     >
-      <span class="text-white"> {{ flight.flightNumber }}</span>
+      <span class="text-white"> {{ flight?.flightNo }}</span>
     </c-widget-stat-d>
   </c-col>
 </c-row>
 
 <c-row>
-  <c-col *ngFor="let shipment of shipments; index as i" md="12" lg="6" xl="6">
+  <c-col>
+    <h4>Shipments on this Flight:</h4>
+  </c-col>
+</c-row>
+
+<c-row>
+  <c-col
+    *ngFor="let shipment of shipmentsDisplayValues; index as i"
+    md="12"
+    lg="6"
+    xl="6"
+  >
     <c-widget-stat-d
       [values]="shipment.values"
       class="mb-4"
-      (click)="navigateToShipmentDetail(shipment.id)"
+      (click)="navigateToShipmentDetail(shipment)"
       [color]="shipment.color"
     >
-      <span class="text-white"> AWB {{ shipment.id }}</span>
+      <span class="text-white"> AWB {{ shipment.awb }}</span>
     </c-widget-stat-d>
   </c-col>
 </c-row>

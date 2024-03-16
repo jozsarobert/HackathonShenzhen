@@ -20,9 +20,9 @@ export class PieceDetailComponent implements OnInit {
       label: 'Temperature in C°',
       backgroundColor: 'transparent',
       borderColor: 'rgba(255,255,255,.55)',
-      pointBackgroundColor: getStyle('--cui-primary'),
+      pointBackgroundColor: '#FFFFFF',
       pointHoverBorderColor: getStyle('--cui-primary'),
-      data: [4, 5, 2, 6, 8, 5, 4],
+      data: [4, 5, 2, 6, 20, 17, 10],
     },
   ];
 
@@ -45,7 +45,7 @@ export class PieceDetailComponent implements OnInit {
       },
       y: {
         min: -10,
-        max: 20,
+        max: 25,
         display: false,
         grid: {
           display: false,

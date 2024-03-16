@@ -22,7 +22,7 @@
   <c-row>
     <c-col lg="2"></c-col>
     <c-col>
-      <form cForm>
+      <form cForm [formGroup]="searchForm" (ngSubmit)="getFilledOutFieldIds()">
         <!-- Shipment Number-->
         <div class="mb-3">
           <input
@@ -31,23 +31,24 @@
             type="text"
             placeholder="Shipment No."
             sizing="lg"
+            formControlName="shipmentNo"
           />
         </div>
 
         <!-- Flight -->
         <c-input-group class="mb-3">
           <input
-            aria-label="Username"
             cFormControl
             placeholder="Flight No."
             sizing="lg"
+            formControlName="flight"
           />
 
           <input
-            aria-label="Server"
             cFormControl
             placeholder="Date"
             sizing="lg"
+            formControlName="date"
           />
           <span cInputGroupText> <svg [cIcon]="icons.cilCalendar"></svg></span>
         </c-input-group>
@@ -60,6 +61,7 @@
             type="text"
             placeholder="Origin"
             sizing="lg"
+            formControlName="origin"
           />
         </div>
 
@@ -71,6 +73,7 @@
             type="text"
             placeholder="Destination"
             sizing="lg"
+            formControlName="destination"
           />
         </div>
 
@@ -82,6 +85,7 @@
             type="text"
             placeholder="Piece ID"
             sizing="lg"
+            formControlName="pieceId"
           />
         </div>
 
@@ -99,3 +103,18 @@
 
   <div style="padding-bottom: 25px"></div>
 </c-container>
+
+<c-row>
+  <ng-container *ngIf="flight">
+    <c-col md="12" lg="12" xl="12">
+      <c-widget-stat-d
+        [values]="flightDisplayValues.values"
+        class="mb-4"
+        (click)="navigateToFlightDetail('flight1234')"
+        [color]="flightHasAlert ? 'danger' : 'success'"
+      >
+        <span class="text-white"> {{ flightDisplayValues.id }}</span>
+      </c-widget-stat-d>
+    </c-col>
+  </ng-container>
+</c-row>
