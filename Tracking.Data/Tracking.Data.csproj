@@ -13,4 +13,8 @@
 
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OneRecord.Data.Model\OneRecord.Data.Model.csproj" />
+  </ItemGroup>
+
 </Project>
