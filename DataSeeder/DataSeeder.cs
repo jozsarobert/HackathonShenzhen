@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using OneRecord.Data.Model.Model;
+using System.ComponentModel.DataAnnotations;
 using Tracking.Data;
 
 namespace DataSeeder
@@ -50,30 +51,161 @@ namespace DataSeeder
 
             var dbContext = new TrackingDbContext(options);
 
-            var pieces = new List<Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["COL",""],"goodDescription","ID112", 2, 8),
-                                           GetPiece(GetDimensions(0.8, "MC"),GetValue(150.0, "Kg"), ["COL",""],"goodDescription","ID223", 2,8)
-                                               };
+            CreateShipment1(dbContext);
+            CreateShipment2(dbContext);
+
+        }
+
+        private void CreateShipment1(TrackingDbContext dbContext)
+        {
+            var pieces = new List<Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["COL"],"goodDescription","ID112", 2, 8),
+                                           GetPiece(GetDimensions(0.1, "MC"),GetValue(150.0, "Kg"), ["COL"],"goodDescription","ID223", 2,8),
+                                            GetPiece(GetDimensions(0.2, "MC"),GetValue(30.0, "Kg"), null,"goodDescription","ID1123", null, null),
+                                           GetPiece(GetDimensions(0.4, "MC"),GetValue(15.0, "Kg"), ["COL"],"goodDescription","ID224", 2,8),
+                                            GetPiece(GetDimensions(0.2, "MC"),GetValue(5.0, "Kg"), null,"goodDescription","ID114", null, null),
+                                           GetPiece(GetDimensions(0.4, "MC"),GetValue(120.0, "Kg"), ["COL"],"goodDescription","ID225", 2,8),
+
+            };
+
+            var flightInfoList = new List<FlightInfo>();
             var fligthInfo = new FlightInfo
             {
                 FlightNo = "LX14",
-                DepartureDate = new DateTime(2024, 3, 16, 13, 10, 0),
-                ArrivalDate = new DateTime(2024, 3, 16, 18, 20, 0),
+                DepartureDate = new DateTime(2024, 3, 17, 9, 50, 0),
+                ArrivalDate = new DateTime(2024, 3, 17, 14, 0, 0),
+                DepartureCode = "ZHR",
+                ArrivalCode = "JFK"
+            };
+            var fligthInfo2 = new FlightInfo
+            {
+                FlightNo = "LX16",
+                DepartureDate = new DateTime(2024, 3, 17, 13, 10, 0),
+                ArrivalDate = new DateTime(2024, 3, 17, 17, 30, 0),
                 DepartureCode = "ZHR",
                 ArrivalCode = "JFK"
             };
 
-            var shipment = GetShipment("721-1234568", fligthInfo, ["COL"], 200, pieces, "chocolate");
+            flightInfoList.Add(fligthInfo);
+            flightInfoList.Add(fligthInfo2);
+
+            var specialHandlingCodes = pieces.Where(x=>x.SpecialHandlingCodes != null).SelectMany(x => x.SpecialHandlingCodes).Distinct().ToList();
+            var totalWeight = pieces.Select(x => x.GrossWeight.NumericalValue).Sum();
+
+            var shipment = GetShipment("721-4567234", flightInfoList, specialHandlingCodes, totalWeight, pieces, "chocolate");
 
             dbContext.Shipment.Add(shipment);
             dbContext.SaveChanges();
 
-            var activitySequence = shipment.Waybill.ReferredBookingOption.ActivitySequences.First();
+            var activitySequences = shipment.Waybill.ReferredBookingOption.ActivitySequences;
 
-            var loading = GetLoading(activitySequence.Activity, pieces);
+            if (activitySequences.Count == 1)
+            {
+                var activitySequence = shipment.Waybill.ReferredBookingOption.ActivitySequences.First();
+                var loading = GetLoading(activitySequence.Activity, pieces);
 
-            dbContext.Loading.Add(loading);
+                dbContext.Loading.Add(loading);
+            }
+            else
+            {
+                var count = activitySequences.Count;
+
+                List<List<Piece>> picesLists = GetPicecesList(pieces, count);
+
+                foreach (var item in activitySequences)
+                {
+                    var loading = GetLoading(item.Activity, pieces);
+
+                    dbContext.Loading.Add(loading);
+                }
+            }
+
+            dbContext.SaveChanges();
+        }
+
+        private void CreateShipment2(TrackingDbContext dbContext)
+        {
+            var pieces = new List<Piece> { GetPiece(GetDimensions(0.3, "MC"),GetValue(50.0, "Kg"), ["COL"],"goodDescription","ID112", 2, 8),
+                                           GetPiece(GetDimensions(0.1, "MC"),GetValue(150.0, "Kg"), ["COL"],"goodDescription","ID223", 2,8),
+
+
+            };
+
+            var flightInfoList = new List<FlightInfo>();
+            var fligthInfo = new FlightInfo
+            {
+                FlightNo = "LX14",
+                DepartureDate = new DateTime(2024, 3, 17, 9, 50, 0),
+                ArrivalDate = new DateTime(2024, 3, 17, 14, 0, 0),
+                DepartureCode = "ZHR",
+                ArrivalCode = "JFK"
+            };
+
+
+            flightInfoList.Add(fligthInfo);
+
+            var specialHandlingCodes = pieces.Where(x => x.SpecialHandlingCodes != null).SelectMany(x => x.SpecialHandlingCodes).Distinct().ToList();
+            var totalWeight = pieces.Select(x => x.GrossWeight.NumericalValue).Sum();
+
+            var shipment = GetShipment("721-1234568", flightInfoList, specialHandlingCodes, totalWeight, pieces, "chocolate");
+
+            dbContext.Shipment.Add(shipment);
             dbContext.SaveChanges();
 
+            var activitySequences = shipment.Waybill.ReferredBookingOption.ActivitySequences;
+
+            if (activitySequences.Count == 1)
+            {
+                var activitySequence = shipment.Waybill.ReferredBookingOption.ActivitySequences.First();
+                var loading = GetLoading(activitySequence.Activity, pieces);
+
+                dbContext.Loading.Add(loading);
+            }
+            else
+            {
+                var count = activitySequences.Count;
+
+                List<List<Piece>> picesLists = GetPicecesList(pieces, count);
+
+                foreach (var item in activitySequences)
+                {
+                    var loading = GetLoading(item.Activity, pieces);
+
+                    dbContext.Loading.Add(loading);
+                }
+            }
+
+            dbContext.SaveChanges();
+        }
+
+        private List<List<Piece>> GetPicecesList(List<Piece> pieces, int count)
+        {
+            return DivideList<Piece>(pieces, count);
+        }
+
+        static List<List<T>> DivideList<T>(List<T> list, int numberOfLists)
+        {
+            List<List<T>> dividedLists = new List<List<T>>();
+
+            // Calculate the number of items per each divided list
+            int itemsPerList = list.Count / numberOfLists;
+            int remainder = list.Count % numberOfLists;
+
+            // Initialize starting index
+            int startIndex = 0;
+
+            // Divide the list
+            for (int i = 0; i < numberOfLists; i++)
+            {
+                int count = itemsPerList + (i < remainder ? 1 : 0);
+
+                List<T> sublist = list.GetRange(startIndex, count);
+                dividedLists.Add(sublist);
+
+                // Update starting index for the next sublist
+                startIndex += count;
+            }
+
+            return dividedLists;
         }
 
         private Dimensions GetDimensions(double value, string unit)
@@ -170,24 +302,23 @@ namespace DataSeeder
 
         }
         public Shipment GetShipment(string waybillNumber,
-                                  FlightInfo flightInfo,
+                                  List<FlightInfo> flightInfoList,
                                    List<string> specialHandlingCodes,
                                    double totalWeight,
                                    List<Piece> pieces,
                                    string goodDescription)
 
         {
+            var activitySequences = new List<ActivitySequence>();
 
-
-            var activitySequences = new List<ActivitySequence>
+            foreach (var flightInfo in flightInfoList)
             {
-                new ActivitySequence
+                var activitySequence = new ActivitySequence
                 {
-                    Activity = GetTransportMovement(flightInfo.ArrivalCode,flightInfo.DepartureCode,flightInfo.FlightNo, flightInfo.DepartureDate, flightInfo.ArrivalDate)
-                }
-            };
-
-
+                    Activity = GetTransportMovement(flightInfo.ArrivalCode, flightInfo.DepartureCode, flightInfo.FlightNo, flightInfo.DepartureDate, flightInfo.ArrivalDate)
+                };
+                activitySequences.Add(activitySequence);
+            }
 
             return new Shipment
             {
