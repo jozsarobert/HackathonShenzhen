@@ -15,6 +15,11 @@ const routes: Routes = [
         pathMatch: 'full',
         component: PiecesOverviewComponent,
       },
+      {
+        path: 'detail/:id',
+        pathMatch: 'full',
+        component: PieceDetailComponent,
+      },
     ],
   },
 ];

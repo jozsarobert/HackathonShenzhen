@@ -59,6 +59,6 @@ export class ShipmentDetailComponent implements OnInit {
   ];
 
   public navigateToPieceDetail(pieceId: string): void {
-    this.router.navigate([`piece/${pieceId}`]);
+    this.router.navigate([`pieces/detail/${pieceId}`]);
   }
 }
