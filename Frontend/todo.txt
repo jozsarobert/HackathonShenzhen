@@ -1,3 +1,5 @@
 - save favorites? example: search page -> mark with star, then "saved" in flights tab
 - flights endpoint date type is currently string
 - transfercache error in FlightService
+- pieces search / overview
+- refactor piece detail page location to "graph" to have checkpoints
