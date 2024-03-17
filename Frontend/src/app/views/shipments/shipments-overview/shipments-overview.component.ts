@@ -45,7 +45,7 @@ export class ShipmentsOverviewComponent implements OnInit {
     {
       id: '724-14329303',
       values: [
-        { title: 'Pieces', value: '2' },
+        { title: 'Pieces', value: '3' },
         { title: 'Status', value: 'OK' },
       ],
     },

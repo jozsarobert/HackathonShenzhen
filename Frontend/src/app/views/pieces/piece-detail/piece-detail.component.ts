@@ -15,18 +15,29 @@ export class PieceDetailComponent implements OnInit {
 
   labels = ['08:00', '08:10', '08:20', '08:30', '08:40', '08:50', '09:00'];
 
-  datasets = [
+  datasets1 = [
     {
       label: 'Temperature in C°',
       backgroundColor: 'transparent',
       borderColor: 'rgba(255,255,255,.55)',
       pointBackgroundColor: '#FFFFFF',
       pointHoverBorderColor: getStyle('--cui-primary'),
-      data: [4, 5, 2, 6, 20, 17, 10],
+      data: [4, 5, 2, 6, 20, 17, 15],
     },
   ];
 
-  optionsDefault = {
+  datasets2 = [
+    {
+      label: 'Temperature in C°',
+      backgroundColor: 'transparent',
+      borderColor: 'rgba(255,255,255,.55)',
+      pointBackgroundColor: '#FFFFFF',
+      pointHoverBorderColor: getStyle('--cui-primary'),
+      data: [4, 5, 2, 6, 6, 6, 4],
+    },
+  ];
+
+  optionsDefault1 = {
     plugins: {
       legend: {
         display: false,
@@ -55,7 +66,7 @@ export class PieceDetailComponent implements OnInit {
         },
       },
     },
-    elements: {
+    elements1: {
       line: {
         borderWidth: 1,
         tension: 0.4,
@@ -68,17 +79,17 @@ export class PieceDetailComponent implements OnInit {
     },
   };
 
-  colors = {
+  colors1 = {
     backgroundColor: 'rgba(255,255,255,.1)',
     borderColor: 'rgba(255,255,255,.55)',
     pointHoverBackgroundColor: '#fff',
   };
 
-  brandData = [
+  brandData1 = [
     {
       icon: 'cisTruck',
       values: [
-        { title: 'Temp', value: '4°C' },
+        { title: 'Temp', value: '15°C' },
         { title: 'Location', value: 'ZRH Building 1' },
       ],
       capBg: { '--cui-card-cap-bg': '#3b5998' },
@@ -87,22 +98,22 @@ export class PieceDetailComponent implements OnInit {
         labels: ['ligma'],
         datasets: [
           {
-            ...this.datasets,
+            ...this.datasets1,
             data: [65, 59, 84, 84, 51, 55, 40],
             label: 'Facebook',
-            ...this.colors,
+            ...this.colors1,
           },
         ],
       },
-      color: this.colors,
+      color: this.colors1,
     },
   ];
 
   public ngOnInit(): void {
     this.data = {
       labels: this.labels.slice(0, 7),
-      datasets: this.datasets,
+      datasets: this.datasets2,
     };
-    this.options = this.optionsDefault;
+    this.options = this.optionsDefault1;
   }
 }

@@ -6,7 +6,10 @@
       color="secondary"
       [values]="flightDisplayValues"
     >
-      <span class="text-white"> {{ flight?.flightNo }}</span>
+      <span class="text-white">
+        <svg cIcon class="me-2" name="cilAirplaneMode"></svg>
+        {{ flight?.flightNo }}</span
+      >
     </c-widget-stat-d>
   </c-col>
 </c-row>

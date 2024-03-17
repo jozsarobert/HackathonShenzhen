@@ -27,6 +27,8 @@ export class SearchComponent implements OnInit {
 
   subscriptions: Subscription[] = [];
 
+  isLoading: boolean = false;
+
   public flight: FlightDto | undefined = undefined;
   public flightDisplayValues: any;
   public flightHasAlert: boolean = false; // loop through shipments and check if any has alert
@@ -81,10 +83,13 @@ export class SearchComponent implements OnInit {
     //   }
     // });
 
+    this.isLoading = true;
+
     // todo get type selected and fetch data according to type
     this.flightsService
       .mockGetFlightByFlightnumberAndDate()
       .subscribe((flight: FlightDto) => {
+        this.isLoading = false;
         this.flight = flight;
         this.flightDisplayValues = {
           id: flight.flightNo,

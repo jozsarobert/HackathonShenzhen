@@ -97,6 +97,7 @@ import {
   cilSearch,
   cilBellExclamation,
   cilAlarm,
+  cilSend,
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -198,6 +199,7 @@ export const iconSubset = {
   cilSearch,
   cilBellExclamation,
   cilAlarm,
+  cilSend,
 };
 
 export enum IconSubset {
@@ -299,4 +301,5 @@ export enum IconSubset {
   cilSearch = 'cilSearch',
   cilBellExclamation = 'cilBellExclamation',
   cilAlarm = 'cilAlarm',
+  cilSend = 'cilSend',
 }

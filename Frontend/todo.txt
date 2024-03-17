@@ -1,2 +1,10 @@
 // branding colors
 // iwas mit model stimmt noch nicht
+align data examples
+
+1) search -> flight -> until piece detail
+2) click on alerts -> go to 2. shipment with alert -> 2 pieces, 1 error, LX 14 16.03 error, location, Piece on booked on LX14 of 17th is green
+3) instead of being loaded, it's still Warehouse Zurich
+4) piece detail: send alert button
+
+shipments detail still messed up

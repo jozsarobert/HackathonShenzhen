@@ -13,21 +13,21 @@ export class AlertsOverviewComponent {
     {
       id: '724-14329302',
       values: [
-        { title: 'Flight', value: 'LX14' },
+        { title: 'Next Flight', value: 'LX14' },
         { title: 'Origin', value: 'ZRH' },
         { title: 'Dest', value: 'JFK' },
         { title: 'Departure', value: '16.03.2024' },
-        { title: 'Pieces', value: '5' },
+        { title: 'Pieces', value: '3' },
       ],
     },
     {
-      id: '724-14329303',
+      id: '724-14329306',
       values: [
-        { title: 'Flight', value: 'LX14' },
+        { title: 'Next Flight', value: 'LX14' },
         { title: 'Origin', value: 'ZRH' },
         { title: 'Dest', value: 'JFK' },
         { title: 'Departure', value: '16.03.2024' },
-        { title: 'Pieces', value: '5' },
+        { title: 'Pieces', value: '3' },
       ],
     },
   ];

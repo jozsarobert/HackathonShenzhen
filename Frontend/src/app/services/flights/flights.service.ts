@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, Subject, delay, of } from 'rxjs';
 import { FlightDto } from '../../../model/flightDto';
 
 @Injectable({
@@ -39,7 +39,7 @@ export class FlightsService {
   // todo replce mock with real backend
   public mockGetFlightByFlightnumberAndDate(): Observable<FlightDto> {
     return of({
-      flightNo: 'LX14',
+      flightNo: 'LX14/16MAR',
       originCode: 'ZRH',
       departureDateTime: '16.03.2024',
       destinationlCode: 'JFK',
@@ -48,29 +48,35 @@ export class FlightsService {
         {
           id: 'todo',
           waybillNumber: '724-14329302',
-          pieces: ['piece1', 'piece2'],
+          pieces: ['piece1', 'piece2', 'piece3'],
           hasAlert: false,
         },
         {
           id: 'todo',
-          waybillNumber: '724-14329302',
-          pieces: ['piece1', 'piece2'],
+          waybillNumber: '724-14329303',
+          pieces: ['piece1', 'piece2', 'piece3'],
           hasAlert: true,
         },
         {
           id: 'todo',
-          waybillNumber: '724-14329302',
-          pieces: ['piece1', 'piece2'],
+          waybillNumber: '724-14329304',
+          pieces: ['piece1', 'piece2', 'piece3', 'piece4', 'piece5'],
           hasAlert: false,
         },
         {
           id: 'todo',
-          waybillNumber: '724-14329302',
-          pieces: ['piece1', 'piece2'],
+          waybillNumber: '724-14329305',
+          pieces: ['piece1', 'piece2', 'piece3', 'piece4', 'piece5', 'piece6'],
           hasAlert: false,
         },
+        {
+          id: 'todo',
+          waybillNumber: '724-14329306',
+          pieces: ['piece1', 'piece2'],
+          hasAlert: true,
+        },
       ],
-    });
+    }).pipe(delay(2000));
   }
 
   // todo replace with backend

@@ -17,6 +17,7 @@ import {
   ProgressBarComponent,
   ProgressComponent,
   SharedModule,
+  SpinnerModule,
   UtilitiesModule,
   WidgetModule,
 } from '@coreui/angular';
@@ -52,6 +53,7 @@ import { ButtonsComponent } from '../buttons/buttons/buttons.component';
     ProgressBarComponent,
     BadgeComponent,
     ListGroupModule,
+    SpinnerModule,
   ],
 })
 export class SearchModule {}

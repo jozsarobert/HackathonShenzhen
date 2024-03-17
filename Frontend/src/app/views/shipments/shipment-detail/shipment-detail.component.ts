@@ -71,8 +71,8 @@ export class ShipmentDetailComponent implements OnInit {
 
     this.pieces = [
       {
-        id: '123',
-        currentTemperature: 20,
+        id: 'LX-9384756873-SWC',
+        currentTemperature: 3,
         isTemperatureControlled: true,
         location: 'Warehouse A',
         weight: {
@@ -80,17 +80,85 @@ export class ShipmentDetailComponent implements OnInit {
           value: 10,
         },
         volume: {
-          unit: 'm3',
+          unit: 'm³',
           value: 2,
         },
-        // flight: {
-        //   flightNumber: 'AA123',
-        //   departure: 'JFK',
-        //   arrival: 'LAX',
-        //   departureTime: new Date(),
-        //   arrivalTime: new Date(),
-        // },
+        flight: {
+          flightNo: 'LX14',
+          originCode: 'ZRH',
+          departureDateTime: '16.03.2024',
+          destinationlCode: 'JFK',
+          arrivalDateTime: '17.03.2024',
+        },
         alertType: 'temperature',
+        temperatureHistory: [
+          {
+            value: 20,
+            unit: 'C°',
+            timestamp: '08:00',
+          },
+          {
+            value: 20,
+            unit: 'C°',
+            timestamp: '08:05',
+          },
+        ],
+      },
+      {
+        id: 'LX-9124749273-SWC',
+        currentTemperature: 4,
+        isTemperatureControlled: true,
+        location: 'Warehouse A',
+        weight: {
+          unit: 'kg',
+          value: 8,
+        },
+        volume: {
+          unit: 'm³',
+          value: 1.5,
+        },
+        flight: {
+          flightNo: 'LX14',
+          originCode: 'ZRH',
+          departureDateTime: '16.03.2024',
+          destinationlCode: 'JFK',
+          arrivalDateTime: '17.03.2024',
+        },
+        alertType: null,
+        temperatureHistory: [
+          {
+            value: 20,
+            unit: 'C°',
+            timestamp: '08:00',
+          },
+          {
+            value: 20,
+            unit: 'C°',
+            timestamp: '08:05',
+          },
+        ],
+      },
+      {
+        id: 'LX-9129482271-SWC',
+        currentTemperature: 2,
+        isTemperatureControlled: true,
+        location: 'Warehouse A',
+        weight: {
+          unit: 'kg',
+          value: 2,
+        },
+        volume: {
+          unit: 'm³',
+          value: 0.5,
+        },
+        flight: {
+          flightNo: 'LX14',
+          originCode: 'ZRH',
+          departureDateTime: '16.03.2024',
+          destinationlCode: 'JFK',
+          arrivalDateTime: '17.03.2024',
+        },
+        alertType: null,
         temperatureHistory: [
           {
             value: 20,
@@ -123,7 +191,7 @@ export class ShipmentDetailComponent implements OnInit {
             title: 'Volume',
             value: `${piece.volume?.value}${piece.volume?.unit}`,
           },
-          { title: 'Flight No.', value: piece.flight?.flightNo },
+          { title: 'Flight', value: piece.flight?.flightNo },
           { title: 'Departure', value: piece.flight?.originCode },
         ],
       });
@@ -134,6 +202,7 @@ export class ShipmentDetailComponent implements OnInit {
     // todo overwrite title
   }
 
+  // todo I don't remember why I did this
   pieces2 = [
     {
       id: 'Piece 1',
@@ -180,6 +249,7 @@ export class ShipmentDetailComponent implements OnInit {
   ];
 
   public navigateToPieceDetail(pieceId: string): void {
+    // todo go to different piece and submit piece object
     this.router.navigate([`pieces/detail/${pieceId}`]);
   }
 }

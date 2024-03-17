@@ -1,12 +1,13 @@
 <c-row>
+  <!-- todo change color for video -->
   <c-col md="12" xl="6">
     <c-widget-stat-a
       class="mb-4"
-      color="danger"
+      color="success"
       [title]="'Current Temperature'"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        4°C
+        3°C
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
@@ -38,15 +39,23 @@
       #widgetStatB1inv="cWidgetStatB"
       [title]="'Current Location'"
       class="mb-4"
-      color="primary"
+      color="danger"
       inverse
-      text="Lorem ipsum dolor sit amet enim."
-      value="ZRH Building 1"
+      text=""
+      value="ZRH Warehouse: Location Deviation"
     >
       <br /><br /><br />
       <c-progress [white]="widgetStatB1inv.inverse" class="my-2" thin>
         <c-progress-bar [value]="75.9"></c-progress-bar>
       </c-progress>
     </c-widget-stat-b>
+  </c-col>
+</c-row>
+
+<c-row>
+  <c-col>
+    <div class="d-grid gap-2">
+      <button cButton color="primary">Send alert</button>
+    </div>
   </c-col>
 </c-row>
