@@ -45,6 +45,7 @@ import {
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { NgxsModule } from '@ngxs/store';
+import { HttpClientModule } from '@angular/common/http';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -81,6 +82,7 @@ const APP_CONTAINERS = [
     ListGroupModule,
     CardModule,
     NgScrollbarModule,
+    HttpClientModule,
     NgxsModule.forRoot([ShipmentsState], {
       developmentMode: true, // todo
     }),

@@ -23,7 +23,9 @@
           type="submit"
           variant="outline"
         >
-          <svg [cIcon]="icons.cilSearch"></svg>
+          <ng-container *ngIf="!isLoading; else loading">
+            <svg [cIcon]="icons.cilSearch"></svg>
+          </ng-container>
         </button>
       </c-input-group>
     </c-col>
@@ -51,6 +53,14 @@
   <c-row class="text-align-center">
     <c-col lg="12" xs="12">
       <c-callout color="info"> No Data to Display :&#40; </c-callout>
+    </c-col>
+  </c-row>
+</ng-template>
+
+<ng-template #loading>
+  <c-row>
+    <c-col>
+      <c-spinner class="text-center" color="white" size="sm"></c-spinner>
     </c-col>
   </c-row>
 </ng-template>

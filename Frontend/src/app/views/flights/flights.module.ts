@@ -17,16 +17,17 @@ import {
   ProgressBarComponent,
   ProgressComponent,
   SharedModule,
+  SpinnerModule,
   UtilitiesModule,
   WidgetModule,
 } from '@coreui/angular';
 
+import { RouterModule } from '@angular/router';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
 import { IconModule } from '@coreui/icons-angular';
+import { FlightDetailComponent } from './flight-detail/flight-detail.component';
 import { FlightsOverviewComponent } from './flights-overview/flights-overview.component';
 import { FlightsRoutingModule } from './flights-routing.module';
-import { FlightDetailComponent } from './flight-detail/flight-detail.component';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [FlightsOverviewComponent, FlightDetailComponent],
@@ -54,6 +55,7 @@ import { RouterModule } from '@angular/router';
     ProgressBarComponent,
     HeaderModule,
     CalloutModule,
+    SpinnerModule,
   ],
 })
 export class FlightsModule {}
