@@ -9,6 +9,6 @@ namespace Tracking.Api.Dto
         public DateTime DepartureDateTime { get; set; }
         public string DestinationlCode { get; set; }
         public DateTime ArrivalDateTime { get; set; }
-        public List<ShipmentDto> Shipments { get; }
+        public List<ShipmentDto> Shipments { get; set; }
     }
 }

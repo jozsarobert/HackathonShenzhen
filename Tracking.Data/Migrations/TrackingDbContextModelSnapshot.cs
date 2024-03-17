@@ -30,6 +30,9 @@ namespace Tracking.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ActivityId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("BookingId")
                         .HasColumnType("int");
 
@@ -43,6 +46,8 @@ namespace Tracking.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
 
                     b.HasIndex("BookingId");
 
@@ -151,73 +156,6 @@ namespace Tracking.Data.Migrations
                     b.ToTable("Geolocation");
                 });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.IotDevice", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AssociatedObject")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyIdentifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DeviceModel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("IotDeviceId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NeonId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PieceId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SensorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SerialNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("SkeletonIndicator")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("TransportMeansId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IotDeviceId");
-
-                    b.HasIndex("LocationId");
-
-                    b.HasIndex("PieceId");
-
-                    b.HasIndex("SensorId");
-
-                    b.HasIndex("TransportMeansId");
-
-                    b.ToTable("IotDevice");
-
-                    b.HasDiscriminator().HasValue("IotDevice");
-                });
-
             modelBuilder.Entity("OneRecord.Data.Model.Model.Loading", b =>
                 {
                     b.Property<int>("Id")
@@ -250,6 +188,9 @@ namespace Tracking.Data.Migrations
                     b.Property<int?>("OnTransportMeansId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ServedActivityId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("SkeletonIndicator")
                         .HasColumnType("bit");
 
@@ -263,6 +204,8 @@ namespace Tracking.Data.Migrations
 
                     b.HasIndex("OnTransportMeansId");
 
+                    b.HasIndex("ServedActivityId");
+
                     b.HasIndex("TransportMovementId");
 
                     b.ToTable("Loading");
@@ -270,7 +213,7 @@ namespace Tracking.Data.Migrations
                     b.HasDiscriminator().HasValue("Loading");
                 });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.Location", b =>
+            modelBuilder.Entity("OneRecord.Data.Model.Model.LogisticsActivity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -278,25 +221,18 @@ namespace Tracking.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CompanyIdentifier")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("GeolocationId")
-                        .HasColumnType("int");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
 
-                    b.Property<string>("LocationName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LocationType")
+                    b.Property<string>("ExecutionStatus")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NeonId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrganizationId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SkeletonIndicator")
@@ -307,11 +243,11 @@ namespace Tracking.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GeolocationId");
+                    b.ToTable("LogisticsActivity");
 
-                    b.ToTable("Location");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("LogisticsActivity");
 
-                    b.HasDiscriminator().HasValue("Location");
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Measurement", b =>
@@ -382,96 +318,7 @@ namespace Tracking.Data.Migrations
                     b.ToTable("MovementTimes");
                 });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.Piece", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("Coload")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("CompanyIdentifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentProductionCountry")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DimensionsId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FulfillsUldTypeCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("GoodsDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LoadType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("LoadingId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NeonId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("NvdForCarriage")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("NvdForCustoms")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("OfShipmentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PackageMarkCoded")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PackagedeIdentifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PieceId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("SkeletonIndicator")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Slac")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SpecialHandlingCodes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Stackable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Turnable")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Upid")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DimensionsId");
-
-                    b.HasIndex("LoadingId");
-
-                    b.HasIndex("OfShipmentId");
-
-                    b.HasIndex("PieceId");
-
-                    b.ToTable("Piece");
-
-                    b.HasDiscriminator().HasValue("Piece");
-                });
-
-            modelBuilder.Entity("OneRecord.Data.Model.Model.Sensor", b =>
+            modelBuilder.Entity("OneRecord.Data.Model.Model.PhysicalLogisticsObject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -482,22 +329,12 @@ namespace Tracking.Data.Migrations
                     b.Property<string>("CompanyIdentifier")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IotDeviceId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(34)
+                        .HasColumnType("nvarchar(34)");
 
                     b.Property<string>("NeonId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SensorType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SerialNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("SkeletonIndicator")
@@ -508,11 +345,11 @@ namespace Tracking.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IotDeviceId");
+                    b.ToTable("PhysicalLogisticsObject");
 
-                    b.ToTable("Sensor");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("PhysicalLogisticsObject");
 
-                    b.HasDiscriminator().HasValue("Sensor");
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Shipment", b =>
@@ -569,105 +406,6 @@ namespace Tracking.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("TemperatureInstructions");
-                });
-
-            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMeans", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CompanyIdentifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NeonId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("SkeletonIndicator")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VehicleModel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VehicleRegistration")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VehicleSize")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VehicleType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TransportMeans");
-
-                    b.HasDiscriminator().HasValue("TransportMeans");
-                });
-
-            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMovement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("ArrivalLocationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CompanyIdentifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DepartureLocationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ExecutionStatus")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FuelType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ModeCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ModeQualifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NeonId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OperatingTransportMeansId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Seal")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("SkeletonIndicator")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("TransportIdentifier")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArrivalLocationId");
-
-                    b.HasIndex("DepartureLocationId");
-
-                    b.HasIndex("OperatingTransportMeansId");
-
-                    b.ToTable("TransportMovement");
-
-                    b.HasDiscriminator().HasValue("TransportMovement");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Waybill", b =>
@@ -768,11 +506,234 @@ namespace Tracking.Data.Migrations
                     b.ToTable("Waybill");
                 });
 
+            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMovement", b =>
+                {
+                    b.HasBaseType("OneRecord.Data.Model.Model.LogisticsActivity");
+
+                    b.Property<int?>("ArrivalLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DepartureLocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FuelType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModeCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ModeQualifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OperatingTransportMeansId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Seal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransportIdentifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("ArrivalLocationId");
+
+                    b.HasIndex("DepartureLocationId");
+
+                    b.HasIndex("OperatingTransportMeansId");
+
+                    b.HasDiscriminator().HasValue("TransportMovement");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.IotDevice", b =>
+                {
+                    b.HasBaseType("OneRecord.Data.Model.Model.PhysicalLogisticsObject");
+
+                    b.Property<string>("AssociatedObject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("AttachedToObjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeviceModel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhysicalLogisticsObjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("AttachedToObjectId");
+
+                    b.HasIndex("PhysicalLogisticsObjectId");
+
+                    b.HasDiscriminator().HasValue("IotDevice");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.Location", b =>
+                {
+                    b.HasBaseType("OneRecord.Data.Model.Model.PhysicalLogisticsObject");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GeolocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LocationName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LocationType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrganizationId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("GeolocationId");
+
+                    b.HasDiscriminator().HasValue("Location");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.Piece", b =>
+                {
+                    b.HasBaseType("OneRecord.Data.Model.Model.PhysicalLogisticsObject");
+
+                    b.Property<bool>("Coload")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ContentProductionCountry")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DimensionsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FulfillsUldTypeCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GoodsDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LoadType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("LoadingId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("NvdForCarriage")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("NvdForCustoms")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("OfShipmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PackageMarkCoded")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PackagedeIdentifier")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PieceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Slac")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SpecialHandlingCodes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Stackable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Turnable")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Upid")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("DimensionsId");
+
+                    b.HasIndex("LoadingId");
+
+                    b.HasIndex("OfShipmentId");
+
+                    b.HasIndex("PieceId");
+
+                    b.HasDiscriminator().HasValue("Piece");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.Sensor", b =>
+                {
+                    b.HasBaseType("OneRecord.Data.Model.Model.PhysicalLogisticsObject");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IotDeviceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SensorType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("IotDeviceId");
+
+                    b.ToTable("PhysicalLogisticsObject", t =>
+                        {
+                            t.Property("Description")
+                                .HasColumnName("Sensor_Description");
+
+                            t.Property("Name")
+                                .HasColumnName("Sensor_Name");
+
+                            t.Property("SerialNumber")
+                                .HasColumnName("Sensor_SerialNumber");
+                        });
+
+                    b.HasDiscriminator().HasValue("Sensor");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMeans", b =>
+                {
+                    b.HasBaseType("OneRecord.Data.Model.Model.PhysicalLogisticsObject");
+
+                    b.Property<string>("VehicleModel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VehicleRegistration")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VehicleSize")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VehicleType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("TransportMeans");
+                });
+
             modelBuilder.Entity("OneRecord.Data.Model.Model.ActivitySequence", b =>
                 {
+                    b.HasOne("OneRecord.Data.Model.Model.LogisticsActivity", "Activity")
+                        .WithMany()
+                        .HasForeignKey("ActivityId");
+
                     b.HasOne("OneRecord.Data.Model.Model.Booking", null)
                         .WithMany("ActivitySequences")
                         .HasForeignKey("BookingId");
+
+                    b.Navigation("Activity");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Dimensions", b =>
@@ -900,49 +861,23 @@ namespace Tracking.Data.Migrations
                     b.Navigation("Elevation");
                 });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.IotDevice", b =>
-                {
-                    b.HasOne("OneRecord.Data.Model.Model.IotDevice", null)
-                        .WithMany("AttachedIotDevices")
-                        .HasForeignKey("IotDeviceId");
-
-                    b.HasOne("OneRecord.Data.Model.Model.Location", null)
-                        .WithMany("AttachedIotDevices")
-                        .HasForeignKey("LocationId");
-
-                    b.HasOne("OneRecord.Data.Model.Model.Piece", null)
-                        .WithMany("AttachedIotDevices")
-                        .HasForeignKey("PieceId");
-
-                    b.HasOne("OneRecord.Data.Model.Model.Sensor", null)
-                        .WithMany("AttachedIotDevices")
-                        .HasForeignKey("SensorId");
-
-                    b.HasOne("OneRecord.Data.Model.Model.TransportMeans", null)
-                        .WithMany("AttachedIotDevices")
-                        .HasForeignKey("TransportMeansId");
-                });
-
             modelBuilder.Entity("OneRecord.Data.Model.Model.Loading", b =>
                 {
                     b.HasOne("OneRecord.Data.Model.Model.TransportMeans", "OnTransportMeans")
                         .WithMany()
                         .HasForeignKey("OnTransportMeansId");
 
+                    b.HasOne("OneRecord.Data.Model.Model.LogisticsActivity", "ServedActivity")
+                        .WithMany()
+                        .HasForeignKey("ServedActivityId");
+
                     b.HasOne("OneRecord.Data.Model.Model.TransportMovement", null)
                         .WithMany("LoadingActions")
                         .HasForeignKey("TransportMovementId");
 
                     b.Navigation("OnTransportMeans");
-                });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.Location", b =>
-                {
-                    b.HasOne("OneRecord.Data.Model.Model.Geolocation", "Geolocation")
-                        .WithMany()
-                        .HasForeignKey("GeolocationId");
-
-                    b.Navigation("Geolocation");
+                    b.Navigation("ServedActivity");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Measurement", b =>
@@ -987,64 +922,6 @@ namespace Tracking.Data.Migrations
                     b.HasOne("OneRecord.Data.Model.Model.TransportMovement", null)
                         .WithMany("MovementTimes")
                         .HasForeignKey("TransportMovementId");
-                });
-
-            modelBuilder.Entity("OneRecord.Data.Model.Model.Piece", b =>
-                {
-                    b.HasOne("OneRecord.Data.Model.Model.Dimensions", "Dimensions")
-                        .WithMany()
-                        .HasForeignKey("DimensionsId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("OneRecord.Data.Model.Model.Loading", null)
-                        .WithMany("LoadedPieces")
-                        .HasForeignKey("LoadingId");
-
-                    b.HasOne("OneRecord.Data.Model.Model.Shipment", "OfShipment")
-                        .WithMany("Pieces")
-                        .HasForeignKey("OfShipmentId");
-
-                    b.HasOne("OneRecord.Data.Model.Model.Piece", null)
-                        .WithMany("ContainedPieces")
-                        .HasForeignKey("PieceId");
-
-                    b.OwnsOne("OneRecord.Data.Model.Model.Value", "GrossWeight", b1 =>
-                        {
-                            b1.Property<int>("PieceId")
-                                .HasColumnType("int");
-
-                            b1.Property<double>("NumericalValue")
-                                .HasColumnType("float")
-                                .HasColumnName("GrossWeightValue");
-
-                            b1.Property<string>("Unit")
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("GrossWeightUnit");
-
-                            b1.HasKey("PieceId");
-
-                            b1.ToTable("Piece");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PieceId");
-                        });
-
-                    b.Navigation("Dimensions");
-
-                    b.Navigation("GrossWeight");
-
-                    b.Navigation("OfShipment");
-                });
-
-            modelBuilder.Entity("OneRecord.Data.Model.Model.Sensor", b =>
-                {
-                    b.HasOne("OneRecord.Data.Model.Model.IotDevice", "PartOfIotDevice")
-                        .WithMany("ConnectedSensors")
-                        .HasForeignKey("IotDeviceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PartOfIotDevice");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Shipment", b =>
@@ -1130,28 +1007,6 @@ namespace Tracking.Data.Migrations
                     b.Navigation("Piece");
                 });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMovement", b =>
-                {
-                    b.HasOne("OneRecord.Data.Model.Model.Location", "ArrivalLocation")
-                        .WithMany()
-                        .HasForeignKey("ArrivalLocationId");
-
-                    b.HasOne("OneRecord.Data.Model.Model.Location", "DepartureLocation")
-                        .WithMany()
-                        .HasForeignKey("DepartureLocationId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("OneRecord.Data.Model.Model.TransportMeans", "OperatingTransportMeans")
-                        .WithMany("OperatedTransportMovements")
-                        .HasForeignKey("OperatingTransportMeansId");
-
-                    b.Navigation("ArrivalLocation");
-
-                    b.Navigation("DepartureLocation");
-
-                    b.Navigation("OperatingTransportMeans");
-                });
-
             modelBuilder.Entity("OneRecord.Data.Model.Model.Waybill", b =>
                 {
                     b.HasOne("OneRecord.Data.Model.Model.Location", "ArrivalLocation")
@@ -1184,6 +1039,110 @@ namespace Tracking.Data.Migrations
                     b.Navigation("Shipment");
                 });
 
+            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMovement", b =>
+                {
+                    b.HasOne("OneRecord.Data.Model.Model.Location", "ArrivalLocation")
+                        .WithMany()
+                        .HasForeignKey("ArrivalLocationId");
+
+                    b.HasOne("OneRecord.Data.Model.Model.Location", "DepartureLocation")
+                        .WithMany()
+                        .HasForeignKey("DepartureLocationId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("OneRecord.Data.Model.Model.TransportMeans", "OperatingTransportMeans")
+                        .WithMany("OperatedTransportMovements")
+                        .HasForeignKey("OperatingTransportMeansId");
+
+                    b.Navigation("ArrivalLocation");
+
+                    b.Navigation("DepartureLocation");
+
+                    b.Navigation("OperatingTransportMeans");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.IotDevice", b =>
+                {
+                    b.HasOne("OneRecord.Data.Model.Model.PhysicalLogisticsObject", "AttachedToObject")
+                        .WithMany()
+                        .HasForeignKey("AttachedToObjectId");
+
+                    b.HasOne("OneRecord.Data.Model.Model.PhysicalLogisticsObject", null)
+                        .WithMany("AttachedIotDevices")
+                        .HasForeignKey("PhysicalLogisticsObjectId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("AttachedToObject");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.Location", b =>
+                {
+                    b.HasOne("OneRecord.Data.Model.Model.Geolocation", "Geolocation")
+                        .WithMany()
+                        .HasForeignKey("GeolocationId");
+
+                    b.Navigation("Geolocation");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.Piece", b =>
+                {
+                    b.HasOne("OneRecord.Data.Model.Model.Dimensions", "Dimensions")
+                        .WithMany()
+                        .HasForeignKey("DimensionsId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("OneRecord.Data.Model.Model.Loading", null)
+                        .WithMany("LoadedPieces")
+                        .HasForeignKey("LoadingId");
+
+                    b.HasOne("OneRecord.Data.Model.Model.Shipment", "OfShipment")
+                        .WithMany("Pieces")
+                        .HasForeignKey("OfShipmentId");
+
+                    b.HasOne("OneRecord.Data.Model.Model.Piece", null)
+                        .WithMany("ContainedPieces")
+                        .HasForeignKey("PieceId");
+
+                    b.OwnsOne("OneRecord.Data.Model.Model.Value", "GrossWeight", b1 =>
+                        {
+                            b1.Property<int>("PieceId")
+                                .HasColumnType("int");
+
+                            b1.Property<double>("NumericalValue")
+                                .HasColumnType("float")
+                                .HasColumnName("GrossWeightValue");
+
+                            b1.Property<string>("Unit")
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("GrossWeightUnit");
+
+                            b1.HasKey("PieceId");
+
+                            b1.ToTable("PhysicalLogisticsObject");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PieceId");
+                        });
+
+                    b.Navigation("Dimensions");
+
+                    b.Navigation("GrossWeight");
+
+                    b.Navigation("OfShipment");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.Sensor", b =>
+                {
+                    b.HasOne("OneRecord.Data.Model.Model.IotDevice", "PartOfIotDevice")
+                        .WithMany("ConnectedSensors")
+                        .HasForeignKey("IotDeviceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PartOfIotDevice");
+                });
+
             modelBuilder.Entity("OneRecord.Data.Model.Model.Booking", b =>
                 {
                     b.Navigation("ActivitySequences");
@@ -1191,37 +1150,14 @@ namespace Tracking.Data.Migrations
                     b.Navigation("IssuedForWaybill");
                 });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.IotDevice", b =>
-                {
-                    b.Navigation("AttachedIotDevices");
-
-                    b.Navigation("ConnectedSensors");
-                });
-
             modelBuilder.Entity("OneRecord.Data.Model.Model.Loading", b =>
                 {
                     b.Navigation("LoadedPieces");
                 });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.Location", b =>
+            modelBuilder.Entity("OneRecord.Data.Model.Model.PhysicalLogisticsObject", b =>
                 {
                     b.Navigation("AttachedIotDevices");
-                });
-
-            modelBuilder.Entity("OneRecord.Data.Model.Model.Piece", b =>
-                {
-                    b.Navigation("AttachedIotDevices");
-
-                    b.Navigation("ContainedPieces");
-
-                    b.Navigation("TemperatureInstructions");
-                });
-
-            modelBuilder.Entity("OneRecord.Data.Model.Model.Sensor", b =>
-                {
-                    b.Navigation("AttachedIotDevices");
-
-                    b.Navigation("Measurements");
                 });
 
             modelBuilder.Entity("OneRecord.Data.Model.Model.Shipment", b =>
@@ -1233,18 +1169,33 @@ namespace Tracking.Data.Migrations
                     b.Navigation("Waybill");
                 });
 
-            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMeans", b =>
-                {
-                    b.Navigation("AttachedIotDevices");
-
-                    b.Navigation("OperatedTransportMovements");
-                });
-
             modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMovement", b =>
                 {
                     b.Navigation("LoadingActions");
 
                     b.Navigation("MovementTimes");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.IotDevice", b =>
+                {
+                    b.Navigation("ConnectedSensors");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.Piece", b =>
+                {
+                    b.Navigation("ContainedPieces");
+
+                    b.Navigation("TemperatureInstructions");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.Sensor", b =>
+                {
+                    b.Navigation("Measurements");
+                });
+
+            modelBuilder.Entity("OneRecord.Data.Model.Model.TransportMeans", b =>
+                {
+                    b.Navigation("OperatedTransportMovements");
                 });
 #pragma warning restore 612, 618
         }

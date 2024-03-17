@@ -13,6 +13,6 @@ namespace Tracking.Data.DomainModel
         public DateTime DepartureDateTime { get; set; }
         public string DestinationlCode { get; set; }
         public DateTime ArrivalDateTime { get; set; }
-        public List<ShipmentModel> Shipments { get;}
+        public List<ShipmentModel> Shipments { get; set; }
     }
 }
