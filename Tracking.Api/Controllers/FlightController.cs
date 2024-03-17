@@ -18,8 +18,13 @@ namespace Tracking.Api.Controllers
         [HttpGet("getbyflight")]
         public FlightDto GetShipmentsForFlight(string flightNo, DateTime date)
         {
-            Console.WriteLine("test");
             return _flightService.GetFlightByDateAndFlightNo(date, flightNo);
+        }
+
+        [HttpGet("getbyid")]
+        public FlightDto GetFlightById(int id)
+        {
+            return _flightService.GetFlightById(id);
         }
     }
 }

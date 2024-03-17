@@ -10,6 +10,7 @@ configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/alertDto.ts
 model/flightDto.ts
 model/flightModel.ts
 model/measuredTemperature.ts

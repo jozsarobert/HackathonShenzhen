@@ -89,6 +89,45 @@
         }
       }
     },
+    "/api/Flight/getbyid": {
+      "get": {
+        "tags": [
+          "Flight"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlightDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlightDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlightDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Piece/getbyid": {
       "get": {
         "tags": [
@@ -251,12 +290,72 @@
           }
         }
       }
+    },
+    "/api/Shipment/getwithalerts": {
+      "get": {
+        "tags": [
+          "Shipment"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ShipmentDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ShipmentDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ShipmentDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
       "AlertDto": {
         "type": "object",
+        "properties": {
+          "flightNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "originCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "destinationCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "departureTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "piecesCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
         "additionalProperties": false
       },
       "FlightDto": {
@@ -456,9 +555,6 @@
               "format": "int32"
             },
             "nullable": true
-          },
-          "hasAlert": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false

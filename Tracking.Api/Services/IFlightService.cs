@@ -5,5 +5,6 @@ namespace Tracking.Api.Services
     public interface IFlightService
     {
         FlightDto GetFlightByDateAndFlightNo(DateTime date, string flightNo);
+        FlightDto GetFlightById(int id);
     }
 }
