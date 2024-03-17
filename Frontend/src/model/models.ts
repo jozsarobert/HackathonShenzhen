@@ -1,3 +1,4 @@
+export * from './alertDto';
 export * from './flightDto';
 export * from './flightModel';
 export * from './measuredTemperature';
