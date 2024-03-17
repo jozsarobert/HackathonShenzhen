@@ -4,6 +4,7 @@ namespace Tracking.Data.Repositories
 {
     public interface IShipmentRepository
     {
-        public ShipmentModel GetShipmentById(int id);
+        ShipmentModel GetShipmentById(int id);
+        List<ShipmentModel> GetShipments();
     }
 }

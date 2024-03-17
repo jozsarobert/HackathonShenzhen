@@ -18,6 +18,6 @@ export interface FlightDto {
     departureDateTime?: string;
     destinationlCode?: string | null;
     arrivalDateTime?: string;
-    readonly shipments?: Array<ShipmentDto> | null;
+    shipments?: Array<ShipmentDto> | null;
 }
 

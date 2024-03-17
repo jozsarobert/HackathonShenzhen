@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { FlightModel } from './flightModel';
 
 
-export interface ShipmentModel { 
-    id?: number;
-    waybillNumber?: string | null;
-    flights?: Array<FlightModel> | null;
-    pieceIds?: Array<number> | null;
+export interface AlertDto { 
+    flightNo?: string | null;
+    originCode?: string | null;
+    destinationCode?: string | null;
+    departureTime?: string;
+    piecesCount?: number;
 }
 

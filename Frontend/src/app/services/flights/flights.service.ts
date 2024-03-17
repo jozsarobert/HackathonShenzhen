@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, delay, of } from 'rxjs';
 import { FlightDto } from '../../../model/flightDto';
+import { PieceDto } from 'src/model/pieceDto';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,32 @@ export class FlightsService {
 
   // todo replce mock with real backend
   public mockGetFlightByFlightnumberAndDate(): Observable<FlightDto> {
+    const piece1: PieceDto = {
+      id: '123',
+      currentTemperature: 20,
+      isTemperatureControlled: true,
+      location: 'Warehouse A',
+      weight: { unit: 'kg', value: 10 },
+      volume: { unit: 'm3', value: 2 },
+      flight: {
+        flightNo: 'AB123',
+        originCode: 'NYC',
+        destinationlCode: 'LAX',
+        departureDateTime: '16.03.2024',
+        arrivalDateTime: '16.03.2024',
+      },
+      alertType: 'temperature',
+      temperatureHistory: [
+        // Assuming MeasuredTemperature is an object with properties temperature and timestamp
+        { value: 18, timestamp: '2021-09-01T00:00:00Z', unit: 'C°' },
+        { value: 18, timestamp: '2021-09-01T00:00:00Z', unit: 'C°' },
+        { value: 18, timestamp: '2021-09-01T00:00:00Z', unit: 'C°' },
+      ],
+      minTemperature: 18,
+      maxTemperature: 22,
+      hasAlert: false,
+    };
+
     return of({
       flightNo: 'LX14/16MAR',
       originCode: 'ZRH',
@@ -46,34 +73,32 @@ export class FlightsService {
       arrivalDateTime: '2023-01-01T06:00', // todo
       shipments: [
         {
-          id: 'todo',
+          id: 1234,
           waybillNumber: '724-14329302',
-          pieces: ['piece1', 'piece2', 'piece3'],
+          pieces: [piece1],
+          flights: null,
           hasAlert: false,
         },
         {
-          id: 'todo',
-          waybillNumber: '724-14329303',
-          pieces: ['piece1', 'piece2', 'piece3'],
+          id: 1234,
+          waybillNumber: '724-14329302',
+          pieces: [piece1],
+          flights: null,
           hasAlert: true,
         },
         {
-          id: 'todo',
-          waybillNumber: '724-14329304',
-          pieces: ['piece1', 'piece2', 'piece3', 'piece4', 'piece5'],
+          id: 1234,
+          waybillNumber: '724-14329302',
+          pieces: [piece1],
+          flights: null,
           hasAlert: false,
         },
         {
-          id: 'todo',
-          waybillNumber: '724-14329305',
-          pieces: ['piece1', 'piece2', 'piece3', 'piece4', 'piece5', 'piece6'],
+          id: 1234,
+          waybillNumber: '724-14329302',
+          pieces: [piece1],
+          flights: null,
           hasAlert: false,
-        },
-        {
-          id: 'todo',
-          waybillNumber: '724-14329306',
-          pieces: ['piece1', 'piece2'],
-          hasAlert: true,
         },
       ],
     }).pipe(delay(2000));
@@ -81,6 +106,32 @@ export class FlightsService {
 
   // todo replace with backend
   public mockGetFlightById(id: string): Observable<FlightDto> {
+    const piece1: PieceDto = {
+      id: '123',
+      currentTemperature: 20,
+      isTemperatureControlled: true,
+      location: 'Warehouse A',
+      weight: { unit: 'kg', value: 10 },
+      volume: { unit: 'm3', value: 2 },
+      flight: {
+        flightNo: 'AB123',
+        originCode: 'NYC',
+        destinationlCode: 'LAX',
+        departureDateTime: '16.03.2024',
+        arrivalDateTime: '16.03.2024',
+      },
+      alertType: 'temperature',
+      temperatureHistory: [
+        // Assuming MeasuredTemperature is an object with properties temperature and timestamp
+        { value: 18, timestamp: '2021-09-01T00:00:00Z', unit: 'C°' },
+        { value: 18, timestamp: '2021-09-01T00:00:00Z', unit: 'C°' },
+        { value: 18, timestamp: '2021-09-01T00:00:00Z', unit: 'C°' },
+      ],
+      minTemperature: 18,
+      maxTemperature: 22,
+      hasAlert: false,
+    };
+
     return of({
       flightNo: 'LX14',
       originCode: 'ZRH',
@@ -89,27 +140,31 @@ export class FlightsService {
       arrivalDateTime: '2023-01-01T06:00', // todo
       shipments: [
         {
-          id: 'todo',
+          id: 1234,
           waybillNumber: '724-14329302',
-          pieces: ['piece1', 'piece2'],
+          pieces: [piece1],
+          flights: null,
           hasAlert: false,
         },
         {
-          id: 'todo',
+          id: 1234,
           waybillNumber: '724-14329302',
-          pieces: ['piece1', 'piece2'],
+          pieces: [piece1],
+          flights: null,
           hasAlert: true,
         },
         {
-          id: 'todo',
+          id: 1234,
           waybillNumber: '724-14329302',
-          pieces: ['piece1', 'piece2'],
+          pieces: [piece1],
+          flights: null,
           hasAlert: false,
         },
         {
-          id: 'todo',
+          id: 1234,
           waybillNumber: '724-14329302',
-          pieces: ['piece1', 'piece2'],
+          pieces: [piece1],
+          flights: null,
           hasAlert: false,
         },
       ],

@@ -89,6 +89,45 @@
         }
       }
     },
+    "/api/Flight/getbyid": {
+      "get": {
+        "tags": [
+          "Flight"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlightDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlightDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlightDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Piece/getbyid": {
       "get": {
         "tags": [
@@ -99,7 +138,8 @@
             "name": "id",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -137,7 +177,8 @@
             "name": "id",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -174,6 +215,43 @@
         }
       }
     },
+    "/api/Piece/updatesensor": {
+      "get": {
+        "tags": [
+          "Piece"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "serialNumber",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "temperature",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Shipment/getbyid": {
       "get": {
         "tags": [
@@ -184,7 +262,8 @@
             "name": "id",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -211,12 +290,72 @@
           }
         }
       }
+    },
+    "/api/Shipment/getwithalerts": {
+      "get": {
+        "tags": [
+          "Shipment"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ShipmentDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ShipmentDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ShipmentDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
       "AlertDto": {
         "type": "object",
+        "properties": {
+          "flightNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "originCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "destinationCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "departureTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "piecesCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
         "additionalProperties": false
       },
       "FlightDto": {
@@ -247,8 +386,7 @@
             "items": {
               "$ref": "#/components/schemas/ShipmentDto"
             },
-            "nullable": true,
-            "readOnly": true
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -281,8 +419,7 @@
             "items": {
               "$ref": "#/components/schemas/ShipmentModel"
             },
-            "nullable": true,
-            "readOnly": true
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -343,6 +480,20 @@
               "$ref": "#/components/schemas/MeasuredTemperature"
             },
             "nullable": true
+          },
+          "minTemperature": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "maxTemperature": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "hasAlert": {
+            "type": "boolean",
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -351,8 +502,8 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
+            "type": "integer",
+            "format": "int32"
           },
           "waybillNumber": {
             "type": "string",
@@ -368,12 +519,13 @@
           "pieces": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/PieceDto"
             },
             "nullable": true
           },
           "hasAlert": {
-            "type": "boolean"
+            "type": "boolean",
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -382,29 +534,27 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "nullable": true
+            "type": "integer",
+            "format": "int32"
           },
           "waybillNumber": {
             "type": "string",
             "nullable": true
           },
-          "shipment": {
+          "flights": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FlightModel"
             },
             "nullable": true
           },
-          "pieces": {
+          "pieceIds": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             },
             "nullable": true
-          },
-          "hasAlert": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false

@@ -20,5 +20,11 @@ namespace Tracking.Api.Controllers
         {
             return _shipmentService.GetShipmentById(id);
         }
+
+        [HttpGet("getwithalerts")]
+        public List<ShipmentDto> GetShipmentWithAlerts()
+        {
+            return _shipmentService.GetShipmentWithAlerts();
+        }
     }
 }

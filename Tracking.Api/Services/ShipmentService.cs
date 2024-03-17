@@ -34,5 +34,31 @@ namespace Tracking.Api.Services
 
             return shipmentDto;
         }
+
+        public List<ShipmentDto> GetShipmentWithAlerts()
+        {
+            var result = _shipmentRepository.GetShipments();
+
+            var shipmenList = new List<ShipmentDto>();
+
+            foreach (var item in result)
+            {
+                var shipmentDto = _mapper.Map<ShipmentDto>(item);
+
+                var pieces = new List<PieceDto>();
+                foreach (var pieceId in item.PieceIds)
+                {
+                    var piece = _pieceRepository.GetPieceById(pieceId);
+                    var pieceDto = _mapper.Map<PieceDto>(piece);
+                    pieces.Add(pieceDto);
+                }
+                shipmentDto.Pieces = pieces;
+                shipmenList.Add(shipmentDto);
+            }
+         
+            var shipmentWithAlerts = shipmenList.Where(x=> x.HasAlert).ToList();
+
+            return shipmentWithAlerts;
+        }
     }
 }

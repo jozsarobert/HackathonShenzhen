@@ -25,5 +25,8 @@ export interface PieceDto {
     flight?: FlightModel;
     alertType?: string | null;
     temperatureHistory?: Array<MeasuredTemperature> | null;
+    minTemperature?: number | null;
+    maxTemperature?: number | null;
+    readonly hasAlert?: boolean;
 }
 

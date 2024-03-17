@@ -10,5 +10,6 @@ namespace Tracking.Data.Repositories
     public interface IFlightRepository
     {
         FlightModel GetFlightByDateAndFlightNo(DateTime date, string flightNo);
+        FlightModel GetFlightById(int id);
     }
 }
