@@ -20,6 +20,7 @@ import {
   SpinnerModule,
   UtilitiesModule,
   WidgetModule,
+  TableModule
 } from '@coreui/angular';
 
 import { RouterModule } from '@angular/router';
@@ -56,6 +57,7 @@ import { FlightsRoutingModule } from './flights-routing.module';
     HeaderModule,
     CalloutModule,
     SpinnerModule,
+    TableModule
   ],
 })
 export class FlightsModule {}

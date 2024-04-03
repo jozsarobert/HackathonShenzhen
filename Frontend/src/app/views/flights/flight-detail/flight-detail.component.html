@@ -37,3 +37,26 @@
     </c-widget-stat-d>
   </c-col>
 </c-row>
+
+<c-row>
+  <h2>Or better table? :</h2>
+  <table cTable hover striped [responsive]="true">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Pieces</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <ng-container *ngFor="let shipment of flight?.shipments">
+        <tr>
+          <th scope="row">{{ shipment.id }}</th>
+          <td>{{ shipment.pieces?.length }}</td>
+          <td>{{ shipment.hasAlert }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</c-row>

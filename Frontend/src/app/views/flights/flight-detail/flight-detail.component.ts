@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightsService } from 'src/app/services/flights/flights.service';
 import { FlightDto } from 'src/model/flightDto';
@@ -22,7 +22,8 @@ export class FlightDetailComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private flightsService: FlightsService
+    private flightsService: FlightsService,
+    private cdr: ChangeDetectorRef
   ) {
     this.flight =
       this.router?.getCurrentNavigation()?.extras?.state?.['flight'];
@@ -32,18 +33,22 @@ export class FlightDetailComponent {
       this.flightId = params.get('id');
     });
 
-    // todo fetch from API
+    // todo fetch from API if not received via navigation
     if (!this.flight && this.flightId) {
       this.flightsService
-        .mockGetFlightById(this.flightId)
+        .mockGetFlightByFlightnumberAndDate() //todo change function?
         .subscribe((flight) => {
           this.flight = flight;
+
+          this.setFlightDisplayValues(this.flight);
+          this.setShipmentDisplayValues(this.flight);
         });
     }
 
     if (this.flight) {
       this.setFlightDisplayValues(this.flight);
 
+      // todo replace with function (setShipmentDisplayValues)
       this.flight?.shipments?.forEach((shipment) => {
         this.shipmentsDisplayValues.push({
           id: shipment.id,
@@ -58,39 +63,6 @@ export class FlightDetailComponent {
     }
   }
 
-  // todo why all this data?
-  // shipments = [
-  //   {
-  //     id: '724-14329302',
-  //     color: 'danger',
-  //     values: [
-  //       { title: 'Flight', value: 'LX138' },
-  //       { title: 'Dest', value: 'HKG' },
-  //       { title: 'Date', value: 'todo' },
-  //       { title: 'SMC', value: 'COL' },
-  //       { title: 'SLA', value: '2.0 - 5.0 C°' },
-  //       { title: 'Temp', value: '2.0°C' },
-  //       { title: 'Status', value: 'OK' },
-  //     ],
-  //   },
-  //   {
-  //     id: '724-14329303',
-  //     color: 'success',
-  //     values: [
-  //       { title: 'Pieces', value: '2' },
-  //       { title: 'Status', value: 'OK' },
-  //     ],
-  //   },
-  //   {
-  //     id: '724-14329304',
-  //     color: 'success',
-  //     values: [
-  //       { title: 'Pieces', value: '5' },
-  //       { title: 'Status', value: 'OK' },
-  //     ],
-  //   },
-  // ];
-
   public navigateToShipmentDetail(shipment: ShipmentDto): void {
     this.router.navigate([`shipments/detail/${shipment.id}`], {
       state: { shipment: shipment },
@@ -103,5 +75,19 @@ export class FlightDetailComponent {
       { title: 'Origin', value: flight.originCode },
       { title: 'Destination', value: flight.destinationlCode },
     ];
+  }
+
+  public setShipmentDisplayValues(flight: FlightDto) {
+    flight?.shipments?.forEach((shipment) => {
+      this.shipmentsDisplayValues.push({
+        id: shipment.id,
+        awb: shipment.waybillNumber,
+        color: shipment.hasAlert ? 'danger' : 'success',
+        values: [
+          { title: 'Pieces', value: shipment.pieces?.length },
+          { title: 'Status', value: shipment.hasAlert ? 'Alert' : 'OK' },
+        ],
+      });
+    });
   }
 }

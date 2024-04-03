@@ -75,21 +75,21 @@ export class FlightsService {
         {
           id: 1234,
           waybillNumber: '724-14329302',
-          pieces: [piece1],
+          pieces: [piece1, piece1, piece1],
           flights: null,
           hasAlert: false,
         },
         {
           id: 1234,
-          waybillNumber: '724-14329302',
+          waybillNumber: '724-14329303',
           pieces: [piece1],
           flights: null,
           hasAlert: true,
         },
         {
           id: 1234,
-          waybillNumber: '724-14329302',
-          pieces: [piece1],
+          waybillNumber: '724-14329304',
+          pieces: [piece1, piece1],
           flights: null,
           hasAlert: false,
         },
@@ -101,7 +101,7 @@ export class FlightsService {
           hasAlert: false,
         },
       ],
-    }).pipe(delay(2000));
+    }).pipe(delay(0)); // todo fake delay
   }
 
   // todo replace with backend

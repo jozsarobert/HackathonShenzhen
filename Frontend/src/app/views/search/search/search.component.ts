@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { cilCalendar } from '@coreui/icons';
 import { Subscription } from 'rxjs';
 import { FlightsService } from 'src/app/services/flights/flights.service';
@@ -11,7 +11,7 @@ import { FlightDto } from 'src/model/flightDto';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
   icons = { cilCalendar };
 
   searchForm: FormGroup = new FormGroup({
@@ -38,51 +38,12 @@ export class SearchComponent implements OnInit {
     private flightsService: FlightsService
   ) {}
 
-  public ngOnInit(): void {
-    //this.subscribeToStatusChanges();
-  }
-
-  // disable every field except the one that is being filled
-  // private subscribeToStatusChanges(): void {
-  //   Object.keys(this.searchForm.controls).forEach((key) => {
-  //     const subscription = this.searchForm
-  //       .get(key)
-  //       ?.statusChanges.subscribe((status) => {
-  //         if (status === 'VALID' && this.searchForm?.get(key)?.value) {
-  //           this.unsubscribeFromStatusChanges();
-  //           Object.keys(this.searchForm.controls).forEach((controlKey) => {
-  //             if (controlKey !== key) {
-  //               this.searchForm?.get(controlKey)?.disable();
-  //             }
-  //           });
-  //           this.subscribeToStatusChanges();
-  //         } else if (status === 'VALID' && !this.searchForm.get(key)?.value) {
-  //           this.unsubscribeFromStatusChanges();
-  //           Object.keys(this.searchForm.controls).forEach((controlKey) => {
-  //             this.searchForm.get(controlKey)?.enable();
-  //           });
-  //           this.subscribeToStatusChanges();
-  //         }
-  //       });
-  //     if (subscription) {
-  //       this.subscriptions.push(subscription);
-  //     }
-  //   });
-  // }
-
   public navigateToPage(page: string) {
     this.router.navigate([page]);
   }
 
   // todo rename
   public getFilledOutFieldIds(): void {
-    // let filledOutFieldIds: string[] = [];
-    // Object.keys(this.searchForm.controls).forEach((controlKey) => {
-    //   if (this.searchForm.get(controlKey)?.value) {
-    //     filledOutFieldIds.push(controlKey);
-    //   }
-    // });
-
     this.isLoading = true;
 
     // todo get type selected and fetch data according to type
@@ -111,9 +72,4 @@ export class SearchComponent implements OnInit {
       state: { flight: this.flight },
     });
   }
-
-  // private unsubscribeFromStatusChanges(): void {
-  //   this.subscriptions.forEach((subscription) => subscription.unsubscribe());
-  //   this.subscriptions = [];
-  // }
 }

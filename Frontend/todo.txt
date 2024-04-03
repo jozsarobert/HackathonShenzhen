@@ -3,3 +3,5 @@
 - transfercache error in FlightService
 - pieces search / overview
 - refactor piece detail page location to "graph" to have checkpoints
+
+- Flight needs ID
